@@ -15,10 +15,11 @@
 		7E5BD6A92A501FDD00FB806C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD6A82A501FDD00FB806C /* RxSwift */; };
 		7E5BD6AE2A501FEE00FB806C /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD6AD2A501FEE00FB806C /* NSObject-Rx */; };
 		7E5BD6B12A5029A700FB806C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6B02A5029A700FB806C /* ViewModelType.swift */; };
-		7E5BD6BB2A502AD800FB806C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6BA2A502AD800FB806C /* Log.swift */; };
+		7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6BA2A502AD800FB806C /* OsLog.swift */; };
 		7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6BE2A502C8200FB806C /* ViewModelBindable.swift */; };
 		7E5BD6C32A502E8800FB806C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C22A502E8800FB806C /* MainViewController.swift */; };
 		7E5BD6C62A502EF100FB806C /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C52A502EF100FB806C /* MainViewModel.swift */; };
+		7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC082A56E8D600C4999C /* Preview.swift */; };
 		7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DA82A2557E0008AC342 /* AppDelegate.swift */; };
 		7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DAA2A2557E0008AC342 /* SceneDelegate.swift */; };
 		7EC97DB22A2557E1008AC342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC97DB12A2557E1008AC342 /* Assets.xcassets */; };
@@ -50,10 +51,11 @@
 		7E5BD6992A4B1CBA00FB806C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		7E5BD6B02A5029A700FB806C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		7E5BD6B32A502AA300FB806C /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
-		7E5BD6BA2A502AD800FB806C /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		7E5BD6BA2A502AD800FB806C /* OsLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OsLog.swift; sourceTree = "<group>"; };
 		7E5BD6BE2A502C8200FB806C /* ViewModelBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindable.swift; sourceTree = "<group>"; };
 		7E5BD6C22A502E8800FB806C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7E5BD6C52A502EF100FB806C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		7EBBBC082A56E8D600C4999C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7EC97DA52A2557E0008AC342 /* netflix_clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netflix_clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC97DA82A2557E0008AC342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC97DAA2A2557E0008AC342 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,7 +135,7 @@
 		7E5BD6942A4B1C6500FB806C /* config */ = {
 			isa = PBXGroup;
 			children = (
-				7E5BD6B92A502AD400FB806C /* logger */,
+				7E5BD6B92A502AD400FB806C /* utils */,
 				7E5BD6AF2A5029A000FB806C /* viewModel */,
 				7E5BD6982A4B1CB200FB806C /* service */,
 				7E5BD6952A4B1C6900FB806C /* base */,
@@ -174,12 +176,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7E5BD6B92A502AD400FB806C /* logger */ = {
+		7E5BD6B92A502AD400FB806C /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				7E5BD6BA2A502AD800FB806C /* Log.swift */,
+				7EBBBC082A56E8D600C4999C /* Preview.swift */,
+				7E5BD6BA2A502AD800FB806C /* OsLog.swift */,
 			);
-			path = logger;
+			path = utils;
 			sourceTree = "<group>";
 		};
 		7E5BD6C02A502E6000FB806C /* main */ = {
@@ -395,9 +398,10 @@
 			files = (
 				7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */,
 				7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */,
-				7E5BD6BB2A502AD800FB806C /* Log.swift in Sources */,
+				7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */,
 				7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */,
 				7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */,
+				7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */,
 				7E5BD6B12A5029A700FB806C /* ViewModelType.swift in Sources */,
 				7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */,
 				7E5BD6C32A502E8800FB806C /* MainViewController.swift in Sources */,
@@ -576,7 +580,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -610,7 +613,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
