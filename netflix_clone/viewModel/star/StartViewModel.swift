@@ -1,14 +1,14 @@
 //
-//  MainViewModel.swift
+//  StartViewModel.swift
 //  netflix_clone
 //
-//  Created by Sang Hyeon kim on 2023/07/01.
+//  Created by Sang Hyeon kim on 2023/07/07.
 //
 
 import Foundation
 import RxSwift
 
-class MainViewModel: ViewModelType {
+class StarViewModel: ViewModelType {
     var title: String
     var service: Service
     

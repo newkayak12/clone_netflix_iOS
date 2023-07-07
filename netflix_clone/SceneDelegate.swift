@@ -19,10 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let service = Service.shared
         
-        let mainViewModel = MainViewModel(title: "Main", service: service )
+
         var mainView = MainViewController()
         
-        mainView.bind(viewModel: mainViewModel)
+        
         
         window = UIWindow(windowScene: scene)
         window?.rootViewController = UINavigationController(rootViewController: mainView )
