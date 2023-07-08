@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Ticket: Codable {
+final class Ticket: Codable {
    
     var ticketNo: Int
     var name: String

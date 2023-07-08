@@ -13,7 +13,6 @@
 		7E5BD6A02A501FCA00FB806C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD69F2A501FCA00FB806C /* SnapKit */; };
 		7E5BD6A52A501FDD00FB806C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD6A42A501FDD00FB806C /* RxCocoa */; };
 		7E5BD6A92A501FDD00FB806C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD6A82A501FDD00FB806C /* RxSwift */; };
-		7E5BD6AE2A501FEE00FB806C /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD6AD2A501FEE00FB806C /* NSObject-Rx */; };
 		7E5BD6B12A5029A700FB806C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6B02A5029A700FB806C /* ViewModelType.swift */; };
 		7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6BA2A502AD800FB806C /* OsLog.swift */; };
 		7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6BE2A502C8200FB806C /* ViewModelBindable.swift */; };
@@ -36,6 +35,21 @@
 		7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC322A583F7800C4999C /* TicketPayment.swift */; };
 		7EBBBC352A583FA700C4999C /* TicketRaise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC342A583FA700C4999C /* TicketRaise.swift */; };
 		7EBBBC372A5840A800C4999C /* PageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC362A5840A800C4999C /* PageRequest.swift */; };
+		7EBBBC3B2A5909EA00C4999C /* Watched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC3A2A5909EA00C4999C /* Watched.swift */; };
+		7EBBBC3D2A5909FF00C4999C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC3C2A5909FF00C4999C /* Person.swift */; };
+		7EBBBC3F2A590A1B00C4999C /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC3E2A590A1B00C4999C /* Favorite.swift */; };
+		7EBBBC412A590A2900C4999C /* ContentsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC402A590A2900C4999C /* ContentsInfo.swift */; };
+		7EBBBC432A590A3700C4999C /* ContentsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC422A590A3700C4999C /* ContentsDetail.swift */; };
+		7EBBBC452A590A4300C4999C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC442A590A4300C4999C /* Category.swift */; };
+		7EBBBC472A590A5100C4999C /* Analyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC462A590A5100C4999C /* Analyze.swift */; };
+		7EBBBC492A5910AE00C4999C /* ContentPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC482A5910AE00C4999C /* ContentPerson.swift */; };
+		7EBBBC4B2A5910FE00C4999C /* FavoriteWatched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC4A2A5910FE00C4999C /* FavoriteWatched.swift */; };
+		7EBBBC4E2A59159B00C4999C /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC4D2A59159B00C4999C /* Banner.swift */; };
+		7EBBBC502A5915F100C4999C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC4F2A5915F100C4999C /* Comment.swift */; };
+		7EBBBC522A5916FD00C4999C /* CustomerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC512A5916FD00C4999C /* CustomerService.swift */; };
+		7EBBBC542A5919DF00C4999C /* Faq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC532A5919DF00C4999C /* Faq.swift */; };
+		7EBBBC562A591A6700C4999C /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC552A591A6700C4999C /* Notice.swift */; };
+		7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC818D82A5951C200A28D43 /* NSObject-Rx */; };
 		7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DA82A2557E0008AC342 /* AppDelegate.swift */; };
 		7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DAA2A2557E0008AC342 /* SceneDelegate.swift */; };
 		7EC97DB22A2557E1008AC342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC97DB12A2557E1008AC342 /* Assets.xcassets */; };
@@ -88,6 +102,20 @@
 		7EBBBC322A583F7800C4999C /* TicketPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketPayment.swift; sourceTree = "<group>"; };
 		7EBBBC342A583FA700C4999C /* TicketRaise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRaise.swift; sourceTree = "<group>"; };
 		7EBBBC362A5840A800C4999C /* PageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageRequest.swift; sourceTree = "<group>"; };
+		7EBBBC3A2A5909EA00C4999C /* Watched.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watched.swift; sourceTree = "<group>"; };
+		7EBBBC3C2A5909FF00C4999C /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		7EBBBC3E2A590A1B00C4999C /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		7EBBBC402A590A2900C4999C /* ContentsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsInfo.swift; sourceTree = "<group>"; };
+		7EBBBC422A590A3700C4999C /* ContentsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsDetail.swift; sourceTree = "<group>"; };
+		7EBBBC442A590A4300C4999C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		7EBBBC462A590A5100C4999C /* Analyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyze.swift; sourceTree = "<group>"; };
+		7EBBBC482A5910AE00C4999C /* ContentPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPerson.swift; sourceTree = "<group>"; };
+		7EBBBC4A2A5910FE00C4999C /* FavoriteWatched.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteWatched.swift; sourceTree = "<group>"; };
+		7EBBBC4D2A59159B00C4999C /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		7EBBBC4F2A5915F100C4999C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		7EBBBC512A5916FD00C4999C /* CustomerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerService.swift; sourceTree = "<group>"; };
+		7EBBBC532A5919DF00C4999C /* Faq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faq.swift; sourceTree = "<group>"; };
+		7EBBBC552A591A6700C4999C /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		7EC97DA52A2557E0008AC342 /* netflix_clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netflix_clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC97DA82A2557E0008AC342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC97DAA2A2557E0008AC342 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,10 +135,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E5BD6A92A501FDD00FB806C /* RxSwift in Frameworks */,
-				7E5BD6AE2A501FEE00FB806C /* NSObject-Rx in Frameworks */,
 				7E5BD69D2A501FB300FB806C /* Alamofire in Frameworks */,
 				7E5BD6A52A501FDD00FB806C /* RxCocoa in Frameworks */,
 				7E5BD6A02A501FCA00FB806C /* SnapKit in Frameworks */,
+				7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +162,9 @@
 		7E5BD6902A4B1A8600FB806C /* model */ = {
 			isa = PBXGroup;
 			children = (
+				7EBBBC4C2A59159500C4999C /* board */,
+				7EBBBC392A5909E300C4999C /* movie */,
+				7EBBBC382A59098700C4999C /* file */,
 				7EBBBC2D2A583B5100C4999C /* other */,
 				7EBBBC262A58382C00C4999C /* user */,
 			);
@@ -245,17 +276,17 @@
 		7EBBBC0C2A56F61C00C4999C /* component */ = {
 			isa = PBXGroup;
 			children = (
-				7EBBBC0D2A56F61E00C4999C /* main */,
+				7EBBBC0D2A56F61E00C4999C /* home */,
 			);
 			path = component;
 			sourceTree = "<group>";
 		};
-		7EBBBC0D2A56F61E00C4999C /* main */ = {
+		7EBBBC0D2A56F61E00C4999C /* home */ = {
 			isa = PBXGroup;
 			children = (
 				7EBBBC0E2A56F63600C4999C /* BannerCell.swift */,
 			);
-			path = main;
+			path = home;
 			sourceTree = "<group>";
 		};
 		7EBBBC132A582B7100C4999C /* home */ = {
@@ -330,10 +361,46 @@
 		7EBBBC2D2A583B5100C4999C /* other */ = {
 			isa = PBXGroup;
 			children = (
-				7EBBBC2E2A583B5400C4999C /* File.swift */,
 				7EBBBC362A5840A800C4999C /* PageRequest.swift */,
 			);
 			path = other;
+			sourceTree = "<group>";
+		};
+		7EBBBC382A59098700C4999C /* file */ = {
+			isa = PBXGroup;
+			children = (
+				7EBBBC2E2A583B5400C4999C /* File.swift */,
+			);
+			name = file;
+			path = "랴ㅣㄷ";
+			sourceTree = "<group>";
+		};
+		7EBBBC392A5909E300C4999C /* movie */ = {
+			isa = PBXGroup;
+			children = (
+				7EBBBC3A2A5909EA00C4999C /* Watched.swift */,
+				7EBBBC3C2A5909FF00C4999C /* Person.swift */,
+				7EBBBC3E2A590A1B00C4999C /* Favorite.swift */,
+				7EBBBC402A590A2900C4999C /* ContentsInfo.swift */,
+				7EBBBC422A590A3700C4999C /* ContentsDetail.swift */,
+				7EBBBC442A590A4300C4999C /* Category.swift */,
+				7EBBBC462A590A5100C4999C /* Analyze.swift */,
+				7EBBBC482A5910AE00C4999C /* ContentPerson.swift */,
+				7EBBBC4A2A5910FE00C4999C /* FavoriteWatched.swift */,
+			);
+			path = movie;
+			sourceTree = "<group>";
+		};
+		7EBBBC4C2A59159500C4999C /* board */ = {
+			isa = PBXGroup;
+			children = (
+				7EBBBC4D2A59159B00C4999C /* Banner.swift */,
+				7EBBBC4F2A5915F100C4999C /* Comment.swift */,
+				7EBBBC512A5916FD00C4999C /* CustomerService.swift */,
+				7EBBBC532A5919DF00C4999C /* Faq.swift */,
+				7EBBBC552A591A6700C4999C /* Notice.swift */,
+			);
+			path = board;
 			sourceTree = "<group>";
 		};
 		7EC97D9C2A2557E0008AC342 = {
@@ -410,7 +477,7 @@
 				7E5BD69F2A501FCA00FB806C /* SnapKit */,
 				7E5BD6A42A501FDD00FB806C /* RxCocoa */,
 				7E5BD6A82A501FDD00FB806C /* RxSwift */,
-				7E5BD6AD2A501FEE00FB806C /* NSObject-Rx */,
+				7EC818D82A5951C200A28D43 /* NSObject-Rx */,
 			);
 			productName = netflix_clone;
 			productReference = 7EC97DA52A2557E0008AC342 /* netflix_clone.app */;
@@ -488,7 +555,7 @@
 				7E5BD69B2A501FB300FB806C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				7E5BD69E2A501FCA00FB806C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				7E5BD6A12A501FDD00FB806C /* XCRemoteSwiftPackageReference "RxSwift" */,
-				7E5BD6AC2A501FEE00FB806C /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
+				7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
 			);
 			productRefGroup = 7EC97DA62A2557E0008AC342 /* Products */;
 			projectDirPath = "";
@@ -532,12 +599,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EBBBC492A5910AE00C4999C /* ContentPerson.swift in Sources */,
 				7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */,
 				7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */,
 				7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */,
+				7EBBBC3F2A590A1B00C4999C /* Favorite.swift in Sources */,
+				7EBBBC4B2A5910FE00C4999C /* FavoriteWatched.swift in Sources */,
 				7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */,
+				7EBBBC542A5919DF00C4999C /* Faq.swift in Sources */,
 				7EBBBC252A582D3A00C4999C /* MyViewController.swift in Sources */,
 				7EBBBC122A5829EE00C4999C /* MainViewController.swift in Sources */,
+				7EBBBC452A590A4300C4999C /* Category.swift in Sources */,
 				7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */,
 				7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */,
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,
@@ -548,12 +620,21 @@
 				7EBBBC162A582BB200C4999C /* SearchViewController.swift in Sources */,
 				7EBBBC1F2A582CF000C4999C /* StartViewModel.swift in Sources */,
 				7E5BD6B12A5029A700FB806C /* ViewModelType.swift in Sources */,
+				7EBBBC502A5915F100C4999C /* Comment.swift in Sources */,
 				7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */,
 				7EBBBC352A583FA700C4999C /* TicketRaise.swift in Sources */,
+				7EBBBC3D2A5909FF00C4999C /* Person.swift in Sources */,
+				7EBBBC562A591A6700C4999C /* Notice.swift in Sources */,
 				7EBBBC372A5840A800C4999C /* PageRequest.swift in Sources */,
+				7EBBBC522A5916FD00C4999C /* CustomerService.swift in Sources */,
 				7EBBBC232A582D2A00C4999C /* StarViewController.swift in Sources */,
+				7EBBBC432A590A3700C4999C /* ContentsDetail.swift in Sources */,
+				7EBBBC4E2A59159B00C4999C /* Banner.swift in Sources */,
 				7E5BD6C32A502E8800FB806C /* HomeViewController.swift in Sources */,
+				7EBBBC412A590A2900C4999C /* ContentsInfo.swift in Sources */,
+				7EBBBC472A590A5100C4999C /* Analyze.swift in Sources */,
 				7EBBBC212A582CF500C4999C /* MyViewModel.swift in Sources */,
+				7EBBBC3B2A5909EA00C4999C /* Watched.swift in Sources */,
 				7EBBBC2A2A58399E00C4999C /* MobileDeviceInfo.swift in Sources */,
 				7EBBBC312A583D9800C4999C /* Ticket.swift in Sources */,
 				7EBBBC282A58383300C4999C /* Account.swift in Sources */,
@@ -926,7 +1007,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		7E5BD6AC2A501FEE00FB806C /* XCRemoteSwiftPackageReference "NSObject-Rx" */ = {
+		7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/NSObject-Rx";
 			requirement = {
@@ -957,9 +1038,9 @@
 			package = 7E5BD6A12A501FDD00FB806C /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		7E5BD6AD2A501FEE00FB806C /* NSObject-Rx */ = {
+		7EC818D82A5951C200A28D43 /* NSObject-Rx */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7E5BD6AC2A501FEE00FB806C /* XCRemoteSwiftPackageReference "NSObject-Rx" */;
+			package = 7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */;
 			productName = "NSObject-Rx";
 		};
 /* End XCSwiftPackageProductDependency section */

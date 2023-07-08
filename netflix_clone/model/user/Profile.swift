@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Profile: Codable {
+final class Profile: Codable {
     var profileNo: Int
     var account: Account
     var regDate: Date

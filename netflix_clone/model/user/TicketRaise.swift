@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct TicketRaise: Codable {
+final class TicketRaise: Codable {
     var raiseLogNo: Int
     var ticket: Ticket
     var account: Account

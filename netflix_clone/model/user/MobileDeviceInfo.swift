@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct MobileDeviceInfo: Codable {
+final class MobileDeviceInfo: Codable {
     var deviceType: String
     var pushKey: String
     var uuid: String

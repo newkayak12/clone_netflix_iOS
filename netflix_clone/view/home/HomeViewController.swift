@@ -7,7 +7,11 @@
 
 import UIKit
 import SwiftUI
+import RxCocoa
 import SnapKit
+import RxSwift
+import NSObject_Rx
+
 
 class HomeViewController: BaseViewController, ViewModelBindable {
     var viewModel: HomeViewModel!
@@ -16,66 +20,102 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         return imageView
     }()
-    private let bannerCollection = {
+    
+    private lazy var bannerCollection: UICollectionView  = {
+        var layout = UICollectionViewFlowLayout()
+        layout.itemSize.width = view.frame.width
+        layout.itemSize.height = 200
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .black
+        collectionView.isScrollEnabled = true
+        return collectionView
+    }()
+    private lazy var analysticCollection = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         return collectionView
     }()
-    private let analysticCollection = {
+    private lazy var watchedCollection = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         return collectionView
     }()
-    private let watchedCollection = {
+    private lazy var newEpisodeCollection = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         return collectionView
     }()
-    private let newEpisodeCollection = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        
-        return collectionView
-    }()
-    private let container = UIScrollView(frame: .zero)
-   
-   
+    private let scrollView = UIScrollView(frame: .zero)
     
     
     func wireViewModel() {
         
         
+        bannerCollection.dataSource = nil
+        bannerCollection.delegate = nil
+        
+        bannerCollection.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.cellId)
+        viewModel.banners.bind(to: bannerCollection.rx.items(cellIdentifier: BannerCell.cellId, cellType: BannerCell.self)){ (row, element, cell) in
+        }.disposed(by: rx.disposeBag)
+        viewModel.fetchBanner()
+                     
+                        
+        
     }
     
-    
-    func prepareUI() {
+    func setNavigation() {
         logo.contentMode = .scaleAspectFit
-        navigationController?.navigationBar.prefersLargeTitles = true
+        logo.snp.makeConstraints { make in
+            make.width.equalTo(40)
+        }
+        
+        
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barStyle = .black
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logo)
         let symbolConf = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)
         let bellImg = UIImage(systemName: "bell", withConfiguration: symbolConf)
         let profileImg = UIImage(systemName: "person.crop.circle", withConfiguration: symbolConf)
         navigationItem.rightBarButtonItems = [ UIBarButtonItem(image: profileImg, style: .plain, target: nil, action: nil), UIBarButtonItem(image: bellImg, style: .plain, target: nil, action: nil)]
+    }
+    
+    func prepareUI() {
+        self.setNavigation()
+        
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [
+            bannerCollection,
+        ])
+        
+        
+        //, analysticCollection,watchedCollection, newEpisodeCollection
+        
+        
+        stackView.axis = .vertical
+        stackView.spacing = CGFloat(100)
+        
+        
+        
+        scrollView.addSubview(stackView)
+        view.addSubview(scrollView)
+        
+        
        
-        let innerContainer: UIStackView = UIStackView(arrangedSubviews: [bannerCollection, analysticCollection,watchedCollection, newEpisodeCollection])
-        innerContainer.axis = .vertical
-        innerContainer.spacing = CGFloat(10)
-        
-        
-        container.addSubview(innerContainer)
-        view.addSubview(container)
-        
-        
-        logo.snp.makeConstraints { make in
-            make.width.equalTo(40)
+        scrollView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view)
+            make.height.equalTo(stackView)
         }
-        view.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalTo(container)
+        
+        stackView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(scrollView)
+            make.width.equalTo(scrollView)
         }
-        innerContainer.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(bannerCollection)
-            make.leading.trailing.equalTo(analysticCollection)
-            make.leading.trailing.equalTo(watchedCollection)
-            make.leading.trailing.equalTo(newEpisodeCollection)
+        
+        bannerCollection.snp.makeConstraints { make in
+            make.leading.trailing.width.equalTo(stackView)
         }
     }
     
@@ -86,7 +126,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         super.viewDidLoad()
         view.backgroundColor = .black
         #if DEBUG
-        prepareUI()
         #endif
     }
 

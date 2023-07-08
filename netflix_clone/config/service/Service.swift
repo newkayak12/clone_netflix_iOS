@@ -34,7 +34,7 @@ class Service {
         return HTTPHeaders(result)
     }
     
-    public func get <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func get <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
             let response =  af.request( baseUrl + path, method: .get, parameters: params, headers: self.prepareHeader())
                              .responseDecodable(of: R.self) { response in
