@@ -24,11 +24,12 @@ class HomeViewController: BaseViewController, ViewModelBindable {
     private lazy var bannerCollection: UICollectionView  = {
         var layout = UICollectionViewFlowLayout()
         layout.itemSize.width = view.frame.width
-        layout.itemSize.height = 200
+        layout.itemSize.height = 300
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .black
         collectionView.isScrollEnabled = true
+        collectionView.isPagingEnabled = true
         return collectionView
     }()
     private lazy var analysticCollection = {
@@ -57,6 +58,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         
         bannerCollection.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.cellId)
         viewModel.banners.bind(to: bannerCollection.rx.items(cellIdentifier: BannerCell.cellId, cellType: BannerCell.self)){ (row, element, cell) in
+            Log.debug("???", "..")
         }.disposed(by: rx.disposeBag)
         viewModel.fetchBanner()
                      
@@ -86,19 +88,42 @@ class HomeViewController: BaseViewController, ViewModelBindable {
     func prepareUI() {
         self.setNavigation()
         
+        let bannerView = UIView(frame: .zero)
+        bannerView.backgroundColor = .white
+        let analysticView = UIView(frame: .zero)
+        analysticView.backgroundColor = .red
+        let watchedView = UIView(frame: .zero)
+        watchedView.backgroundColor = .blue
+        let newEpisodView = UIView(frame: .zero)
+        newEpisodView.backgroundColor = .yellow
+        
+        let footerView = UIView(frame: .zero)
+        footerView.backgroundColor = .cyan
+        
+        
+        bannerView.addSubview(bannerCollection)
+        
+        
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
-            bannerCollection,
+           bannerView,
+           analysticView,
+           watchedView,
+           newEpisodView,
+           footerView
         ])
         
         
         //, analysticCollection,watchedCollection, newEpisodeCollection
         
-        
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
         stackView.axis = .vertical
-        stackView.spacing = CGFloat(100)
+        stackView.spacing = CGFloat(20)
+//        stackView.alignment = .leading
+//        stackView.distribution = .fill
         
         
-        
+        scrollView.bounces = true
         scrollView.addSubview(stackView)
         view.addSubview(scrollView)
         
@@ -106,7 +131,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
        
         scrollView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(view)
-            make.height.equalTo(stackView)
         }
         
         stackView.snp.makeConstraints { make in
@@ -114,9 +138,32 @@ class HomeViewController: BaseViewController, ViewModelBindable {
             make.width.equalTo(scrollView)
         }
         
-        bannerCollection.snp.makeConstraints { make in
-            make.leading.trailing.width.equalTo(stackView)
+        bannerView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(stackView)
+            make.height.equalTo(300)
+            make.leading.trailing.equalTo(bannerCollection)
         }
+        bannerCollection.snp.makeConstraints { make in
+            make.width.height.leading.top.equalTo(bannerView)
+        }
+        
+        analysticView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(stackView)
+            make.height.equalTo(200)
+        }
+        watchedView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(stackView)
+            make.height.equalTo(200)
+        }
+        newEpisodView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(stackView)
+            make.height.equalTo(200)
+        }
+        footerView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(stackView)
+            make.height.equalTo(100)
+        }
+        
     }
     
     
