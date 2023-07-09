@@ -8,10 +8,16 @@
 import Foundation
 final class Watched: Codable {
     var watchedNo: Int
-    var profile: Profile
-    var contentsDetail: ContentDetail
+    var profile: Profile?
+    var contentsDetail: ContentDetail?
     var lastWatchedDate: Date
     var watchedAt: String
+    
+    init() {
+        self.watchedNo = 0
+        self.lastWatchedDate = Date()
+        self.watchedAt = ""
+    }
     
     
     init(from decoder: Decoder) throws {

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1D97AD2A59B6E400E91650 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1D97AC2A59B6E400E91650 /* Lottie */; };
+		7E1D97AF2A5A5E3400E91650 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */; };
+		7E1D97B12A5A7EE700E91650 /* AnalyzeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */; };
+		7E1D97B32A5A87F400E91650 /* RankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97B22A5A87F400E91650 /* RankCell.swift */; };
+		7E1D97B52A5ACD4B00E91650 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97B42A5ACD4B00E91650 /* CategoryCell.swift */; };
 		7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6962A4B1C7600FB806C /* BaseViewController.swift */; };
 		7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6992A4B1CBA00FB806C /* Service.swift */; };
 		7E5BD69D2A501FB300FB806C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD69C2A501FB300FB806C /* Alamofire */; };
@@ -50,6 +55,8 @@
 		7EBBBC542A5919DF00C4999C /* Faq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC532A5919DF00C4999C /* Faq.swift */; };
 		7EBBBC562A591A6700C4999C /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC552A591A6700C4999C /* Notice.swift */; };
 		7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC818D82A5951C200A28D43 /* NSObject-Rx */; };
+		7EC818DB2A59954200A28D43 /* AnalyzeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC818DA2A59954200A28D43 /* AnalyzeCell.swift */; };
+		7EC818DD2A5999F100A28D43 /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC818DC2A5999F100A28D43 /* Footer.swift */; };
 		7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DA82A2557E0008AC342 /* AppDelegate.swift */; };
 		7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DAA2A2557E0008AC342 /* SceneDelegate.swift */; };
 		7EC97DB22A2557E1008AC342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC97DB12A2557E1008AC342 /* Assets.xcassets */; };
@@ -77,6 +84,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
+		7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeFlow.swift; sourceTree = "<group>"; };
+		7E1D97B22A5A87F400E91650 /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
+		7E1D97B42A5ACD4B00E91650 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		7E5BD6962A4B1C7600FB806C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7E5BD6992A4B1CBA00FB806C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		7E5BD6B02A5029A700FB806C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -116,6 +127,8 @@
 		7EBBBC512A5916FD00C4999C /* CustomerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerService.swift; sourceTree = "<group>"; };
 		7EBBBC532A5919DF00C4999C /* Faq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faq.swift; sourceTree = "<group>"; };
 		7EBBBC552A591A6700C4999C /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		7EC818DA2A59954200A28D43 /* AnalyzeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeCell.swift; sourceTree = "<group>"; };
+		7EC818DC2A5999F100A28D43 /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		7EC97DA52A2557E0008AC342 /* netflix_clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netflix_clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC97DA82A2557E0008AC342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC97DAA2A2557E0008AC342 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +152,7 @@
 				7E5BD6A52A501FDD00FB806C /* RxCocoa in Frameworks */,
 				7E5BD6A02A501FCA00FB806C /* SnapKit in Frameworks */,
 				7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */,
+				7E1D97AD2A59B6E400E91650 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +299,12 @@
 			isa = PBXGroup;
 			children = (
 				7EBBBC0E2A56F63600C4999C /* BannerCell.swift */,
+				7EC818DA2A59954200A28D43 /* AnalyzeCell.swift */,
+				7EC818DC2A5999F100A28D43 /* Footer.swift */,
+				7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */,
+				7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */,
+				7E1D97B22A5A87F400E91650 /* RankCell.swift */,
+				7E1D97B42A5ACD4B00E91650 /* CategoryCell.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -478,6 +498,7 @@
 				7E5BD6A42A501FDD00FB806C /* RxCocoa */,
 				7E5BD6A82A501FDD00FB806C /* RxSwift */,
 				7EC818D82A5951C200A28D43 /* NSObject-Rx */,
+				7E1D97AC2A59B6E400E91650 /* Lottie */,
 			);
 			productName = netflix_clone;
 			productReference = 7EC97DA52A2557E0008AC342 /* netflix_clone.app */;
@@ -556,6 +577,7 @@
 				7E5BD69E2A501FCA00FB806C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				7E5BD6A12A501FDD00FB806C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
+				7E1D97AB2A59B6E400E91650 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 7EC97DA62A2557E0008AC342 /* Products */;
 			projectDirPath = "";
@@ -599,9 +621,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC818DB2A59954200A28D43 /* AnalyzeCell.swift in Sources */,
 				7EBBBC492A5910AE00C4999C /* ContentPerson.swift in Sources */,
 				7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */,
 				7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */,
+				7E1D97B12A5A7EE700E91650 /* AnalyzeFlow.swift in Sources */,
 				7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */,
 				7EBBBC3F2A590A1B00C4999C /* Favorite.swift in Sources */,
 				7EBBBC4B2A5910FE00C4999C /* FavoriteWatched.swift in Sources */,
@@ -614,10 +638,13 @@
 				7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */,
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,
 				7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */,
+				7E1D97B32A5A87F400E91650 /* RankCell.swift in Sources */,
 				7EBBBC2F2A583B5400C4999C /* File.swift in Sources */,
 				7EBBBC1D2A582CE900C4999C /* SearchViewModel.swift in Sources */,
+				7EC818DD2A5999F100A28D43 /* Footer.swift in Sources */,
 				7EBBBC2C2A5839DF00C4999C /* Profile.swift in Sources */,
 				7EBBBC162A582BB200C4999C /* SearchViewController.swift in Sources */,
+				7E1D97B52A5ACD4B00E91650 /* CategoryCell.swift in Sources */,
 				7EBBBC1F2A582CF000C4999C /* StartViewModel.swift in Sources */,
 				7E5BD6B12A5029A700FB806C /* ViewModelType.swift in Sources */,
 				7EBBBC502A5915F100C4999C /* Comment.swift in Sources */,
@@ -626,6 +653,7 @@
 				7EBBBC3D2A5909FF00C4999C /* Person.swift in Sources */,
 				7EBBBC562A591A6700C4999C /* Notice.swift in Sources */,
 				7EBBBC372A5840A800C4999C /* PageRequest.swift in Sources */,
+				7E1D97AF2A5A5E3400E91650 /* PosterCell.swift in Sources */,
 				7EBBBC522A5916FD00C4999C /* CustomerService.swift in Sources */,
 				7EBBBC232A582D2A00C4999C /* StarViewController.swift in Sources */,
 				7EBBBC432A590A3700C4999C /* ContentsDetail.swift in Sources */,
@@ -809,7 +837,7 @@
 				DEVELOPMENT_TEAM = NL7TARX6W5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = netflix_clone/resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = netflix;
+				INFOPLIST_KEY_CFBundleDisplayName = Neflix;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -842,7 +870,7 @@
 				DEVELOPMENT_TEAM = NL7TARX6W5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = netflix_clone/resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = netflix;
+				INFOPLIST_KEY_CFBundleDisplayName = Neflix;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -983,6 +1011,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7E1D97AB2A59B6E400E91650 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		7E5BD69B2A501FB300FB806C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1018,6 +1054,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7E1D97AC2A59B6E400E91650 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E1D97AB2A59B6E400E91650 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		7E5BD69C2A501FB300FB806C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7E5BD69B2A501FB300FB806C /* XCRemoteSwiftPackageReference "Alamofire" */;

@@ -8,9 +8,14 @@
 import Foundation
 final class Category: Codable {
     var categoryNo: Int
-    var parentCategory: Category
+    var parentCategory: Category?
     var name: String
     var isLeaf: Bool
+    init() {
+        self.categoryNo = 0
+        self.name = "CATEGORY"
+        self.isLeaf = true
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
