@@ -7,9 +7,27 @@
 
 import Foundation
 import SwiftUI
+import RxSwift
+import Lottie
 
 class NoticeViewController: BaseViewController, ViewModelBindable {
     var viewModel: NoticeViewModel!
+    private lazy var animationView = {
+        let uiView = UIView(frame: .zero)
+        let animationView =  LottieAnimationView(name: "spinner")
+//        let animationView =  UIImageView(image: UIImage(systemName: "tray.circle.fill"))
+        animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        animationView.loopMode = .loop
+        animationView.play()
+        
+        
+        uiView.addSubview(animationView)
+        animationView.snp.makeConstraints { make in
+            make.center.equalTo(uiView)
+        }
+        
+        return uiView
+    }()
     private lazy var noticeTableView = {
         let tableView = UITableView();
         
@@ -33,17 +51,38 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
     }
     
     func wireNotice() {
-        Log.warning("WIRE", "WIRE")
+        viewModel.loading
+        .withUnretained(self)
+        .subscribe{
+            this, value in
+            Log.warning("LOTTIE", !value)
+            this.animationView.isHidden = !value
+        }.disposed(by: rx.disposeBag)
+        
         self.noticeTableView.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.cellId)
         viewModel.notice.bind(to: noticeTableView.rx.items(cellIdentifier: NoticeCell.cellId)){ (row, element, cell) in
             Log.warning("NOTICE", "..")
         }.disposed(by: rx.disposeBag)
+        
+        
+        Observable.zip(noticeTableView.rx.modelSelected(Notice.self), noticeTableView.rx.itemSelected)
+                  .withUnretained(self)
+                  .do { this, data in
+//                      this.noticeTableView.deselectRow(at: data.1, animated: true)
+                  }
+                  .map{ $0.1 }
+                  .withUnretained(self)
+                  .subscribe{ this, data in
+                      print(data.0)
+                      print(data.1)
+                  }.disposed(by: rx.disposeBag)
     }
     
     func wireViewModel() {
         self.wireNotice()
         
         viewModel.fetchNotice()
+        self.noticeTableView.reloadData()
     }
    
     func setAttributes () {
@@ -54,10 +93,16 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
         noticeTableView.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalTo(view)
         }
+        animationView.snp.makeConstraints { make in
+            make.center.equalTo(view)
+            make.width.height.equalTo(100)
+        }
     }
     
     func prepareUI() {
         view.addSubview(self.noticeTableView)
+        view.addSubview(self.animationView)
+        view.bringSubviewToFront(self.animationView)
         
         
         self.setConstraints()
