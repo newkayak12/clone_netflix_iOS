@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class HomeViewModel: ViewModelType {
     var title: String
@@ -53,6 +54,9 @@ class HomeViewModel: ViewModelType {
             Category(), Category(), Category(), Category(), Category()
         ])
     }
+    
+  
+        
     
     init( title: String, service: Service ) {
         self.title = title

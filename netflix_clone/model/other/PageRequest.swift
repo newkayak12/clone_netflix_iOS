@@ -9,7 +9,13 @@ import Foundation
 struct PageRequest: Codable {
     var page: Int
     var limit: Int
-    var tableNo: Int
+    var tableNo: Int?
+    
+    init ( page: Int = 1 ) {
+        self.page = page
+        self.limit = 10
+        tableNo = nil
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

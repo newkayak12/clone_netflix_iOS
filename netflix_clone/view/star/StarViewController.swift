@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 import SwiftUI
 class StarViewController: BaseViewController, ViewModelBindable {
+
     var viewModel: StarViewModel!
+    
+    func setNavigation() {
+    }
     
     func wireViewModel() {
     }

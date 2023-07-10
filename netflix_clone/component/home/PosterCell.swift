@@ -23,6 +23,11 @@ class PosterCell: UICollectionViewCell {
         }
         return view
     }()
+    let titleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "TITLE"
+        return label
+    }()
     
     required init?(coder: NSCoder) {
         fatalError ("init (coder:) has not been implemented" )
@@ -34,11 +39,16 @@ class PosterCell: UICollectionViewCell {
     }
     
     func drawUI() {
+        self.addSubview(titleLabel)
+        self.sendSubviewToBack(titleLabel)
         self.addSubview(imgView)
         imgView.contentMode = .scaleAspectFit
         imgView.backgroundColor = .white
         imgView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(self)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.center.equalTo(self)
         }
     }
     

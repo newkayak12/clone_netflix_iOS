@@ -9,6 +9,7 @@ import UIKit
 protocol ViewModelBindable {
     associatedtype ViewModel
     var viewModel: ViewModel! { get set }
+    func setNavigation()
     func wireViewModel()
     func prepareUI()
 }
@@ -17,6 +18,7 @@ extension ViewModelBindable where Self: UIViewController {
     mutating func bind( viewModel: Self.ViewModel ) {
         self.viewModel = viewModel
         loadViewIfNeeded()
+        setNavigation()
         wireViewModel()
         prepareUI()
     }

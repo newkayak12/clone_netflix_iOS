@@ -11,6 +11,9 @@ import SwiftUI
 class MyViewController: BaseViewController, ViewModelBindable {
     var viewModel: MyViewModel!
     
+    func setNavigation() {
+    }
+    
     func wireViewModel() {
     }
     

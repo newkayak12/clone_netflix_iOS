@@ -14,6 +14,13 @@ final class Notice: Codable {
     var regDate: Date
     var images: [File] = []
     
+    init(){
+        self.noticeNo = 0
+        self.title = "TITLE"
+        self.content = "CONTENT"
+        self.regDate = Date()
+    }
+    
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

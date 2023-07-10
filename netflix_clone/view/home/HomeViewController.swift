@@ -16,17 +16,6 @@ import NSObject_Rx
 class HomeViewController: BaseViewController, ViewModelBindable {
     var viewModel: HomeViewModel!
     
-//    enum Paging {
-//        static let itemSize = CGSize(width: UIScreen.main.bounds.width * 0.825, height: 300)
-//        static let itemSpacing = 20.0
-//
-//        static var insetX: CGFloat {
-//            (UIScreen.main.bounds.width - Self.itemSize.width) / 2.0
-//        }
-//        static var collectionViewContentInset: UIEdgeInsets {
-//            UIEdgeInsets(top: 0, left: Self.insetX, bottom: 0, right: Self.insetX)
-//        }
-//    }
     private let analyzeflowDelegate = AnalyzeFlow()
     
     private let logo = {
@@ -242,7 +231,13 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         let symbolConf = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)
         let bellImg = UIImage(systemName: "bell", withConfiguration: symbolConf)
         let profileImg = UIImage(systemName: "person.crop.circle", withConfiguration: symbolConf)
-        navigationItem.rightBarButtonItems = [ UIBarButtonItem(image: profileImg, style: .plain, target: nil, action: nil), UIBarButtonItem(image: bellImg, style: .plain, target: nil, action: nil)]
+        
+        let profile = UIBarButtonItem(image: profileImg, style: .plain, target: self, action: #selector(fnRouteProfile))
+        let bell = UIBarButtonItem(image: bellImg, style: .plain, target: self, action: #selector(fnRouteNotice))
+        
+        profile.tintColor = .white
+        bell.tintColor = .white
+        navigationItem.rightBarButtonItems = [ profile, bell]
     }
     func setConstraints() {
         scrollView.snp.makeConstraints { make in
@@ -320,7 +315,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         
         footerView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(stackView!)
-            make.height.equalTo(150)
+            make.height.equalTo(200)
         }
     }
     func setAttributes() {
@@ -380,11 +375,29 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         view.addSubview(scrollView)
         
         self.setAttributes()
-        self.setNavigation()
         self.setConstraints()
     }
     
+    //methods
     
+    //push, present
+    @objc
+    private func fnRouteNotice () {
+        let noticeViewModel = NoticeViewModel(title: "알림", service: self.viewModel.service)
+        var noticeView = NoticeViewController()
+        noticeView.bind(viewModel: noticeViewModel)
+        let navtigation = UINavigationController(rootViewController: noticeView)
+        navigationController?.present(navtigation, animated: true)
+        navigationController?.modalPresentationStyle = .fullScreen
+    }
+    @objc
+    func fnRouteProfile () {
+        Log.error("TOUCH", "Profile")
+        
+    }
+    func fnTouchMovie ( contentsInfoNo: Int ){
+        
+    }
     
 
     override func viewDidLoad() {
@@ -398,7 +411,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
 
 #if DEBUG
 @available(iOS 13, *)
-struct Preview: PreviewProvider {
+struct HomePreview: PreviewProvider {
 
     static var previews: some View {
         // view controller using programmatic UI

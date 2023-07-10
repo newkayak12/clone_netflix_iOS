@@ -34,9 +34,9 @@ class Service {
         return HTTPHeaders(result)
     }
     
-    public func get <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
+    public func get <R: Decodable>( path: Api, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response =  af.request( baseUrl + path, method: .get, parameters: params, headers: self.prepareHeader())
+            let response =  af.request( baseUrl + path.rawValue, method: .get, parameters: params, headers: self.prepareHeader())
                              .responseDecodable(of: R.self) { response in
                                  switch response.result {
                                      case .success(let response):
@@ -52,9 +52,9 @@ class Service {
         }
     }
     
-    public func patch <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func patch <R: Decodable>( path: Api, params: [String: Any]? ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response = af.request( baseUrl + path, method: .patch, parameters: params, headers: self.prepareHeader())
+            let response = af.request( baseUrl + path.rawValue, method: .patch, parameters: params, headers: self.prepareHeader())
                 .responseDecodable(of: R.self) { response in
                     switch response.result {
                         case .success(let response):
@@ -69,9 +69,9 @@ class Service {
         }
     }
     
-    public func post <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func post <R: Decodable>( path: Api, params: [String: Any]? ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response = af.request( baseUrl + path, method: .post, parameters: params, headers: self.prepareHeader())
+            let response = af.request( baseUrl + path.rawValue, method: .post, parameters: params, headers: self.prepareHeader())
                 .responseDecodable(of: R.self) { response in
                     switch response.result {
                         case .success(let response):
@@ -86,9 +86,9 @@ class Service {
         }
     }
     
-    public func delete <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func delete <R: Decodable>( path: Api, params: [String: Any]? ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response = af.request( baseUrl + path, method: .delete, parameters: params, headers: self.prepareHeader())
+            let response = af.request( baseUrl + path.rawValue, method: .delete, parameters: params, headers: self.prepareHeader())
                 .responseDecodable(of: R.self) { response in
                     switch response.result {
                         case .success(let response):
@@ -103,4 +103,9 @@ class Service {
         }
     }
     
+}
+
+
+enum Api: String {
+    case USER_SIGN_IN = ""
 }

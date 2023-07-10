@@ -11,6 +11,9 @@ import SwiftUI
 class SearchViewController: BaseViewController, ViewModelBindable {
     var viewModel: SearchViewModel!
     
+    func setNavigation() {
+    }
+    
     func wireViewModel() {
     }
     
