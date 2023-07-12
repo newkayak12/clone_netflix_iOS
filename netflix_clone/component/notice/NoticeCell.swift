@@ -24,11 +24,7 @@ class NoticeCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         label.backgroundColor = .black
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
-        dateFormatter.locale = Locale(identifier:"ko_KR")
-        
-        let date = dateFormatter.string(from: Date())
+        let date = self.nowDate()
         label.text = date
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 16)
@@ -55,6 +51,18 @@ class NoticeCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func nowDate () -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
+        dateFormatter.locale = Locale(identifier:"ko_KR")
+        
+        return dateFormatter.string(from: Date())
+    }
+    override func prepareForReuse() {
+        self.titleLabel.text = "TITLE"
+        self.dateLabel.text = self.nowDate()
     }
     
     func drawUI(){

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import RxSwift
+import RxCocoa
 import Lottie
 
 class NoticeViewController: BaseViewController, ViewModelBindable {
@@ -59,16 +60,22 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
             this.animationView.isHidden = !value
         }.disposed(by: rx.disposeBag)
         
+        
         self.noticeTableView.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.cellId)
-        viewModel.notice.bind(to: noticeTableView.rx.items(cellIdentifier: NoticeCell.cellId)){ (row, element, cell) in
-            Log.warning("NOTICE", "..")
-        }.disposed(by: rx.disposeBag)
+        self.noticeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "INFINITE")
+        viewModel.notice
+            .map{
+                return [DataSection(type: "Notice", items: $0), DataSection(type: "INFINITE", items: [Notice()])]
+            }
+            .bind(to: noticeTableView.rx.items(dataSource: viewModel.dataSource)).disposed(by:rx.disposeBag)
         
-        
+//
+//
         Observable.zip(noticeTableView.rx.modelSelected(Notice.self), noticeTableView.rx.itemSelected)
                   .withUnretained(self)
                   .do { this, data in
 //                      this.noticeTableView.deselectRow(at: data.1, animated: true)
+                      Log.debug("SELECT", data)
                   }
                   .map{ $0.1 }
                   .withUnretained(self)

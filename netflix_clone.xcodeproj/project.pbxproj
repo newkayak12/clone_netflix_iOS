@@ -17,6 +17,7 @@
 		7E3C277E2A5C272A002E08A6 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3C277D2A5C272A002E08A6 /* NoticeCell.swift */; };
 		7E3C27802A5C3312002E08A6 /* PageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3C277F2A5C3312002E08A6 /* PageResult.swift */; };
 		7E3C27832A5C3C76002E08A6 /* spinner.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E3C27822A5C3C76002E08A6 /* spinner.json */; };
+		7E3C27862A5ECDBD002E08A6 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3C27852A5ECDBD002E08A6 /* RxDataSources */; };
 		7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6962A4B1C7600FB806C /* BaseViewController.swift */; };
 		7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6992A4B1CBA00FB806C /* Service.swift */; };
 		7E5BD69D2A501FB300FB806C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD69C2A501FB300FB806C /* Alamofire */; };
@@ -161,6 +162,7 @@
 				7E5BD69D2A501FB300FB806C /* Alamofire in Frameworks */,
 				7E5BD6A52A501FDD00FB806C /* RxCocoa in Frameworks */,
 				7E5BD6A02A501FCA00FB806C /* SnapKit in Frameworks */,
+				7E3C27862A5ECDBD002E08A6 /* RxDataSources in Frameworks */,
 				7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */,
 				7E1D97AD2A59B6E400E91650 /* Lottie in Frameworks */,
 			);
@@ -546,6 +548,7 @@
 				7E5BD6A82A501FDD00FB806C /* RxSwift */,
 				7EC818D82A5951C200A28D43 /* NSObject-Rx */,
 				7E1D97AC2A59B6E400E91650 /* Lottie */,
+				7E3C27852A5ECDBD002E08A6 /* RxDataSources */,
 			);
 			productName = netflix_clone;
 			productReference = 7EC97DA52A2557E0008AC342 /* netflix_clone.app */;
@@ -625,6 +628,7 @@
 				7E5BD6A12A501FDD00FB806C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
 				7E1D97AB2A59B6E400E91650 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				7E3C27842A5ECDBD002E08A6 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 7EC97DA62A2557E0008AC342 /* Products */;
 			projectDirPath = "";
@@ -1071,6 +1075,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		7E3C27842A5ECDBD002E08A6 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		7E5BD69B2A501FB300FB806C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1110,6 +1122,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E1D97AB2A59B6E400E91650 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		7E3C27852A5ECDBD002E08A6 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E3C27842A5ECDBD002E08A6 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 		7E5BD69C2A501FB300FB806C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
