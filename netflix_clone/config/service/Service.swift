@@ -28,7 +28,7 @@ class Service {
     
     private func prepareHeader () -> HTTPHeaders {
         var result: [HTTPHeader] = Array()
-        if let authorization = UserDefaults.standard.string(forKey: "Authroization") {
+        if let authorization = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) {
                 result.append(HTTPHeader(name: "Authorization", value: authorization))
         }
         return HTTPHeaders(result)

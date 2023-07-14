@@ -14,7 +14,7 @@ class NoticeViewModel: ViewModelType {
     var title: String
     var service: Service
     var pageRequest: PageRequest = PageRequest()
-    public lazy var loading = PublishSubject<Bool>()
+    
     public var noticeArray: [Notice] = []
     public lazy var notice = PublishSubject<[Notice]>()
 
@@ -43,32 +43,16 @@ class NoticeViewModel: ViewModelType {
         
     }
     
-    func fetchNotice ( page: Int = 1 ){
-        self.loading.onNext(true)
+    func fetchNotice (  ){
+        
         noticeArray.append(contentsOf: [
             Notice(),Notice(),Notice(),
             Notice(),Notice(),Notice(),
-            Notice(),Notice(),Notice(),
-            Notice(),Notice(),Notice(),
+            Notice()
         ])
         notice.onNext( noticeArray )
         
-        
-        
-        Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-            .take(5)
-            .debug()
-            .delay(.seconds(5), scheduler: MainScheduler.instance)
-            .subscribe { _ in
-                self.loading.onNext(false)
-                self.noticeArray.append(contentsOf: [
-                    Notice(),Notice(),Notice(),
-                    Notice(),Notice(),Notice(),
-                    Notice(),Notice(),Notice(),
-                    Notice(),Notice(),Notice(),
-                ])
-                self.notice.onNext(self.noticeArray)
-            }
+        self.pageRequest.page += 1
     }
     
 }

@@ -13,6 +13,7 @@ import Lottie
 
 class NoticeViewController: BaseViewController, ViewModelBindable {
     var viewModel: NoticeViewModel!
+    
     private lazy var animationView = {
         let uiView = UIView(frame: .zero)
         let animationView =  LottieAnimationView(name: "spinner")
@@ -20,8 +21,6 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
         animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         animationView.loopMode = .loop
         animationView.play()
-        
-        
         uiView.addSubview(animationView)
         animationView.snp.makeConstraints { make in
             make.center.equalTo(uiView)
@@ -34,6 +33,7 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
         
         return tableView;
     }()
+    public lazy var loading = PublishSubject<Bool>()
     
     func setNavigation() {
         let titleLabel = UILabel(frame: .zero)
@@ -52,12 +52,13 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
     }
     
     func wireNotice() {
-        viewModel.loading
+        loading
         .withUnretained(self)
+//        .debounce(.milliseconds(300), scheduler: MainScheduler().self)
         .subscribe{
             this, value in
-            Log.warning("LOTTIE", !value)
-            this.animationView.isHidden = !value
+            Log.warning("LOTTIE", value)
+            this.animationView.isHidden = value
         }.disposed(by: rx.disposeBag)
         
         
@@ -65,17 +66,25 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
         self.noticeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "INFINITE")
         viewModel.notice
             .map{
+                self.loading.onNext(true)
                 return [DataSection(type: "Notice", items: $0), DataSection(type: "INFINITE", items: [Notice()])]
             }
             .bind(to: noticeTableView.rx.items(dataSource: viewModel.dataSource)).disposed(by:rx.disposeBag)
         
-//
-//
+        noticeTableView.rx.willDisplayCell
+            .subscribe{ (cell: UITableViewCell, indexPath: IndexPath) in
+                if( indexPath.section == 1){
+                    self.loading.onNext(false)
+                    self.viewModel.fetchNotice()
+                    self.noticeTableView.reloadData()
+                }
+            }.disposed(by: rx.disposeBag)
+        
+        
         Observable.zip(noticeTableView.rx.modelSelected(Notice.self), noticeTableView.rx.itemSelected)
                   .withUnretained(self)
                   .do { this, data in
-//                      this.noticeTableView.deselectRow(at: data.1, animated: true)
-                      Log.debug("SELECT", data)
+                      this.noticeTableView.deselectRow(at: data.1, animated: true)
                   }
                   .map{ $0.1 }
                   .withUnretained(self)

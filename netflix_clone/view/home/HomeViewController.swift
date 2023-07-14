@@ -220,6 +220,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
             make.width.equalTo(30)
         }
         
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.black
@@ -392,8 +393,12 @@ class HomeViewController: BaseViewController, ViewModelBindable {
     }
     @objc
     func fnRouteProfile () {
-        Log.error("TOUCH", "Profile")
-        
+        UserDefaults.standard.set("Bearer ABC", forKey: Constants.TOKEN.rawValue)
+        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
+            Log.error("EXIST", token)
+        } else {
+            Log.error("NON", "")
+        }
     }
     func fnTouchMovie ( contentsInfoNo: Int ){
         
