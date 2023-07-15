@@ -393,11 +393,15 @@ class HomeViewController: BaseViewController, ViewModelBindable {
     }
     @objc
     func fnRouteProfile () {
-        UserDefaults.standard.set("Bearer ABC", forKey: Constants.TOKEN.rawValue)
         if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
             Log.error("EXIST", token)
         } else {
             Log.error("NON", "")
+            var signInStep1ViewController = Step1ViewController()
+            let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
+            signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
+            navigationController?.present(UINavigationController(rootViewController: signInStep1ViewController), animated: true)
+            navigationController?.modalPresentationStyle = .fullScreen
         }
     }
     func fnTouchMovie ( contentsInfoNo: Int ){

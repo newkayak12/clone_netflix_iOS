@@ -10,6 +10,9 @@ class Step2ViewModel: ViewModelType {
     var title: String
     var service: Service
     
+    var id: String = ""
+    var password: String = ""
+    
     init( title: String, service: Service ) {
         self.title = title
         self.service = service
