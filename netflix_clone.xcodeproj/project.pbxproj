@@ -66,6 +66,7 @@
 		7EC697E12A617A19006F3F22 /* Step1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC697E02A617A19006F3F22 /* Step1ViewController.swift */; };
 		7EC697E32A617A81006F3F22 /* Step2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC697E22A617A81006F3F22 /* Step2ViewController.swift */; };
 		7EC697E82A617B31006F3F22 /* IdInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC697E72A617B31006F3F22 /* IdInput.swift */; };
+		7EC697EA2A6259C5006F3F22 /* PasswordInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC697E92A6259C5006F3F22 /* PasswordInput.swift */; };
 		7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC818D82A5951C200A28D43 /* NSObject-Rx */; };
 		7EC818DB2A59954200A28D43 /* AnalyzeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC818DA2A59954200A28D43 /* AnalyzeCell.swift */; };
 		7EC818DD2A5999F100A28D43 /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC818DC2A5999F100A28D43 /* Footer.swift */; };
@@ -150,6 +151,7 @@
 		7EC697E02A617A19006F3F22 /* Step1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step1ViewController.swift; sourceTree = "<group>"; };
 		7EC697E22A617A81006F3F22 /* Step2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step2ViewController.swift; sourceTree = "<group>"; };
 		7EC697E72A617B31006F3F22 /* IdInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdInput.swift; sourceTree = "<group>"; };
+		7EC697E92A6259C5006F3F22 /* PasswordInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInput.swift; sourceTree = "<group>"; };
 		7EC818DA2A59954200A28D43 /* AnalyzeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeCell.swift; sourceTree = "<group>"; };
 		7EC818DC2A5999F100A28D43 /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		7EC97DA52A2557E0008AC342 /* netflix_clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netflix_clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,6 +552,7 @@
 		7EC697E62A617AFB006F3F22 /* step2 */ = {
 			isa = PBXGroup;
 			children = (
+				7EC697E92A6259C5006F3F22 /* PasswordInput.swift */,
 			);
 			path = step2;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				7EBBBC502A5915F100C4999C /* Comment.swift in Sources */,
 				7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */,
 				7EBBBC352A583FA700C4999C /* TicketRaise.swift in Sources */,
+				7EC697EA2A6259C5006F3F22 /* PasswordInput.swift in Sources */,
 				7E3C27802A5C3312002E08A6 /* PageResult.swift in Sources */,
 				7EBBBC3D2A5909FF00C4999C /* Person.swift in Sources */,
 				7E1D97B92A5AE62600E91650 /* NoticeViewModel.swift in Sources */,
