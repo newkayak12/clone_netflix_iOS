@@ -224,22 +224,25 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.black
+        
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logo)
         
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logo)
         let symbolConf = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)
         let bellImg = UIImage(systemName: "bell", withConfiguration: symbolConf)
         let profileImg = UIImage(systemName: "person.crop.circle", withConfiguration: symbolConf)
-        
         let profile = UIBarButtonItem(image: profileImg, style: .plain, target: self, action: #selector(fnRouteProfile))
         let bell = UIBarButtonItem(image: bellImg, style: .plain, target: self, action: #selector(fnRouteNotice))
         
         profile.tintColor = .white
         bell.tintColor = .white
-        navigationItem.rightBarButtonItems = [ profile, bell]
+        self.navigationItem.rightBarButtonItems = [ profile, bell]
     }
+    
+    
     func setConstraints() {
         scrollView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(view)

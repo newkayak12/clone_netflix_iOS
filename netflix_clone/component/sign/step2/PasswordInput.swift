@@ -15,7 +15,7 @@ import RxCocoa
 
 
 final class PasswordInput: UIView {
-    public var value: String = ""
+    public var validText: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
     public var isSecureRaw = true
     public var isSecure: BehaviorSubject<Bool> = BehaviorSubject<Bool>(value: true)
     
@@ -70,8 +70,20 @@ final class PasswordInput: UIView {
         }
         return field
     }()
+    private lazy var validation = {
+        let label = UILabel();
+        self.validText.bind(to: label.rx.text).disposed(by: rx.disposeBag)
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textColor = .red
+        label.snp.makeConstraints { make in
+            make.height.equalTo(15)
+        }
+        return label
+    }()
+    
+    
     private lazy var container = {
-        let stackView = UIStackView(arrangedSubviews: [self.title, self.input])
+        let stackView = UIStackView(arrangedSubviews: [self.title, self.input, self.validation])
         stackView.axis = .vertical
         stackView.spacing = 10
         return stackView
@@ -93,6 +105,10 @@ final class PasswordInput: UIView {
         self.container.snp.makeConstraints { make in
             make.width.height.leading.top.trailing.bottom.equalTo(self)
         }
+    }
+    
+    func invalid( text: String ){
+        validText.onNext(text)
     }
     
     func addInputEvent() -> ControlProperty<String?> {

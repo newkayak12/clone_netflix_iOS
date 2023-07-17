@@ -13,7 +13,7 @@ import RxCocoa
 
 
 final class IdInput: UIView {
-   public var value: String = ""
+   public var validText: BehaviorSubject<String> = BehaviorSubject<String>(value: "")
     
     
    private lazy var title = {
@@ -48,12 +48,22 @@ final class IdInput: UIView {
        }
         return field
     }()
-   private lazy var container = {
-        let stackView = UIStackView(arrangedSubviews: [self.title, self.input])
-        stackView.axis = .vertical
-       stackView.spacing = 10
-        return stackView
+   private lazy var validation = {
+        let label = UILabel();
+        self.validText.bind(to: label.rx.text).disposed(by: rx.disposeBag)
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textColor = .red
+       label.snp.makeConstraints { make in
+           make.height.equalTo(15)
+       }
+        return label
     }()
+   private lazy var container = {
+    let stackView = UIStackView(arrangedSubviews: [self.title, self.input, self.validation])
+    stackView.axis = .vertical
+    stackView.spacing = 10
+    return stackView
+   }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,7 +86,9 @@ final class IdInput: UIView {
     func addInputEvent() -> ControlProperty<String?> {
         return self.input.rx.text
     }
-    
+    func invalid( text: String ){
+        validText.onNext(text)
+    }
     @objc
     func clear () {
         self.input.text = ""

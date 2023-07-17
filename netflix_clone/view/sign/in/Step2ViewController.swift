@@ -11,6 +11,7 @@ import SwiftUI
 import RxSwift
 
 class Step2ViewController: BaseViewController, ViewModelBindable {
+    var viewModel: Step2ViewModel!
     lazy var passwordInput: PasswordInput = {
         let input = PasswordInput(frame: .zero)
         return input
@@ -22,12 +23,12 @@ class Step2ViewController: BaseViewController, ViewModelBindable {
         findPwdButton.addTarget(self, action: #selector(self.findPwd), for: .touchUpInside)
         return findPwdButton
     }()
-    
-    var viewModel: Step2ViewModel!
+    private var doAnimation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
     }
     
     func setNavigation() {
@@ -92,6 +93,17 @@ class Step2ViewController: BaseViewController, ViewModelBindable {
     }
     @objc
     func fnNextBtn() {
+        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])(?=.*[0-9])[A-Za-z\\d$@$!%*?&]{8}"
+        passwordInput.invalid(text: "")
+        if (viewModel.password.range(of: passwordRegex, options: .regularExpression) == nil){
+            passwordInput.invalid(text: "비밀번호가 형식에 맞지 않습니다.")
+        } else {
+            
+            
+            navigationController?.dismiss(animated: true) {
+                Log.warning("COMPLETE", "SIGN_IN")
+            }
+        }
     }
     
     @objc
@@ -101,25 +113,38 @@ class Step2ViewController: BaseViewController, ViewModelBindable {
     
     @objc
     func onKeyboardUp (_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
-            findPassword.snp.removeConstraints()
-            findPassword.snp.makeConstraints { make in
-                make.leading.equalTo(view).offset(20)
-                make.bottom.equalTo(view).offset(-keyboardHeight)
+        
+        UIView.animate(withDuration: 1.0) {
+            if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                Log.debug("KEY", "UP")
+                let keyboardHeight = keyboardFrame.cgRectValue.height
+                self.findPassword.snp.removeConstraints()
+                self.findPassword.snp.makeConstraints { make in
+                    make.leading.equalTo(self.view).offset(20)
+                    make.bottom.equalTo(self.view).offset(-keyboardHeight)
+                }
+                self.view.layoutIfNeeded()
             }
         }
+        
         
     }
     @objc
     func onKeyboardDown (_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
-            findPassword.snp.removeConstraints()
-            findPassword.snp.makeConstraints { make in
-                make.leading.equalTo(view).offset(20)
-                make.bottom.equalTo(view.layoutMarginsGuide)
+        if self.doAnimation {
+            UIView.animate(withDuration: 1.0) {
+                if let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                    Log.debug("KEY", "Down")
+                    self.findPassword.snp.removeConstraints()
+                    self.findPassword.snp.makeConstraints { make in
+                        make.leading.equalTo(self.view).offset(20)
+                        make.bottom.equalTo(self.view.layoutMarginsGuide)
+                    }
+                    self.view.layoutIfNeeded()
+                }
+                
             }
         }
+        self.doAnimation = true
     }
 }

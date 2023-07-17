@@ -71,12 +71,24 @@ class Step1ViewController: BaseViewController, ViewModelBindable {
     }
     @objc
     func fnNextBtn() {
-        var signInStep2ViewContorller = Step2ViewController()
-        let signInStep2ViewModel = Step2ViewModel(title: "", service: viewModel.service)
-        signInStep2ViewModel.id = self.viewModel.id
-        signInStep2ViewContorller.bind(viewModel: signInStep2ViewModel)
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}$"
         
-        navigationController?.pushViewController(signInStep2ViewContorller, animated: true)
+
+        idInput.invalid(text: "")
+        if viewModel.id.isEmpty {
+            idInput.invalid(text: "아이디가 비어있습니다.")
+        } else if (viewModel.id.range(of: emailRegex, options: .regularExpression) == nil) {
+            idInput.invalid(text: "아이디가 이메일 형식이 아닙니다.")
+        } else {
+            var signInStep2ViewContorller = Step2ViewController()
+            let signInStep2ViewModel = Step2ViewModel(title: "", service: viewModel.service)
+            signInStep2ViewModel.id = self.viewModel.id
+            signInStep2ViewContorller.bind(viewModel: signInStep2ViewModel)
+            
+            navigationController?.pushViewController(signInStep2ViewContorller, animated: false)
+        }
     }
+        
+      
    
 }

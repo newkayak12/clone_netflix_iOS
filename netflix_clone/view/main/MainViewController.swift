@@ -26,21 +26,25 @@ class MainViewController: UITabBarController {
         let homeViewModel = HomeViewModel(title: "Main", service: service )
         homeView.bind(viewModel: homeViewModel)
         let home = UINavigationController(rootViewController: homeView)
+//        let home = homeView
         
         var searchView = SearchViewController()
         let searchViewModel = SearchViewModel(title: "Search", service: service)
         searchView.bind(viewModel: searchViewModel)
         let search = UINavigationController(rootViewController: searchView)
+//        let search = searchView
         
         var starView = StarViewController()
         let starViewModel = StarViewModel(title: "Star", service: service)
         starView.bind(viewModel: starViewModel)
         let star = UINavigationController(rootViewController: starView)
+//        let star = starView
         
         var myView = MyViewController()
         let myViewModel = MyViewModel(title: "My", service: service)
         myView.bind(viewModel: myViewModel)
         let my = UINavigationController(rootViewController: myView)
+//        let my = myView
         
         
         home.tabBarItem.title = "홈"
