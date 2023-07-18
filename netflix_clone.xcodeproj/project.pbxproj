@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E05342C2A66C86000C28837 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E05342B2A66C86000C28837 /* BaseNavigationController.swift */; };
 		7E1D97AD2A59B6E400E91650 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1D97AC2A59B6E400E91650 /* Lottie */; };
 		7E1D97AF2A5A5E3400E91650 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */; };
 		7E1D97B12A5A7EE700E91650 /* AnalyzeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */; };
@@ -97,6 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E05342B2A66C86000C28837 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeFlow.swift; sourceTree = "<group>"; };
 		7E1D97B22A5A87F400E91650 /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				7E5BD6962A4B1C7600FB806C /* BaseViewController.swift */,
+				7E05342B2A66C86000C28837 /* BaseNavigationController.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				7E3C277E2A5C272A002E08A6 /* NoticeCell.swift in Sources */,
 				7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */,
 				7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */,
+				7E05342C2A66C86000C28837 /* BaseNavigationController.swift in Sources */,
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,
 				7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */,
 				7E1D97B32A5A87F400E91650 /* RankCell.swift in Sources */,

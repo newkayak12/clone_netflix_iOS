@@ -12,13 +12,17 @@ class SearchViewController: BaseViewController, ViewModelBindable {
     var viewModel: SearchViewModel!
     
     lazy var searchBar = {
-       let bar = UISearchController()
+       let bar = UISearchController(searchResultsController: nil)
+        bar.searchBar.placeholder = "콘텐츠, 태그, 인물, 리스트 검색"
         return bar
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+    }
+    override func viewWillAppear(_ animated: Bool) {
+
     }
     
     func setNavigation() {
@@ -28,8 +32,8 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         appearance.backgroundColor = UIColor.black
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().titleTextAttributes = [:]
         
+
         
         
         let symbolConf = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)
@@ -40,13 +44,17 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         
         profile.tintColor = .white
         bell.tintColor = .white
+        
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.rightBarButtonItems = [ profile, bell]
-        self.navigationItem.title = "찾기"
-        self.navigationItem.titleView?.tintColor = .white
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.navigationItem.searchController = self.searchBar
-        searchBar.hidesNavigationBarDuringPresentation = true
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeContentTitle = "찾기"
+        
+        navigationItem.title = "찾기"
+        navigationItem.titleView = UILabel(frame: .zero)
         
     }
     
