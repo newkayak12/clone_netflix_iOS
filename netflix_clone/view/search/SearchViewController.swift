@@ -11,6 +11,24 @@ import SwiftUI
 class SearchViewController: BaseViewController, ViewModelBindable {
     var viewModel: SearchViewModel!
     
+    lazy var categoryCollectionView = {
+        let collectionView = UICollectionView(frame: .zero)
+        
+        return collectionView
+    }()
+    
+    lazy var popularCollectionView = {
+        let collectionView = UICollectionView(frame: .zero)
+        
+        return collectionView
+    }
+    
+    lazy var container = {
+        let stackView = UIStackView(arrangedSubviews: [self.popularCollectionView, self.categoryCollectionView])
+        
+        return stackView
+    }()
+    
     lazy var searchBar = {
        let bar = UISearchController(searchResultsController: nil)
         bar.searchBar.placeholder = "콘텐츠, 태그, 인물, 리스트 검색"
