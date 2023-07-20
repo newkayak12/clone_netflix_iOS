@@ -19,7 +19,7 @@ extension ViewModelBindable where Self: UIViewController {
         self.viewModel = viewModel
         loadViewIfNeeded()
         setNavigation()
-        wireViewModel()
         prepareUI()
+        wireViewModel()
     }
 }

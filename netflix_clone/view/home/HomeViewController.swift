@@ -144,7 +144,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         bannerCollection.delegate = nil
         bannerCollection.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.cellId)
         viewModel.banners.bind(to: bannerCollection.rx.items(cellIdentifier: BannerCell.cellId, cellType: BannerCell.self)){ (row, element, cell) in
-            Log.warning("BANNER", "..")
         }.disposed(by: rx.disposeBag)
     }
     func wireAnalyze () {
@@ -152,7 +151,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         analysticCollection.delegate = analyzeflowDelegate
         analysticCollection.register(AnalyzeCell.self, forCellWithReuseIdentifier: AnalyzeCell.cellId)
         viewModel.analyze.bind(to: analysticCollection.rx.items(cellIdentifier: AnalyzeCell.cellId, cellType: AnalyzeCell.self)) {(row, element, cell) in
-            Log.warning("ANAYLSTIC", "..")
         }.disposed(by: rx.disposeBag)
     }
     func wireRank () {
@@ -160,7 +158,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         rankCollection.delegate = nil
         rankCollection.register(PosterCell.self, forCellWithReuseIdentifier: PosterTypeId.WATCHED.rawValue)
         viewModel.rank.bind(to: rankCollection.rx.items(cellIdentifier: PosterTypeId.WATCHED.rawValue, cellType: PosterCell.self)){ (row, element, cell) in
-            Log.warning("RANK", "..")
         }.disposed(by: rx.disposeBag)
     }
     func wireWatched () {
@@ -168,7 +165,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         watchedCollection.delegate = nil
         watchedCollection.register(PosterCell.self, forCellWithReuseIdentifier: PosterTypeId.WATCHED.rawValue)
         viewModel.watched.bind(to: watchedCollection.rx.items(cellIdentifier: PosterTypeId.WATCHED.rawValue, cellType: PosterCell.self)){ (row, element, cell) in
-            Log.warning("WATCHED", "..")
             cell.type = PosterTypeId.WATCHED
             cell.drawInfoLine()
         }.disposed(by: rx.disposeBag)
@@ -178,7 +174,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         newEpisodeCollection.delegate = nil
         newEpisodeCollection.register(PosterCell.self, forCellWithReuseIdentifier: PosterTypeId.EPISODE.rawValue)
         viewModel.watched.bind(to: newEpisodeCollection.rx.items(cellIdentifier: PosterTypeId.EPISODE.rawValue, cellType: PosterCell.self)){ (row, element, cell) in
-            Log.warning("EPI", "..")
             cell.type = PosterTypeId.EPISODE
         }.disposed(by: rx.disposeBag)
     }
@@ -187,7 +182,6 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         categoryCollection.delegate = nil
         categoryCollection.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.cellId)
         viewModel.category.bind(to: categoryCollection.rx.items(cellIdentifier: CategoryCell.cellId, cellType: CategoryCell.self)){ (row, element, cell) in
-            Log.warning("category", "..")
         }.disposed(by: rx.disposeBag)
         
     }
@@ -397,9 +391,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
     @objc
     func fnRouteProfile () {
         if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
-            Log.error("EXIST", token)
         } else {
-            Log.error("NON", "")
             var signInStep1ViewController = Step1ViewController()
             let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
             signInStep1ViewController.bind(viewModel: signInStep1ViewModel)

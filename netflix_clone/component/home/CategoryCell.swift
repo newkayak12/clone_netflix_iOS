@@ -30,7 +30,6 @@ class CategoryCell: UICollectionViewCell {
     }
     
     func drawUI() {
-        Log.debug("DRAW", "Patterns\(Int.random(in: 1 ... 9))")
         imgView.image = UIImage(named: "Patterns\(Int.random(in: 1 ... 9))")
         self.addSubview(categoryLabel)
         self.addSubview(imgView)

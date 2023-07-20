@@ -1,14 +1,12 @@
 //
-//  SearchViewModel.swift
+//  SearchResultViewController.swift
 //  netflix_clone
 //
-//  Created by Sang Hyeon kim on 2023/07/07.
+//  Created by Sang Hyeon kim on 2023/07/20.
 //
 
 import Foundation
-import RxSwift
-
-class SearchViewModel: ViewModelType {
+class SearchResultViewModel: ViewModelType {
     var title: String
     var service: Service
     
@@ -16,5 +14,4 @@ class SearchViewModel: ViewModelType {
         self.title = title
         self.service = service
     }
-    
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7E05342C2A66C86000C28837 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E05342B2A66C86000C28837 /* BaseNavigationController.swift */; };
+		7E05342F2A69525600C28837 /* SearchCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E05342E2A69525600C28837 /* SearchCommonCell.swift */; };
+		7E0534342A6965F100C28837 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0534332A6965F100C28837 /* SearchResultViewController.swift */; };
+		7E0534392A69675300C28837 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0534382A69675300C28837 /* SearchResultViewModel.swift */; };
 		7E1D97AD2A59B6E400E91650 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1D97AC2A59B6E400E91650 /* Lottie */; };
 		7E1D97AF2A5A5E3400E91650 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */; };
 		7E1D97B12A5A7EE700E91650 /* AnalyzeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */; };
@@ -99,6 +102,9 @@
 
 /* Begin PBXFileReference section */
 		7E05342B2A66C86000C28837 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		7E05342E2A69525600C28837 /* SearchCommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCommonCell.swift; sourceTree = "<group>"; };
+		7E0534332A6965F100C28837 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		7E0534382A69675300C28837 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		7E1D97AE2A5A5E3400E91650 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		7E1D97B02A5A7EE700E91650 /* AnalyzeFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeFlow.swift; sourceTree = "<group>"; };
 		7E1D97B22A5A87F400E91650 /* RankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
@@ -201,6 +207,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E05342D2A69521200C28837 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				7E05342E2A69525600C28837 /* SearchCommonCell.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		7E0534322A6965E700C28837 /* result */ = {
+			isa = PBXGroup;
+			children = (
+				7E0534332A6965F100C28837 /* SearchResultViewController.swift */,
+			);
+			path = result;
+			sourceTree = "<group>";
+		};
+		7E0534352A6966C500C28837 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				7EBBBC152A582BB200C4999C /* SearchViewController.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		7E0534362A6966D200C28837 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				7EBBBC1C2A582CE900C4999C /* SearchViewModel.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		7E0534372A6966D700C28837 /* result */ = {
+			isa = PBXGroup;
+			children = (
+				7E0534382A69675300C28837 /* SearchResultViewModel.swift */,
+			);
+			path = result;
+			sourceTree = "<group>";
+		};
 		7E1D97B62A5AE60F00E91650 /* notice */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +402,7 @@
 		7EBBBC0C2A56F61C00C4999C /* component */ = {
 			isa = PBXGroup;
 			children = (
+				7E05342D2A69521200C28837 /* search */,
 				7EC697E42A617AF0006F3F22 /* sign */,
 				7E3C27812A5C3C6B002E08A6 /* lottie */,
 				7E3C277C2A5C2721002E08A6 /* notice */,
@@ -389,7 +436,8 @@
 		7EBBBC142A582BA800C4999C /* search */ = {
 			isa = PBXGroup;
 			children = (
-				7EBBBC152A582BB200C4999C /* SearchViewController.swift */,
+				7E0534352A6966C500C28837 /* main */,
+				7E0534322A6965E700C28837 /* result */,
 			);
 			path = search;
 			sourceTree = "<group>";
@@ -397,7 +445,8 @@
 		7EBBBC172A582BF800C4999C /* search */ = {
 			isa = PBXGroup;
 			children = (
-				7EBBBC1C2A582CE900C4999C /* SearchViewModel.swift */,
+				7E0534372A6966D700C28837 /* result */,
+				7E0534362A6966D200C28837 /* main */,
 			);
 			path = search;
 			sourceTree = "<group>";
@@ -783,6 +832,8 @@
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,
 				7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */,
 				7E1D97B32A5A87F400E91650 /* RankCell.swift in Sources */,
+				7E0534342A6965F100C28837 /* SearchResultViewController.swift in Sources */,
+				7E0534392A69675300C28837 /* SearchResultViewModel.swift in Sources */,
 				7EBBBC2F2A583B5400C4999C /* File.swift in Sources */,
 				7EBBBC1D2A582CE900C4999C /* SearchViewModel.swift in Sources */,
 				7EC818DD2A5999F100A28D43 /* Footer.swift in Sources */,
@@ -819,6 +870,7 @@
 				7EC697E82A617B31006F3F22 /* IdInput.swift in Sources */,
 				7EBBBC282A58383300C4999C /* Account.swift in Sources */,
 				7E5BD6C62A502EF100FB806C /* HomeViewModel.swift in Sources */,
+				7E05342F2A69525600C28837 /* SearchCommonCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1046,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1027,6 +1080,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
