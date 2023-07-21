@@ -94,7 +94,6 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         container.axis = .vertical
         return container
     }()
-    
     lazy var container: UIScrollView = {
         let stackView = UIStackView(arrangedSubviews: [popularCollectionView, recommandCollectionView, categoryCollectionView])
         stackView.axis = .vertical
@@ -107,6 +106,20 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             make.width.equalTo(scrollView)
         }
         return scrollView
+    }()
+    
+    lazy var searchTextTable: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(RecommandTableViewCell.self, forCellReuseIdentifier: RecommandTableViewCell.cellId)
+        tableView.isHidden = true
+        self.viewModel.lastSearchText.bind(to: tableView.rx.items(cellIdentifier: RecommandTableViewCell.cellId, cellType: RecommandTableViewCell.self)) {
+            (row, element, cell) in
+            cell.rowNumber = row
+            cell.label.text = element
+            cell.callBack = self.searchTextTableTouchXmark
+        }.disposed(by: rx.disposeBag)
+        
+        return tableView
     }()
     
     lazy var searchBar = {
@@ -122,13 +135,16 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             .textDidBeginEditing
             .subscribe(onNext: {
                 self.container.isHidden = true
-            })
-            .disposed(by: rx.disposeBag)
+                self.searchTextTable.isHidden = false
+            }).disposed(by: rx.disposeBag)
+        
         bar.searchBar.rx
             .textDidEndEditing
             .subscribe(onNext: {
                 self.container.isHidden = false
+                self.searchTextTable.isHidden = true
             }).disposed(by: rx.disposeBag)
+        
         return bar
     }()
     
@@ -147,6 +163,14 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             if subviews.count > 0, let label = subviews[0] as? UILabel {
                 label.textColor = .white
             }
+        }
+    }
+    
+    func loadSearchText () {
+        guard let array = UserDefaults.standard.array(forKey: "searchText") else { return }
+        if let keyword = array as? [String], keyword.count > 0 {
+            viewModel.searchText = keyword
+            viewModel.lastSearchText.onNext(keyword)
         }
     }
     
@@ -185,20 +209,29 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         viewModel.fetchPopular()
         viewModel.fetchRecommand()
         viewModel.fetchCategory()
+        
+        
     }
+    
+  
     
     func setConstraints () {
         self.container.snp.makeConstraints { make in
             make.leading.trailing.equalTo(view)
             make.top.bottom.equalTo(view.layoutMarginsGuide)
         }
+        self.searchTextTable.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(view)
+        }
     }
     
     func prepareUI() {
         view.addSubview(self.container)
+        view.addSubview(self.searchTextTable)
         
         
         self.setConstraints()
+        self.searchTextTableSelectEvent()
     }
     
     
@@ -223,6 +256,23 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             navigationController?.present(UINavigationController(rootViewController: signInStep1ViewController), animated: true)
             navigationController?.modalPresentationStyle = .fullScreen
         }
+    }
+    
+    func searchTextTableSelectEvent(){
+        Observable.zip(self.searchTextTable.rx.modelSelected(String.self) , self.searchTextTable.rx.itemSelected)
+            .withUnretained(self)
+            .do(onNext: { this, data in
+                this.searchTextTable.deselectRow(at: data.1, animated: true)
+            })
+                .map{$0.1}
+                .withUnretained(self)
+                .subscribe{
+                    this, data in
+                    this.searchBar.searchBar.text = data.0
+                }.disposed(by: rx.disposeBag)
+    }
+    func searchTextTableTouchXmark(row: Int){
+        Log.debug("TOUCH", row)
     }
     
 }

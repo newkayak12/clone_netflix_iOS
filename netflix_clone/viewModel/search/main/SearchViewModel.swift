@@ -21,19 +21,14 @@ class SearchViewModel: ViewModelType {
     let popular = PublishSubject<[ContentsInfo]>()
     let recommand = PublishSubject<[ContentsInfo]>()
     let category = PublishSubject<[Category]>()
-    var lastSearchText: [String] = []
+    var searchText: [String] = []
+    var lastSearchText = BehaviorSubject<[String]>(value: ["Test", "Test"])
     
     
     
     init( title: String, service: Service ) {
         self.title = title
         self.service = service
-        
-        
-        guard let array = UserDefaults.standard.array(forKey: "searchText") else { return }
-        if let keyword = array as? [String] {
-            lastSearchText = keyword
-        }
     }
     
     func fetchPopular () {

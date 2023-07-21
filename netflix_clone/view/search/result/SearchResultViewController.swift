@@ -12,7 +12,6 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
     var viewModel: SearchResultViewModel!
     
     func updateSearchResults(for searchController: UISearchController) {
-        Log.info("??", searchController)
         guard let text = searchController.searchBar.text else { return }
         Log.debug("TEXT >>> ", text)
     }
