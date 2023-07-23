@@ -116,7 +116,8 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             (row, element, cell) in
             cell.rowNumber = row
             cell.label.text = element
-            cell.callBack = self.searchTextTableTouchXmark
+            cell.button.tag = row
+            cell.callBackMehtod = self.searchTextTableTouchXmark
         }.disposed(by: rx.disposeBag)
         
         return tableView
@@ -145,6 +146,19 @@ class SearchViewController: BaseViewController, ViewModelBindable {
                 self.searchTextTable.isHidden = true
             }).disposed(by: rx.disposeBag)
         
+        bar.searchBar
+            .searchTextField
+            .rx.text
+            .debounce(.milliseconds(300), scheduler: MainScheduler().self)
+            .withUnretained(self)
+            .subscribe(onNext: { (this, data) in
+                Log.debug("??", data)
+                if let txt = data, !txt.isEmpty, txt.count > 0 {
+                    this.viewModel.searchText.append(txt)
+                    this.viewModel.lastSearchText.onNext(this.viewModel.searchText)
+                }
+            })
+            .disposed(by: rx.disposeBag)
         return bar
     }()
     
@@ -164,10 +178,14 @@ class SearchViewController: BaseViewController, ViewModelBindable {
                 label.textColor = .white
             }
         }
+        
+        self.loadSearchText()
     }
     
     func loadSearchText () {
-        guard let array = UserDefaults.standard.array(forKey: "searchText") else { return }
+        UserDefaults.standard.setValue(["test1", "test2", "test3", "test4", "test5"], forKey: Constants.SEARCH_KEYWORK.rawValue)
+        
+        guard let array = UserDefaults.standard.array(forKey: Constants.SEARCH_KEYWORK.rawValue) else { return }
         if let keyword = array as? [String], keyword.count > 0 {
             viewModel.searchText = keyword
             viewModel.lastSearchText.onNext(keyword)
@@ -257,6 +275,12 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             navigationController?.modalPresentationStyle = .fullScreen
         }
     }
+    func searchTextTableTouchXmark(index: Int){
+        var keyList = viewModel.searchText
+        keyList.remove(at: index)
+        viewModel.searchText = keyList
+        viewModel.lastSearchText.onNext(keyList)
+    }
     
     func searchTextTableSelectEvent(){
         Observable.zip(self.searchTextTable.rx.modelSelected(String.self) , self.searchTextTable.rx.itemSelected)
@@ -271,8 +295,6 @@ class SearchViewController: BaseViewController, ViewModelBindable {
                     this.searchBar.searchBar.text = data.0
                 }.disposed(by: rx.disposeBag)
     }
-    func searchTextTableTouchXmark(row: Int){
-        Log.debug("TOUCH", row)
-    }
+   
     
 }

@@ -12,7 +12,6 @@ import SnapKit
 class RecommandTableViewCell: UITableViewCell {
     static let cellId = "recommandCell"
     var rowNumber: Int = 0
-    var callBack: ((_: Int) -> Void)?
     lazy var label = {
         let label = UILabel(frame: .zero)
         label.textColor = .white
@@ -20,13 +19,14 @@ class RecommandTableViewCell: UITableViewCell {
         
         return label
     }()
+    var callBackMehtod: ((_: Int) -> Void)?
+    
     
     lazy var button = {
         let button = UIButton(frame: .zero)
         let symbolConfiguration = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)
         button.setImage(UIImage(systemName: "xmark", withConfiguration: symbolConfiguration), for: .normal)
         button.tintColor = .white
-        button.addTarget(self, action: #selector(self.wrapCallback), for: .touchUpInside)
         return button
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -52,24 +52,23 @@ class RecommandTableViewCell: UITableViewCell {
     
     func drawUI() {
         
-        
-        self.addSubview(self.label)
-        self.addSubview(self.button)
+        self.contentView.addSubview(self.label)
+        self.contentView.addSubview(self.button)
+        self.button.addTarget(self, action: #selector(callback), for: .touchUpInside)
         
         self.label.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.leading.equalTo(self).offset(20)
+            make.centerY.equalTo(self.contentView)
+            make.leading.equalTo(self.contentView).offset(20)
         }
         self.button.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.trailing.equalTo(self).offset(-20)
+            make.centerY.equalTo(self.contentView)
+            make.trailing.equalTo(self.contentView).offset(-20)
         }
-        
     }
     
     @objc
-    func wrapCallback () {
-        guard let callback = self.callBack else { return }
-        callback(rowNumber)
+    func callback () {
+        guard let callback = self.callBackMehtod else { return }
+        callback(self.rowNumber)
     }
 }

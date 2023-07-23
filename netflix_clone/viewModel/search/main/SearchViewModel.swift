@@ -22,7 +22,7 @@ class SearchViewModel: ViewModelType {
     let recommand = PublishSubject<[ContentsInfo]>()
     let category = PublishSubject<[Category]>()
     var searchText: [String] = []
-    var lastSearchText = BehaviorSubject<[String]>(value: ["Test", "Test"])
+    var lastSearchText = BehaviorSubject<[String]>(value: [])
     
     
     

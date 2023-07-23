@@ -8,4 +8,5 @@
 import Foundation
 enum Constants: String {
     case TOKEN = "Authorization"
+    case SEARCH_KEYWORK = "SearchKeyword"
 }
