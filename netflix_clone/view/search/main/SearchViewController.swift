@@ -152,7 +152,6 @@ class SearchViewController: BaseViewController, ViewModelBindable {
             .debounce(.milliseconds(300), scheduler: MainScheduler().self)
             .withUnretained(self)
             .subscribe(onNext: { (this, data) in
-                Log.debug("??", data)
                 if let txt = data, !txt.isEmpty, txt.count > 0 {
                     this.viewModel.searchText.append(txt)
                     this.viewModel.lastSearchText.onNext(this.viewModel.searchText)
