@@ -18,6 +18,37 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
     var segmentIndex = PublishSubject<Int>()
     
     
+    lazy var pouplarCollection = {
+        let tableView = UITableView(frame: .zero)
+        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: SearchResultTableViewCell.cellId)
+        tableView.isHidden = false
+        return tableView
+    }()
+    
+    lazy var movieCollection = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 10.0
+        flowLayout.itemSize.width = (view.frame.width - 20.0) / 3
+        flowLayout.itemSize.height = flowLayout.itemSize.width * 1.4
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(SearchPosterCollectionViewCell.self, forCellWithReuseIdentifier: SearchPosterCollectionViewCell.cellId)
+        collectionView.isHidden = true
+        return collectionView
+    }()
+    lazy var tagCollection = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isHidden = true
+        return collectionView
+    }()
+    lazy var personCollection = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isHidden = true
+        return collectionView
+    }()
+    
+    
     lazy var segment: UISegmentedControl = {
         let control = UISegmentedControl(items: ["인기", "영화", "태그", "인물"])
         control.selectedSegmentIndex = 0
@@ -37,7 +68,8 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-    }    
+    }
+    
     func setNavigation() {
     }
     
@@ -62,7 +94,21 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
     func segmentChange() {
         segmentIndex.subscribe{
             guard let idx = $0.element else { return }
-            Log.warning("CHANGED", idx)
+            
+            self.pouplarCollection.isHidden = true
+            self.movieCollection.isHidden = true
+            self.tagCollection.isHidden = true
+            self.personCollection.isHidden = true
+            switch idx{
+                case 1:
+                    self.movieCollection.isHidden = false
+                case 2:
+                    self.tagCollection.isHidden = false
+                case 3:
+                    self.personCollection.isHidden = false
+                default:
+                    self.pouplarCollection.isHidden = false
+            }
         }.disposed(by: rx.disposeBag)
     }
 }

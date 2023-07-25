@@ -24,6 +24,8 @@
 		7E3C277E2A5C272A002E08A6 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3C277D2A5C272A002E08A6 /* NoticeCell.swift */; };
 		7E3C27802A5C3312002E08A6 /* PageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3C277F2A5C3312002E08A6 /* PageResult.swift */; };
 		7E3C27862A5ECDBD002E08A6 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3C27852A5ECDBD002E08A6 /* RxDataSources */; };
+		7E4A81E32A70018E0062477E /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A81E22A70018E0062477E /* SearchResultTableViewCell.swift */; };
+		7E4A81E62A7004EC0062477E /* SearchPosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A81E52A7004EC0062477E /* SearchPosterCollectionViewCell.swift */; };
 		7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6962A4B1C7600FB806C /* BaseViewController.swift */; };
 		7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6992A4B1CBA00FB806C /* Service.swift */; };
 		7E5BD69D2A501FB300FB806C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7E5BD69C2A501FB300FB806C /* Alamofire */; };
@@ -118,6 +120,8 @@
 		7E1D97BA2A5AE65400E91650 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		7E3C277D2A5C272A002E08A6 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		7E3C277F2A5C3312002E08A6 /* PageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageResult.swift; sourceTree = "<group>"; };
+		7E4A81E22A70018E0062477E /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		7E4A81E52A7004EC0062477E /* SearchPosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPosterCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E5BD6962A4B1C7600FB806C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7E5BD6992A4B1CBA00FB806C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		7E5BD6B02A5029A700FB806C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 		7E05342D2A69521200C28837 /* search */ = {
 			isa = PBXGroup;
 			children = (
+				7E4A81E42A7004D10062477E /* result */,
 				7E05342E2A69525600C28837 /* SearchCommonCell.swift */,
 				7E05347E2A6AACA400C28837 /* RecommandTableViewCell.swift */,
 			);
@@ -283,6 +288,15 @@
 				7E05343A2A6971EB00C28837 /* spinner.json */,
 			);
 			path = lottie;
+			sourceTree = "<group>";
+		};
+		7E4A81E42A7004D10062477E /* result */ = {
+			isa = PBXGroup;
+			children = (
+				7E4A81E22A70018E0062477E /* SearchResultTableViewCell.swift */,
+				7E4A81E52A7004EC0062477E /* SearchPosterCollectionViewCell.swift */,
+			);
+			path = result;
 			sourceTree = "<group>";
 		};
 		7E5BD6902A4B1A8600FB806C /* model */ = {
@@ -826,6 +840,7 @@
 				7E1D97B12A5A7EE700E91650 /* AnalyzeFlow.swift in Sources */,
 				7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */,
 				7EBBBC3F2A590A1B00C4999C /* Favorite.swift in Sources */,
+				7E4A81E62A7004EC0062477E /* SearchPosterCollectionViewCell.swift in Sources */,
 				7EBBBC4B2A5910FE00C4999C /* FavoriteWatched.swift in Sources */,
 				7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */,
 				7EBBBC542A5919DF00C4999C /* Faq.swift in Sources */,
@@ -852,6 +867,7 @@
 				7E5BD6B12A5029A700FB806C /* ViewModelType.swift in Sources */,
 				7EBBBC502A5915F100C4999C /* Comment.swift in Sources */,
 				7EC97DAB2A2557E0008AC342 /* SceneDelegate.swift in Sources */,
+				7E4A81E32A70018E0062477E /* SearchResultTableViewCell.swift in Sources */,
 				7EBBBC352A583FA700C4999C /* TicketRaise.swift in Sources */,
 				7EC697EA2A6259C5006F3F22 /* PasswordInput.swift in Sources */,
 				7E3C27802A5C3312002E08A6 /* PageResult.swift in Sources */,
