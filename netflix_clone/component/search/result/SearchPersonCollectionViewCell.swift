@@ -11,23 +11,38 @@ import RxSwift
 
 class SearchPersonCollectionViewCell: UICollectionViewCell {
     static let cellId = "SearchPersonCell"
-    let imgView: UIImageView = {
+    lazy var  imgView: UIImageView = {
        let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
         img.layer.cornerRadius = 100.0
         return img
     }()
-    let nameLabel: UILabel = {
+    
+    lazy var  nameLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = ""
+        label.text = "name"
         label.textColor = .white
-        return label
+        label.textAlignment = .center
+        label .snp.makeConstraints { make in
+            make.height.equalTo(16)
+        }
+        return label
     }()
     
-    let roleLabel: UILabel = {
+    lazy var  roleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = ""
+        label.text = "role"
         label.textColor = .gray
+        label.textAlignment = .center
+        label.snp.makeConstraints { make in
+            make.height.equalTo(16)
+        }
         return label
+    }()
+    
+    lazy var  container: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews:[self.imgView, self.nameLabel, self.roleLabel])
+        stackView.axis = .vertical
+        return stackView
     }()
     
     required init?(coder: NSCoder) {
@@ -39,7 +54,11 @@ class SearchPersonCollectionViewCell: UICollectionViewCell {
     }
     
     func drawUI() {
+        self.contentView.addSubview(container)
         
+        container.snp.makeConstraints { make in
+            make.leading.top.trailing.bottom.equalTo(self.contentView)
+        }
     }
 }
 

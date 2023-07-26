@@ -10,7 +10,12 @@ import UIKit
 import RxSwift
 class SearchPosterCollectionViewCell: UICollectionViewCell {
     static let cellId = "SearchPosterCell"
-    let imgView: UIImageView = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
+    lazy var  imgView: UIImageView = {
+        let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
+        img.layer.cornerRadius = 20.0
+        
+        return img
+    }()
     
     
     required init?(coder: NSCoder) {

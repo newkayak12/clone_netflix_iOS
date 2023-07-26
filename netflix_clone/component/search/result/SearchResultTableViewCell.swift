@@ -11,29 +11,43 @@ import RxSwift
 
 class SearchResultTableViewCell: UITableViewCell {
     static let cellId = "searchResult"
-    let imgView: UIImageView = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
+    lazy var imgView: UIImageView = {
+       let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
+        img.snp.makeConstraints { make in
+            make.width.height.equalTo(self.contentView.frame.height)
+        }
+        
+        return img
+    }()
     lazy var title = {
         let label = UILabel(frame: .zero)
-        label.text = ""
+        label.text = "title"
         label.textColor = .white
+        label.snp.makeConstraints { make in
+            make.height.equalTo((self.contentView.frame.height - 10) / 2)
+        }
         
         return label;
     }()
     lazy var subTitle = {
         let label = UILabel(frame: .zero)
-        label.text = ""
+        label.text = "subtitle"
         label.textColor = .gray
-        
+        label.snp.makeConstraints { make in
+            make.height.equalTo((self.contentView.frame.height - 10) / 2)
+        }
         return label;
     }()
     lazy var verticalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.title, self.subTitle] );
         stackView.axis = .vertical
+        stackView.spacing = 10
         return stackView
     }()
     lazy var horizontalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.imgView, self.verticalStackView] );
         stackView.axis = .horizontal
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -64,7 +78,9 @@ class SearchResultTableViewCell: UITableViewCell {
         
         
         horizontalStackView.snp.makeConstraints { make in
-            make.leading.top.trailing.bottom.equalTo(self.contentView)
+            make.top.bottom.equalTo(self.contentView)
+            make.leading.equalTo(self.contentView).offset(20)
+            make.trailing.equalTo(self.contentView).offset(-20)
         }
     }
     

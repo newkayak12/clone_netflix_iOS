@@ -10,8 +10,14 @@ final class Person: Codable {
     var personNo: Int
     var name: String
     var role: Role
-    var file: File
+    var file: File?
     var contentsInfoList: [ContentsInfo] = []
+    
+    init(){
+        self.personNo = 0
+        self.name = ""
+        self.role = .ACTOR
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
