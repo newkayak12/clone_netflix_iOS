@@ -24,7 +24,6 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
         tableView.isHidden = false
         return tableView
     }()
-    
     lazy var movieCollection = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10.0
@@ -37,7 +36,11 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
     }()
     lazy var tagCollection = {
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 10.0
+        flowLayout.itemSize.width = (view.frame.width - 20.0) / 3
+        flowLayout.itemSize.height = flowLayout.itemSize.width * 1.4
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(SearchPosterCollectionViewCell.self, forCellWithReuseIdentifier: SearchPosterCollectionViewCell.cellId)
         collectionView.isHidden = true
         return collectionView
     }()
