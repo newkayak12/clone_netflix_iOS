@@ -14,8 +14,6 @@ import SnapKit
 class SearchResultViewController: UIViewController, UISearchResultsUpdating, ViewModelBindable {
     var viewModel: SearchResultViewModel!
     var searchText = PublishSubject<String>()
-    var nowIndex: Int = 0
-    var segmentIndex = PublishSubject<Int>()
     
     
     lazy var popularTable = {
@@ -25,10 +23,12 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
             (row, element, cell) in
             
             Log.debug("popularTable", element)
-            cell.
+            cell.title.text = "TEST"
+            cell.subTitle.text = "SUBTEST"
             
         }.disposed(by: rx.disposeBag)
         tableView.isHidden = true
+        tableView.rowHeight = 60
         return tableView
     }()
     
@@ -93,15 +93,15 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
         control.rx
             .selectedSegmentIndex
             .changed
-            .bind(to: segmentIndex)
+            .bind(to: self.viewModel.segmentIndex)
             .disposed(by: rx.disposeBag)
         return control;
     }()
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        searchText.onNext(text)
-        segmentIndex.onNext(self.nowIndex)
+        self.viewModel.searchText.onNext(text)
+        self.viewModel.segmentIndex.onNext(self.viewModel.nowIndex)
     }
     
     override func viewDidLoad() {
@@ -113,7 +113,6 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
     }
     
     func wireViewModel() {
-        
     }
     
     func setConstraints() {
@@ -150,10 +149,23 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
         
         self.setConstraints()
         self.segmentChange()
+        self.texting()
     }
+    
+    func texting () {
+        self.viewModel.searchText.subscribe(onNext: {
+            self.viewModel.text = $0
+        }).disposed(by: rx.disposeBag)
+    }
+    
     func segmentChange() {
-        segmentIndex.subscribe{
+        self.viewModel.segmentIndex.subscribe{
             guard let idx = $0.element else { return }
+            self.viewModel.movieSubject.onNext([])
+            self.viewModel.personSubject.onNext([])
+            self.viewModel.popularSubject.onNext([])
+            self.viewModel.tagSubject.onNext([])
+            
             
             self.popularTable.isHidden = true
             self.movieCollection.isHidden = true
@@ -161,19 +173,19 @@ class SearchResultViewController: UIViewController, UISearchResultsUpdating, Vie
             self.personCollection.isHidden = true
             switch idx {
                 case 1:
-                    self.nowIndex = idx
+                    self.viewModel.nowIndex = idx
                     self.movieCollection.isHidden = false
                     self.viewModel.fetchMovie()
                 case 2:
-                    self.nowIndex = idx
+                    self.viewModel.nowIndex = idx
                     self.tagCollection.isHidden = false
                     self.viewModel.fetchTag()
                 case 3:
-                    self.nowIndex = idx
+                    self.viewModel.nowIndex = idx
                     self.personCollection.isHidden = false
                     self.viewModel.fetchPerson()
                 default:
-                    self.nowIndex = 0
+                    self.viewModel.nowIndex = 0
                     self.popularTable.isHidden = false
                     self.viewModel.fetchPopular()
             }

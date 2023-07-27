@@ -13,9 +13,10 @@ class SearchResultTableViewCell: UITableViewCell {
     static let cellId = "searchResult"
     lazy var imgView: UIImageView = {
        let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
-        img.snp.makeConstraints { make in
-            make.width.height.equalTo(self.contentView.frame.height)
-        }
+        img.contentMode = .scaleAspectFit
+//        img.snp.makeConstraints { make in
+//            make.width.height.equalTo(self.contentView.frame.height)
+//        }
         
         return img
     }()
@@ -24,7 +25,7 @@ class SearchResultTableViewCell: UITableViewCell {
         label.text = "title"
         label.textColor = .white
         label.snp.makeConstraints { make in
-            make.height.equalTo((self.contentView.frame.height - 10) / 2)
+            make.height.equalTo( (self.contentView.frame.height - 20) / 2 )
         }
         
         return label;
@@ -34,20 +35,21 @@ class SearchResultTableViewCell: UITableViewCell {
         label.text = "subtitle"
         label.textColor = .gray
         label.snp.makeConstraints { make in
-            make.height.equalTo((self.contentView.frame.height - 10) / 2)
+            make.height.equalTo((self.contentView.frame.height - 20) / 2)
         }
         return label;
     }()
     lazy var verticalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.title, self.subTitle] );
         stackView.axis = .vertical
-        stackView.spacing = 10
+//        stackView.spacing = 10
         return stackView
     }()
     lazy var horizontalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.imgView, self.verticalStackView] );
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 20
         return stackView
     }()
     
@@ -67,8 +69,8 @@ class SearchResultTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        self.title.text = ""
-        self.subTitle.text = ""
+        self.title.text = "title"
+        self.subTitle.text = "subTitle"
         imgView.image = UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large))
     }
     
@@ -81,6 +83,7 @@ class SearchResultTableViewCell: UITableViewCell {
             make.top.bottom.equalTo(self.contentView)
             make.leading.equalTo(self.contentView).offset(20)
             make.trailing.equalTo(self.contentView).offset(-20)
+//            make.leading.trailing.equalTo(self.contentView)
         }
     }
     
