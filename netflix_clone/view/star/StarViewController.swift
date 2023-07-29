@@ -51,6 +51,10 @@ class StarViewController: BaseViewController, ViewModelBindable {
         view.axis = .vertical
         return view
     }()
+    lazy var ratingTable = {
+        let table = UITableView(frame: .zero)
+        
+    }()
     
     func setNavigation() {
         
