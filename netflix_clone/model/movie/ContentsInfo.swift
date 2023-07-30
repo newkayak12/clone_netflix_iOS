@@ -20,6 +20,7 @@ final class ContentsInfo: Codable {
     var details: ContentDetail?
     var images: [File] = []
     var lastWatchedDate: Date
+    var star: Double? = 0.0
     
     init() {
         self.description = "DESCRIPTION"
@@ -48,6 +49,7 @@ final class ContentsInfo: Codable {
         self.details = try container.decode(ContentDetail.self, forKey: .details)
         self.images = try container.decode([File].self, forKey: .images)
         self.lastWatchedDate = try container.decode(Date.self, forKey: .lastWatchedDate)
+        self.star = try container.decode(Double.self, forKey: .star)
     }
 }
 

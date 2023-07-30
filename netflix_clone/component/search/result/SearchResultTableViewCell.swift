@@ -81,8 +81,8 @@ class SearchResultTableViewCell: UITableViewCell {
         
         horizontalStackView.snp.makeConstraints { make in
             make.top.bottom.equalTo(self.contentView)
-            make.leading.equalTo(self.contentView).offset(20)
-            make.trailing.equalTo(self.contentView).offset(-20)
+            make.leading.equalTo(self.contentView).offset(10)
+            make.trailing.equalTo(self.contentView).offset(-10)
 //            make.leading.trailing.equalTo(self.contentView)
         }
     }

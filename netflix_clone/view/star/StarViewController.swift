@@ -28,6 +28,9 @@ class StarViewController: BaseViewController, ViewModelBindable {
         view.textColor = .white
         view.font = UIFont.boldSystemFont(ofSize: 20)
         view.textAlignment = .center
+        view.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
         return view
     }()
     lazy var count = {
@@ -36,6 +39,9 @@ class StarViewController: BaseViewController, ViewModelBindable {
         view.textColor = .white
         view.font = UIFont.boldSystemFont(ofSize: 30)
         view.textAlignment = .center
+        view.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
         return view
     }()
     lazy var percentageBar = {
@@ -47,13 +53,17 @@ class StarViewController: BaseViewController, ViewModelBindable {
     }()
     lazy var headerView = {
         let view = UIStackView(arrangedSubviews: [self.label, self.count, self.percentageBar ])
-        view.spacing = 10
+//        view.spacing = 10
         view.axis = .vertical
         return view
     }()
     lazy var ratingTable = {
         let table = UITableView(frame: .zero)
-        
+        table.register(RatingTableViewCell.self, forCellReuseIdentifier: RatingTableViewCell.cellId)
+        self.viewModel.starPublish.bind(to: table.rx.items(cellIdentifier: RatingTableViewCell.cellId, cellType:RatingTableViewCell.self)) { (row, element, cell) in
+        }.disposed(by: rx.disposeBag)
+        table.rowHeight = 100
+        return table
     }()
     
     func setNavigation() {
@@ -85,18 +95,27 @@ class StarViewController: BaseViewController, ViewModelBindable {
     }
     
     func wireViewModel() {
-        
+        self.viewModel.fetchStar()
     }
     
     func setConstraints() {
         headerView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalTo(view)
+            make.height.equalTo(100)
+        }
+        ratingTable.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(view)
+            make.top.equalTo(headerView.snp.bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
     func prepareUI() {
         view.addSubview(headerView)
+        view.addSubview(ratingTable)
+        
+        
         
         self.setConstraints()
     }
