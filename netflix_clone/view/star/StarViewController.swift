@@ -61,8 +61,14 @@ class StarViewController: BaseViewController, ViewModelBindable {
         let table = UITableView(frame: .zero)
         table.register(RatingTableViewCell.self, forCellReuseIdentifier: RatingTableViewCell.cellId)
         self.viewModel.starPublish.bind(to: table.rx.items(cellIdentifier: RatingTableViewCell.cellId, cellType:RatingTableViewCell.self)) { (row, element, cell) in
+            cell.delegate = self
         }.disposed(by: rx.disposeBag)
-        table.rowHeight = 100
+        table.rowHeight = 95
+        table.rx.itemSelected
+            .withUnretained(table)
+            .bind { (this, index) in
+                this.deselectRow(at: index, animated: true)
+            }.disposed(by: rx.disposeBag)
         return table
     }()
     
@@ -106,7 +112,7 @@ class StarViewController: BaseViewController, ViewModelBindable {
         }
         ratingTable.snp.makeConstraints { make in
             make.leading.trailing.equalTo(view)
-            make.top.equalTo(headerView.snp.bottom)
+            make.top.equalTo(headerView.snp.bottom).offset(20)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -143,5 +149,11 @@ class StarViewController: BaseViewController, ViewModelBindable {
             navigationController?.present(UINavigationController(rootViewController: signInStep1ViewController), animated: true)
             navigationController?.modalPresentationStyle = .fullScreen
         }
+    }
+}
+
+extension StarViewController: StarRateDelegate {
+    func rating(value: Float) {
+        Log.warning("RATING", value)
     }
 }

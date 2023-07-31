@@ -13,6 +13,7 @@ import RxSwift
 class RatingTableViewCell: UITableViewCell {
     static let cellId = "RatingCell"
     
+    var delegate: StarRateDelegate?
     private lazy var empty: UIImage? = {
         let image = UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))
         return image
@@ -23,60 +24,6 @@ class RatingTableViewCell: UITableViewCell {
     private lazy var half: UIImage? = {
         return  UIImage(systemName: "star.leadinghalf.filled", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))
     }()
-
-    let rateArray: BehaviorSubject<[Double]> = BehaviorSubject<[Double]>(value: [0.0, 0.0, 0.0, 0.0, 0.0])
-    private lazy var starBox = {
-        let btnArray = [0.0, 0.0, 0.0, 0.0, 0.0].map { _ in
-            let btn = UIButton(frame: .zero)
-            btn.setImage(self.empty, for: .normal)
-            btn.imageView?.tintColor = .yellow
-            btn.imageView?.snp.makeConstraints({ make in
-                make.width.height.equalTo(btn).multipliedBy(0.6)
-            })
-            btn.addTarget(self, action: #selector(self.btnEvent(btn: )), for: .touchUpInside)
-            return btn
-        }
-        
-        btnArray.enumerated().forEach{
-            $1.tag = $0
-        }
-
-        let container = UIStackView(arrangedSubviews: btnArray)
-        container.axis = .horizontal
-        container.snp.makeConstraints { make in
-            make.height.equalTo(60)
-        }
-        container.distribution = .fillEqually
-        
-        return container
-    }()
-    public func calculateStar ( rate: Double ) -> [Double] {
-        var array = Array([0.0, 0.0, 0.0, 0.0, 0.0])
-        var score = rate;
-        var count = 0;
-        while score > 0.0 {
-            switch score {
-                case ...0.0:
-                    break;
-                case 0.0...0.5 :
-                    score -= 0.5
-                    array[count] = 0.5
-                    break;
-                default:
-                    score -= 1.0
-                    array[count] = 1.0
-                    break;
-            }
-            count += 1
-        }
-        
-        return array
-    }
-    private func ratingStar ( rate: Double ) {
-        
-    }
-    
-    
     lazy var imgView: UIImageView = {
         let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
         img.contentMode = .scaleAspectFit
@@ -104,8 +51,137 @@ class RatingTableViewCell: UITableViewCell {
         }
         return label;
     }()
+    private let sliderValue = BehaviorSubject(value: Float(0.0))
+    
+    private lazy var slider = {
+        let slider = UISlider()
+        slider.minimumValue = 0.0
+        slider.maximumValue = 5.0
+        slider.layer.opacity = 0.1
+        slider.tintColor = .yellow
+        let configuration = UIImage.SymbolConfiguration(pointSize: 5)
+        let image = UIImage(systemName: "circle.fill", withConfiguration: configuration)
+        slider.setThumbImage(image, for: .normal)
+        
+        let tab = UITapGestureRecognizer(target: self, action: #selector(self.sliderTab(gestureRecognizer:)))
+        slider.addGestureRecognizer(tab)
+        slider.rx.value.bind {  value  in
+            self.sliderValue.onNext(value )
+        }.disposed(by: rx.disposeBag)
+        self.sliderValue.bind { value in
+            Log.warning("VALUE", value)
+            self.first.image = self.empty
+            self.second.image = self.empty
+            self.third.image = self.empty
+            self.fourth.image = self.empty
+            self.fifth.image = self.empty
+            switch value {
+                case Float(0.0):
+                    break;
+                case ...Float(0.5):
+                    self.first.image = self.half
+                    break;
+                case ...Float(1.0):
+                    self.first.image = self.filled
+                    break;
+                case ...Float(1.5):
+                    self.first.image = self.filled
+                    self.second.image = self.half
+                    break;
+                case ...Float(2.0):
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    break;
+                case ...Float(2.5):
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    self.third.image = self.half
+                    break;
+                case ...Float(3.0):
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    self.third.image = self.filled
+                    break;
+                case ...Float(3.5):
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    self.third.image = self.filled
+                    self.fourth.image = self.half
+                    break;
+                case ...Float(4.0):
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    self.third.image = self.filled
+                    self.fourth.image = self.filled
+                    break;
+                case ...Float(4.5):
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    self.third.image = self.filled
+                    self.fourth.image = self.filled
+                    self.fifth.image = self.half
+                    break;
+                default:
+                    self.first.image = self.filled
+                    self.second.image = self.filled
+                    self.third.image = self.filled
+                    self.fourth.image = self.filled
+                    self.fifth.image = self.filled
+                    break;
+            }
+        }.disposed(by: rx.disposeBag)
+        return slider
+    }()
+    private lazy var first = {
+        var first = UIImageView()
+        first.image = self.empty
+        first.tintColor = .yellow
+        return first
+    }()
+    private lazy var second = {
+        var second = UIImageView()
+        second.image = self.empty
+        second.tintColor = .yellow
+        return second
+    }()
+    private lazy var third = {
+        var third = UIImageView()
+        third.image = self.empty
+        third.tintColor = .yellow
+        return third
+    }()
+    private lazy var fourth = {
+        var fourth = UIImageView()
+        fourth.image = self.empty
+        fourth.tintColor = .yellow
+        return fourth
+    }()
+    private lazy var fifth = {
+        var fifth = UIImageView()
+        fifth.image = self.empty
+        fifth.tintColor = .yellow
+        return fifth
+    }()
+    
+    lazy var starView = {
+        let view = UIView()
+        
+        let starContainer = UIStackView(arrangedSubviews: [self.first, self.second, self.third, self.fourth, self.fifth])
+        starContainer.distribution = .fillEqually
+        view.addSubview(starContainer)
+        view.addSubview(self.slider)
+        
+        
+        starContainer.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(view)
+        }
+        self.slider.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(view)
+        }
+        return view
+    }()
     lazy var verticalStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.title, self.subTitle] );
+        let stackView = UIStackView(arrangedSubviews: [self.title, self.subTitle, self.starView] );
         stackView.axis = .vertical
         return stackView
     }()
@@ -117,11 +193,12 @@ class RatingTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         drawUI()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -129,7 +206,7 @@ class RatingTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+        
     }
     
     override func prepareForReuse() {
@@ -137,7 +214,6 @@ class RatingTableViewCell: UITableViewCell {
         self.subTitle.text = "subTitle"
         imgView.image = UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large))
     }
-    
     
     func drawUI() {
         self.contentView.addSubview(horizontalStackView)
@@ -149,24 +225,37 @@ class RatingTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.contentView).offset(-20)
             //            make.leading.trailing.equalTo(self.contentView)
         }
+        
     }
     
-    @objc func btnEvent ( btn: UIButton ) {
-        Log.debug("BTN", btn)
-        switch btn.tag {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            default:
-                break;
+    @objc func sliderTab(gestureRecognizer: UIGestureRecognizer){
+        
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self.starView)
+        
+        let positionOfSlider: CGPoint = self.slider.frame.origin
+        let widthOfSlider: CGFloat = self.slider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) / widthOfSlider) * CGFloat(slider.maximumValue)
+        let value = round(newValue * 10)
+        let calc = value.truncatingRemainder(dividingBy: 5.0)
+        var result = value
+        if calc >= 2.5 {
+            result += (5.0 - calc)
+        } else {
+            result -= calc
         }
+        let resultValue = Float(result / 10)
+        slider.setValue(resultValue , animated: true)
+        sliderValue.onNext(resultValue )
+        delegate?.rating(value: resultValue )
     }
     
+    func setSliderValue(value: Float) {
+        self.sliderValue.onNext(value)
+        self.slider.value = value
+    }
         
-        
+}
+
+protocol StarRateDelegate {
+    func rating(value: Float )
 }

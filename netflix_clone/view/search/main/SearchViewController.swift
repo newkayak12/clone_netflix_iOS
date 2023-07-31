@@ -13,6 +13,7 @@ import RxSwift
 class SearchViewController: BaseViewController, ViewModelBindable {
     var viewModel: SearchViewModel!
     
+    
     private var isScrollShow = BehaviorSubject(value: true)
     
     private lazy var squareFlowLayout = {
