@@ -14,6 +14,7 @@ class RatingTableViewCell: UITableViewCell {
     static let cellId = "RatingCell"
     
     var delegate: StarRateDelegate?
+    var contentsNo: Int = 0
     private lazy var empty: UIImage? = {
         let image = UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))
         return image
@@ -52,7 +53,6 @@ class RatingTableViewCell: UITableViewCell {
         return label;
     }()
     private let sliderValue = BehaviorSubject(value: Float(0.0))
-    
     private lazy var slider = {
         let slider = UISlider()
         slider.minimumValue = 0.0
@@ -69,7 +69,6 @@ class RatingTableViewCell: UITableViewCell {
             self.sliderValue.onNext(value )
         }.disposed(by: rx.disposeBag)
         self.sliderValue.bind { value in
-            Log.warning("VALUE", value)
             self.first.image = self.empty
             self.second.image = self.empty
             self.third.image = self.empty
@@ -210,6 +209,7 @@ class RatingTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        self.contentsNo = 0
         self.title.text = "title"
         self.subTitle.text = "subTitle"
         imgView.image = UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large))
@@ -246,7 +246,7 @@ class RatingTableViewCell: UITableViewCell {
         let resultValue = Float(result / 10)
         slider.setValue(resultValue , animated: true)
         sliderValue.onNext(resultValue )
-        delegate?.rating(value: resultValue )
+        delegate?.rating(no: self.contentsNo, value: resultValue )
     }
     
     func setSliderValue(value: Float) {
@@ -257,5 +257,5 @@ class RatingTableViewCell: UITableViewCell {
 }
 
 protocol StarRateDelegate {
-    func rating(value: Float )
+    func rating(no: Int, value: Float )
 }

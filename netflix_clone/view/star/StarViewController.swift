@@ -153,7 +153,7 @@ class StarViewController: BaseViewController, ViewModelBindable {
 }
 
 extension StarViewController: StarRateDelegate {
-    func rating(value: Float) {
-        Log.warning("RATING", value)
+    func rating(no: Int, value: Float) {
+        Log.warning("RATING to \(no)" , value)
     }
 }

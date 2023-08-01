@@ -87,6 +87,7 @@
 		7EC97DCA2A2557E1008AC342 /* netflix_cloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DC92A2557E1008AC342 /* netflix_cloneUITests.swift */; };
 		7EC97DCC2A2557E1008AC342 /* netflix_cloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DCB2A2557E1008AC342 /* netflix_cloneUITestsLaunchTests.swift */; };
 		7EF35FC22A7543550092F7BE /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FC12A7543550092F7BE /* RatingTableViewCell.swift */; };
+		7EF35FC52A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FC42A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +186,7 @@
 		7EC97DC92A2557E1008AC342 /* netflix_cloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netflix_cloneUITests.swift; sourceTree = "<group>"; };
 		7EC97DCB2A2557E1008AC342 /* netflix_cloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netflix_cloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7EF35FC12A7543550092F7BE /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
+		7EF35FC42A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitleSubCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +429,7 @@
 		7EBBBC0C2A56F61C00C4999C /* component */ = {
 			isa = PBXGroup;
 			children = (
+				7EF35FC32A7934B60092F7BE /* my */,
 				7EF35FC02A7543480092F7BE /* star */,
 				7E05342D2A69521200C28837 /* search */,
 				7EC697E42A617AF0006F3F22 /* sign */,
@@ -696,6 +699,14 @@
 			path = star;
 			sourceTree = "<group>";
 		};
+		7EF35FC32A7934B60092F7BE /* my */ = {
+			isa = PBXGroup;
+			children = (
+				7EF35FC42A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift */,
+			);
+			path = my;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -845,6 +856,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EF35FC52A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift in Sources */,
 				7EC697DD2A617969006F3F22 /* Step1ViewModel.swift in Sources */,
 				7EC818DB2A59954200A28D43 /* AnalyzeCell.swift in Sources */,
 				7E4A81E82A712BB60062477E /* SearchPersonCollectionViewCell.swift in Sources */,

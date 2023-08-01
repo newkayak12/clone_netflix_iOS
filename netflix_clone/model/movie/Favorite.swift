@@ -9,10 +9,15 @@ import Foundation
 final class Favorite: Codable {
     
     var favoriteNo: Int
-    var profile: Profile
-    var contentsInfo: ContentsInfo
+    var profile: Profile?
+    var contentsInfo: ContentsInfo?
     var favoriteDate: Date
     
+    init(){
+        self.favoriteNo = 0
+        self.contentsInfo = ContentsInfo()
+        self.favoriteDate = Date()
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
