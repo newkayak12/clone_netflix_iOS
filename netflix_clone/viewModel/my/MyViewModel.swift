@@ -14,10 +14,10 @@ class MyViewModel: ViewModelType {
     private var watched: [Watched] = []
     private var favorite: [Favorite] = []
     
-    var watchSubject = PublishSubject<[Watched]>()
-    var favoriteSubject = PublishSubject<[Favorite]>()
+    var watchSubject = BehaviorSubject<[Watched]>(value: [])
+    var favoriteSubject = BehaviorSubject<[Favorite]>(value: [])
     
-    var segmentIndex = BehaviorSubject<Int>(value: 0);
+    var segmentIndex = PublishSubject<Int>();
     
     init( title: String, service: Service ) {
         self.title = title

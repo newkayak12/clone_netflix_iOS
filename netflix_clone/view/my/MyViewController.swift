@@ -20,6 +20,7 @@ class MyViewController: BaseViewController, ViewModelBindable {
             .changed
             .bind(to: self.viewModel.segmentIndex)
             .disposed(by: rx.disposeBag)
+        
         return control;
     }()
     lazy var flowLayout = {
@@ -39,9 +40,12 @@ class MyViewController: BaseViewController, ViewModelBindable {
                                                                                                                                                                     
             cell.nameLabel.text = "WATCHED"
         }.disposed(by: rx.disposeBag)
+        collectionView.isHidden = true
+        
         return collectionView
     }()
     lazy var favoriteCollectionView = {
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.favoriteCellId)
         self.viewModel.favoriteSubject.bind(to: collectionView.rx.items(cellIdentifier: PostTitleSubCollectionViewCell.favoriteCellId, cellType: PostTitleSubCollectionViewCell.self)) {
@@ -49,7 +53,6 @@ class MyViewController: BaseViewController, ViewModelBindable {
             
             cell.nameLabel.text = "FAVORITE"
         }.disposed(by: rx.disposeBag)
-        collectionView.isHidden = true
         
         return collectionView
     }()
@@ -85,19 +88,26 @@ class MyViewController: BaseViewController, ViewModelBindable {
         self.viewModel
             .segmentIndex
             .subscribe{
-                Log.debug("BEHAVIOR", $0)
-                switch $0.element! {
-                    case 0:
-                        self.watchedCollectionView.isHidden = true
-                        self.favoriteCollectionView.isHidden = false
-                        self.viewModel.fetchFavorite()
-                        self.viewModel.resetWatched()
-                    case 1:
-                        self.watchedCollectionView.isHidden = false
-                        self.favoriteCollectionView.isHidden = true
-                        self.viewModel.fetchWatched()
-                        self.viewModel.resetFavorite()
-                    default: break;
+                Log.error("_____________", $0)
+                Log.warning("sect", self.segment.frame.height)
+                Log.warning("sect", self.segment.constraints)
+                Log.warning("fav?", self.favoriteCollectionView.isHidden)
+                Log.warning("fav?", self.favoriteCollectionView.frame.height)
+                Log.warning("fav", self.favoriteCollectionView.constraints)
+                Log.warning("wat?", self.watchedCollectionView.isHidden)
+                Log.warning("wat?", self.watchedCollectionView.frame.height)
+                Log.warning("wat", self.watchedCollectionView.constraints)
+                
+                if let value =  $0.element, value == 0 {
+                    self.watchedCollectionView.isHidden = true
+                    self.favoriteCollectionView.isHidden = false
+                    self.viewModel.fetchFavorite()
+                    self.viewModel.resetWatched()
+                } else {
+                    self.watchedCollectionView.isHidden = false
+                    self.favoriteCollectionView.isHidden = true
+                    self.viewModel.fetchWatched()
+                    self.viewModel.resetFavorite()
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -121,10 +131,14 @@ class MyViewController: BaseViewController, ViewModelBindable {
     
     override func viewDidLoad() {
         
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.segmentIndex.onNext(0)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     
