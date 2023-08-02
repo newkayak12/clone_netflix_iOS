@@ -41,6 +41,10 @@ class MyViewController: BaseViewController, ViewModelBindable {
             cell.nameLabel.text = "WATCHED"
         }.disposed(by: rx.disposeBag)
         collectionView.isHidden = true
+       
+        collectionView.rx.itemSelected.bind {
+            self.fnRouteDetail(indexPath: $0)
+        }.disposed(by: rx.disposeBag)
         
         return collectionView
     }()
@@ -170,6 +174,14 @@ class MyViewController: BaseViewController, ViewModelBindable {
             navigationController?.present(UINavigationController(rootViewController: signInStep1ViewController), animated: true)
             navigationController?.modalPresentationStyle = .fullScreen
         }
+    }
+    func fnRouteDetail( indexPath: IndexPath ) {
+        Log.debug("INDEX", indexPath)
+        let viewModel = DetailViewModel(title: "", service: self.viewModel.service)
+        var viewController = DetailViewController();
+        viewController.bind(viewModel: viewModel);
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     
