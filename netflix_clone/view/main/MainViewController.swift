@@ -57,27 +57,29 @@ class MainViewController: UITabBarController {
         
         
         
-        let homeViewModel = HomeViewModel(title: "Main", service: service )
+        
         let home = UINavigationController(rootViewController: homeView)
+        let homeViewModel = HomeViewModel(title: "Main", service: service )
         homeView.bind(viewModel: homeViewModel)
+        
         //        let home = homeView
         
         
-        let searchViewModel = SearchViewModel(title: "Search", service: service)
+        
         let search = UINavigationController(rootViewController: searchView)
-        searchView.bind(viewModel: searchViewModel)
+        
         //        let search = searchView
         
         
-        let starViewModel = StarViewModel(title: "Star", service: service)
+        
         let star = UINavigationController(rootViewController: starView)
-        starView.bind(viewModel: starViewModel)
+        
         //        let star = starView
         
         
-        let myViewModel = MyViewModel(title: "My", service: service)
+        
         let my = UINavigationController(rootViewController: myView)
-        myView.bind(viewModel: myViewModel)
+        
         //        let my = myView
         
         
@@ -105,7 +107,34 @@ class MainViewController: UITabBarController {
 
 extension MainViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        Log.warning(viewController.view as? MyViewController  , "???")
+        guard let nav = viewController as? UINavigationController else { return false }
+        guard let controller  = nav.viewControllers.first else { return false}
+
+        switch controller.self {
+//            case is HomeViewController:
+//                Log.info("HomeViewController")
+//                let homeViewModel = HomeViewModel(title: "Main", service: service )
+//                homeView.bind(viewModel: homeViewModel)
+//                break;
+            case is  SearchViewController:
+                Log.info("SearchViewController")
+                let searchViewModel = SearchViewModel(title: "Search", service: service)
+                searchView.bind(viewModel: searchViewModel)
+                break;
+            case is  StarViewController:
+                Log.info("StarViewController")
+                let starViewModel = StarViewModel(title: "Star", service: service)
+                starView.bind(viewModel: starViewModel)
+                break;
+            case is   MyViewController:
+                Log.info("MyViewController")
+                let myViewModel = MyViewModel(title: "My", service: service)
+                myView.bind(viewModel: myViewModel)
+                break;
+            default:
+                break
+        }
+        
         
         return true;
     }
