@@ -5,7 +5,6 @@
 //  Created by Sang Hyeon kim on 2023/07/10.
 //
 
-import Foundation
 import UIKit
 
 class NoticeCell: UITableViewCell {

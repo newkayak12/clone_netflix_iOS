@@ -5,7 +5,6 @@
 //  Created by Sang Hyeon kim on 2023/07/29.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 import RxSwift

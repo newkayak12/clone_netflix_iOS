@@ -5,9 +5,9 @@
 //  Created by Sang Hyeon kim on 2023/07/07.
 //
 
-import Foundation
 import UIKit
 import Lottie
+
 class MainViewController: UITabBarController {
     lazy var launchScreen: LottieAnimationView = {
         let animation = LottieAnimationView(name: "netflix")
@@ -118,18 +118,24 @@ extension MainViewController: UITabBarControllerDelegate {
 //                break;
             case is  SearchViewController:
                 Log.info("SearchViewController")
-                let searchViewModel = SearchViewModel(title: "Search", service: service)
-                searchView.bind(viewModel: searchViewModel)
+                if  searchView.viewModel == nil{
+                    let searchViewModel = SearchViewModel(title: "Search", service: service)
+                    searchView.bind(viewModel: searchViewModel)
+                }
                 break;
             case is  StarViewController:
                 Log.info("StarViewController")
-                let starViewModel = StarViewModel(title: "Star", service: service)
-                starView.bind(viewModel: starViewModel)
+                if  starView.viewModel == nil{
+                    let starViewModel = StarViewModel(title: "Star", service: service)
+                    starView.bind(viewModel: starViewModel)
+                }
                 break;
             case is   MyViewController:
                 Log.info("MyViewController")
-                let myViewModel = MyViewModel(title: "My", service: service)
-                myView.bind(viewModel: myViewModel)
+                if  myView.viewModel == nil{
+                    let myViewModel = MyViewModel(title: "My", service: service)
+                    myView.bind(viewModel: myViewModel)
+                }
                 break;
             default:
                 break

@@ -5,8 +5,8 @@
 //  Created by Sang Hyeon kim on 2023/07/08.
 //
 
-import Foundation
 import UIKit
+
 class Footer: UIView {
     let company = UILabel(frame: .zero)
     let info = UILabel(frame: .zero)

@@ -5,7 +5,6 @@
 //  Created by Sang Hyeon kim on 2023/07/08.
 //
 
-import Foundation
 import UIKit
 
 class AnalyzeCell: UICollectionViewCell{

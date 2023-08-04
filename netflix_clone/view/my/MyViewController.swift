@@ -5,9 +5,9 @@
 //  Created by Sang Hyeon kim on 2023/07/07.
 //
 
-import Foundation
 import UIKit
 import SwiftUI
+
 class MyViewController: BaseViewController, ViewModelBindable {
     var viewModel: MyViewModel!
     
@@ -23,6 +23,7 @@ class MyViewController: BaseViewController, ViewModelBindable {
         
         return control;
     }()
+    
     lazy var flowLayout = {
         var layout = UICollectionViewFlowLayout()
         let size = (view.frame.width - 40) / 3
@@ -32,34 +33,41 @@ class MyViewController: BaseViewController, ViewModelBindable {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         return layout
     }()
+    
     lazy var watchedCollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.watchedCellId)
-        self.viewModel.watchSubject.bind(to: collectionView.rx.items(cellIdentifier: PostTitleSubCollectionViewCell.watchedCellId, cellType: PostTitleSubCollectionViewCell.self)) {
-            (row, element, cell)in
-                                                                                                                                                                    
-            cell.nameLabel.text = "WATCHED"
-        }.disposed(by: rx.disposeBag)
         collectionView.isHidden = true
-       
-        collectionView.rx.itemSelected.bind {
-            self.fnRouteDetail(indexPath: $0)
-        }.disposed(by: rx.disposeBag)
-        
+        collectionView.backgroundColor = .blue
         return collectionView
     }()
+    
     lazy var favoriteCollectionView = {
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.favoriteCellId)
-        self.viewModel.favoriteSubject.bind(to: collectionView.rx.items(cellIdentifier: PostTitleSubCollectionViewCell.favoriteCellId, cellType: PostTitleSubCollectionViewCell.self)) {
-            (row, element, cell)in
-            
-            cell.nameLabel.text = "FAVORITE"
-        }.disposed(by: rx.disposeBag)
-        
+        collectionView.isHidden = true
+        collectionView.backgroundColor = .red
         return collectionView
     }()
+    
+    
+    
+ 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewModel.segmentIndex.onNext(0)
+    }
+    
+    
+    
     
     func setNavigation() {
         
@@ -88,7 +96,67 @@ class MyViewController: BaseViewController, ViewModelBindable {
         navigationItem.title = "보관함"
         navigationItem.titleView = UILabel(frame: .zero)
     }
+    
+    func setConstraints() {
+        Log.warning("setConstraints")
+        segment.snp.makeConstraints { make in
+            make.top.equalTo(view.layoutMarginsGuide)
+            make.leading.trailing.equalTo(view)
+        }
+        favoriteCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(segment.snp.bottom).offset(20)
+            make.leading.trailing.bottom.equalTo(view)
+        }
+        watchedCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(segment.snp.bottom).offset(20)
+            make.leading.trailing.bottom.equalTo(view)
+        }
+    }
+    
+    func prepareUI() {
+        Log.warning("prepareUI")
+        view.addSubview(self.segment)
+        view.addSubview(self.favoriteCollectionView)
+        view.addSubview(self.watchedCollectionView)
+        
+        self.setConstraints()
+    }
+    
     func wireViewModel() {
+        Log.warning("wireViewModel")
+        self.wireWatchCollectionView()
+        self.wireFavoriteCollectionView()
+        self.wireSegmentCotroller()
+        
+    }
+    
+    
+    
+    func wireWatchCollectionView () {
+        Log.info("wireWatchCollectionView")
+        self.viewModel.watchSubject.bind(to: watchedCollectionView.rx.items(cellIdentifier: PostTitleSubCollectionViewCell.watchedCellId, cellType: PostTitleSubCollectionViewCell.self)) {
+            (row, element, cell)in
+            
+            cell.nameLabel.text = "WATCHED"
+        }.disposed(by: rx.disposeBag)
+        
+        
+        watchedCollectionView.rx.itemSelected.bind {
+            self.fnRouteDetail(indexPath: $0)
+        }.disposed(by: rx.disposeBag)
+        
+    }
+    
+    func wireFavoriteCollectionView () {
+        Log.info("wireFavoriteCollectionView")
+        self.viewModel.favoriteSubject.bind(to: favoriteCollectionView.rx.items(cellIdentifier: PostTitleSubCollectionViewCell.favoriteCellId, cellType: PostTitleSubCollectionViewCell.self)) {
+            (row, element, cell)in
+            
+            cell.nameLabel.text = "FAVORITE"
+        }.disposed(by: rx.disposeBag)
+    }
+    
+    func wireSegmentCotroller () {
         self.viewModel
             .segmentIndex
             .subscribe{
@@ -117,42 +185,9 @@ class MyViewController: BaseViewController, ViewModelBindable {
             .disposed(by: rx.disposeBag)
     }
     
-    func setConstraints() {
-        segment.snp.makeConstraints { make in
-            make.top.equalTo(view.layoutMarginsGuide)
-            make.leading.trailing.equalTo(view)
-        }
-        favoriteCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(segment.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalTo(view)
-        }
-        watchedCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(segment.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalTo(view)
-        }
-    }
     
     
-    override func viewDidLoad() {
-        
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    
-    func prepareUI() {
-        view.addSubview(self.segment)
-        view.addSubview(self.favoriteCollectionView)
-        view.addSubview(self.watchedCollectionView)
-        
-        self.setConstraints()
-    }
+
     
     @objc
     private func fnRouteNotice () {
@@ -163,6 +198,7 @@ class MyViewController: BaseViewController, ViewModelBindable {
         navigationController?.present(navtigation, animated: true)
         navigationController?.modalPresentationStyle = .fullScreen
     }
+    
     @objc
     func fnRouteProfile () {
         if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
@@ -175,6 +211,7 @@ class MyViewController: BaseViewController, ViewModelBindable {
             navigationController?.modalPresentationStyle = .fullScreen
         }
     }
+    
     func fnRouteDetail( indexPath: IndexPath ) {
         Log.debug("INDEX", indexPath)
         let viewModel = DetailViewModel(title: "", service: self.viewModel.service)

@@ -5,9 +5,9 @@
 //  Created by Sang Hyeon kim on 2023/07/25.
 //
 
-import Foundation
 import UIKit
 import RxSwift
+
 class SearchPosterCollectionViewCell: UICollectionViewCell {
     static let cellId = "SearchPosterCell"
     lazy var  imgView: UIImageView = {

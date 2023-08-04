@@ -5,8 +5,8 @@
 //  Created by Sang Hyeon kim on 2023/07/09.
 //
 
-import Foundation
 import UIKit
+
 class PosterCell: UICollectionViewCell {
     var type: PosterTypeId?
     

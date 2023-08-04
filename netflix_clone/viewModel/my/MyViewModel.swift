@@ -14,8 +14,8 @@ class MyViewModel: ViewModelType {
     private var watched: [Watched] = []
     private var favorite: [Favorite] = []
     
-    var watchSubject = BehaviorSubject<[Watched]>(value: [])
-    var favoriteSubject = BehaviorSubject<[Favorite]>(value: [])
+    var watchSubject = PublishSubject<[Watched]>()
+    var favoriteSubject = PublishSubject<[Favorite]>()
     
     var segmentIndex = PublishSubject<Int>();
     
