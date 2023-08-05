@@ -15,25 +15,6 @@ class SearchViewController: BaseViewController, ViewModelBindable {
     
     private var isScrollShow = BehaviorSubject(value: true)
     
-    private lazy var squareFlowLayout = {
-        var layout = UICollectionViewFlowLayout()
-        let size = view.frame.width / 3
-        layout.itemSize.width = size
-        layout.itemSize.height = size
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        return layout
-    }()
-    private lazy var rectangleFlowLayout = {
-        var layout = UICollectionViewFlowLayout()
-        let size = view.frame.width / 3
-        layout.itemSize.width = size
-        layout.itemSize.height = size * 0.6
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        return layout
-    }()
-    
     lazy var popularCollectionView: UIStackView = {
         let label = UILabel(frame: .zero)
         label.text = "인기"
@@ -42,7 +23,16 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         label.snp.makeConstraints { make in
             make.height.equalTo(18)
         }
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.squareFlowLayout)
+        
+        var layout = UICollectionViewFlowLayout()
+        let size = view.frame.width / 3
+        layout.itemSize.width = size
+        layout.itemSize.height = size
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SearchCommonCell.self, forCellWithReuseIdentifier: "\(SearchCommonCell.cellId)_popular")
         self.viewModel.popular.bind(to: collectionView.rx.items(cellIdentifier: "\(SearchCommonCell.cellId)_popular", cellType: SearchCommonCell.self)) { (row, element, cell) in
             Log.warning("POPULAR", "EMIT")
@@ -54,6 +44,7 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         container.axis = .vertical
         return container
     }()
+    
     lazy var recommandCollectionView: UIStackView = {
         let label = UILabel(frame: .zero)
         label.text = "추천 작품"
@@ -62,7 +53,17 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         label.snp.makeConstraints { make in
             make.height.equalTo(18)
         }
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.squareFlowLayout)
+        
+        var layout = UICollectionViewFlowLayout()
+        let size = view.frame.width / 3
+        layout.itemSize.width = size
+        layout.itemSize.height = size
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SearchCommonCell.self, forCellWithReuseIdentifier: "\(SearchCommonCell.cellId)_recommand")
         self.viewModel.recommand.bind(to: collectionView.rx.items(cellIdentifier: "\(SearchCommonCell.cellId)_recommand", cellType: SearchCommonCell.self)) { (row, element, cell) in
             Log.warning("RECOMMAND", "EMIT")
@@ -74,6 +75,7 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         container.axis = .vertical
         return container
     }()
+   
     lazy var categoryCollectionView: UIStackView = {
         let label = UILabel(frame: .zero)
         label.text = "카테고리"
@@ -82,7 +84,14 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         label.snp.makeConstraints { make in
             make.height.equalTo(18)
         }
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: rectangleFlowLayout)
+        var layout = UICollectionViewFlowLayout()
+        let size = view.frame.width / 3
+        layout.itemSize.width = size
+        layout.itemSize.height = size * 0.6
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SearchCommonCell.self, forCellWithReuseIdentifier: "\(SearchCommonCell.cellId)_popular")
         self.viewModel.category.bind(to: collectionView.rx.items(cellIdentifier: "\(SearchCommonCell.cellId)_popular", cellType: SearchCommonCell.self)) { (row, element, cell) in
             Log.warning("CATEGORY", "EMIT")
@@ -94,6 +103,7 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         container.axis = .vertical
         return container
     }()
+   
     lazy var container: UIScrollView = {
         let stackView = UIStackView(arrangedSubviews: [popularCollectionView, recommandCollectionView, categoryCollectionView])
         stackView.axis = .vertical

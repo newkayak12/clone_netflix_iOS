@@ -76,30 +76,41 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         
         return collectionView
     }()
-    private lazy var posterFlowLayout = {
+    private lazy var rankCollection = {
         var layout = UICollectionViewFlowLayout()
         layout.itemSize.width = view.frame.width / 4
         layout.itemSize.height = 200
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        return layout
-    }()
-    private lazy var rankCollection = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.posterFlowLayout)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = false
         return collectionView
     }()
     private lazy var watchedCollection = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.posterFlowLayout)
+        var layout = UICollectionViewFlowLayout()
+        layout.itemSize.width = view.frame.width / 4
+        layout.itemSize.height = 200
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = true
         return collectionView
     }()
     private lazy var newEpisodeCollection = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.posterFlowLayout)
+        
+        var layout = UICollectionViewFlowLayout()
+        layout.itemSize.width = view.frame.width / 4
+        layout.itemSize.height = 200
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = true

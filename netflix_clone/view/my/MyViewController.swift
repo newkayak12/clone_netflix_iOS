@@ -34,7 +34,6 @@ class MyViewController: BaseViewController, ViewModelBindable {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.watchedCellId)
-        collectionView.backgroundColor = .cyan
         collectionView.isHidden = true
         return collectionView
     }()
@@ -48,7 +47,6 @@ class MyViewController: BaseViewController, ViewModelBindable {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.favoriteCellId)
-        collectionView.backgroundColor = .red
         collectionView.isHidden = true
         return collectionView
     }()
