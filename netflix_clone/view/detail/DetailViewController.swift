@@ -34,8 +34,6 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.rightBarButtonItems = [share, bell]
         
-//        navigationItem.title = "보관함"
-//        navigationItem.titleView = UILabel(frame: .zero)
         
         let backButton = UIButton(frame: .zero)
         backButton.addTarget(self, action: #selector(fnBackBtn), for: .touchUpInside)

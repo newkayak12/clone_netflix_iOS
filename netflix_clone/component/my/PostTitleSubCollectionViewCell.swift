@@ -50,6 +50,11 @@ class PostTitleSubCollectionViewCell: UICollectionViewCell {
         drawUI()
     }
     
+    override func prepareForReuse() {
+        nameLabel.text = ""
+        descriptionLabel.text = ""
+    }
+    
     func drawUI() {
         self.addSubview(container)
         

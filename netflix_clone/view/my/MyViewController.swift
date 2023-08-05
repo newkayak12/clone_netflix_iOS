@@ -24,29 +24,32 @@ class MyViewController: BaseViewController, ViewModelBindable {
         return control;
     }()
     
-    lazy var flowLayout = {
+    
+    lazy var watchedCollectionView = {
         var layout = UICollectionViewFlowLayout()
         let size = (view.frame.width - 40) / 3
         layout.itemSize.width = size
         layout.itemSize.height = size * 1.2
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        return layout
-    }()
-    
-    lazy var watchedCollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.watchedCellId)
+        collectionView.backgroundColor = .cyan
         collectionView.isHidden = true
-        collectionView.backgroundColor = .blue
         return collectionView
     }()
     
     lazy var favoriteCollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+        var layout = UICollectionViewFlowLayout()
+        let size = (view.frame.width - 40) / 3
+        layout.itemSize.width = size
+        layout.itemSize.height = size * 1.2
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PostTitleSubCollectionViewCell.self, forCellWithReuseIdentifier: PostTitleSubCollectionViewCell.favoriteCellId)
-        collectionView.isHidden = true
         collectionView.backgroundColor = .red
+        collectionView.isHidden = true
         return collectionView
     }()
     
@@ -63,7 +66,6 @@ class MyViewController: BaseViewController, ViewModelBindable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.viewModel.segmentIndex.onNext(0)
     }
     
     
@@ -127,7 +129,6 @@ class MyViewController: BaseViewController, ViewModelBindable {
         self.wireWatchCollectionView()
         self.wireFavoriteCollectionView()
         self.wireSegmentCotroller()
-        
     }
     
     
@@ -154,12 +155,18 @@ class MyViewController: BaseViewController, ViewModelBindable {
             
             cell.nameLabel.text = "FAVORITE"
         }.disposed(by: rx.disposeBag)
+        
+        favoriteCollectionView.rx.itemSelected.bind {
+            self.fnRouteDetail(indexPath: $0)
+        }.disposed(by: rx.disposeBag)
     }
     
     func wireSegmentCotroller () {
         self.viewModel
             .segmentIndex
             .subscribe{
+                self.viewModel.resetWatched()
+                self.viewModel.resetFavorite()
                 Log.error("_____________", $0)
                 Log.warning("sect", self.segment.frame.height)
                 Log.warning("sect", self.segment.constraints)
@@ -174,13 +181,12 @@ class MyViewController: BaseViewController, ViewModelBindable {
                     self.watchedCollectionView.isHidden = true
                     self.favoriteCollectionView.isHidden = false
                     self.viewModel.fetchFavorite()
-                    self.viewModel.resetWatched()
                 } else {
                     self.watchedCollectionView.isHidden = false
                     self.favoriteCollectionView.isHidden = true
                     self.viewModel.fetchWatched()
-                    self.viewModel.resetFavorite()
                 }
+                self.view.layoutIfNeeded()
             }
             .disposed(by: rx.disposeBag)
     }

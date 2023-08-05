@@ -17,7 +17,7 @@ class MyViewModel: ViewModelType {
     var watchSubject = PublishSubject<[Watched]>()
     var favoriteSubject = PublishSubject<[Favorite]>()
     
-    var segmentIndex = PublishSubject<Int>();
+    var segmentIndex = BehaviorSubject<Int>(value: 0);
     
     init( title: String, service: Service ) {
         self.title = title
@@ -26,7 +26,7 @@ class MyViewModel: ViewModelType {
     
     func fetchWatched () {
         Log.debug("FETCH", "WATCHED")
-        watched.append(contentsOf: [Watched(), Watched(), Watched(), Watched(), Watched(), Watched(), Watched(), Watched(), Watched()])
+        watched.append(contentsOf: [Watched(), Watched(), Watched()])
         watchSubject.onNext(watched)
     }
     func resetWatched() {
@@ -34,7 +34,8 @@ class MyViewModel: ViewModelType {
     }
     func fetchFavorite () {
         Log.debug("FETCH", "FAV")
-        favorite.append(contentsOf: [Favorite(), Favorite(), Favorite(), Favorite(), Favorite(), Favorite(), Favorite(), Favorite(), Favorite(), Favorite()])
+        favorite.append(contentsOf: [Favorite(), Favorite(), Favorite(),
+                                     Favorite()])
         favoriteSubject.onNext(favorite)
     }
     func resetFavorite() {
