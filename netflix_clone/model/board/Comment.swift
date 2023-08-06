@@ -8,13 +8,24 @@
 import Foundation
 final class Comment: Codable {
     var commentNo: Int
-    var profile: Profile
+    var profile: Profile?
     var contentsNo: Int
     var comments: String
     var star: Double
     var regDate: Date
     var modifyDate: Date
     var isDeleted: Bool
+    
+    init() {
+        self.commentNo = 0
+        self.profile = nil
+        self.contentsNo = 0
+        self.comments = ""
+        self.star = 3.4
+        self.regDate = Date()
+        self.modifyDate = Date()
+        self.isDeleted = false
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

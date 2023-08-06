@@ -134,7 +134,7 @@ class MyViewController: BaseViewController, ViewModelBindable {
     func wireWatchCollectionView () {
         Log.info("wireWatchCollectionView")
         self.viewModel.watchSubject.bind(to: watchedCollectionView.rx.items(cellIdentifier: PostTitleSubCollectionViewCell.watchedCellId, cellType: PostTitleSubCollectionViewCell.self)) {
-            (row, element, cell)in
+            (row, element, cell) in
             
             cell.nameLabel.text = "WATCHED"
         }.disposed(by: rx.disposeBag)
