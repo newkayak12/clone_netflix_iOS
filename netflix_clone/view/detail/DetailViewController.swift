@@ -13,6 +13,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     lazy var posterImage = {
         let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
+        
         img.contentMode = .scaleAspectFit
         return img
     }()
@@ -35,18 +36,23 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     lazy var watchBtn = {
         let btn = UIButton(frame: .zero)
-        btn.tintColor = .systemPink
-        btn.titleLabel?.text = "시청하기"
+        btn.setTitle("시청하기", for: .normal)
+        btn.titleLabel?.backgroundColor = .systemPink
         btn.titleLabel?.textColor = .white
+        btn.titleLabel?.clipsToBounds = true
+        btn.titleLabel?.textAlignment = .center
+        btn.titleLabel?.layer.cornerRadius = 10
+        
         return btn
     }()
     
     lazy var descriptionLabel = {
         let label = UILabel(frame: .zero)
-        label.text = ""
-        label.textColor = .white
+        label.text = "\ndesc \n desc \n desc"
+        label.textColor = .gray
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 22)
+        label.font = UIFont.systemFont(ofSize: 20)
+        
         
         return label
     }()
@@ -68,6 +74,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     lazy var infoStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.posterImage, self.titleLabel, self.subtitleLabel, self.watchBtn, self.descriptionLabel, self.segment])
         stackView.axis = .vertical
+        stackView.spacing = 15
+        stackView.alignment = .center
         return stackView
     }()
     
@@ -83,27 +91,12 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(PersonCollectionViewCell.self, forCellWithReuseIdentifier: PersonCollectionViewCell.cellId)
-        
-        self.viewModel.personSubject.bind(to: collectionView.rx.items(cellIdentifier: PersonCollectionViewCell.cellId, cellType: PersonCollectionViewCell.self )) {
-            (row, element, cell) in
-            
-            cell.title.text = "TEXT"
-            cell.subTitle.text = "SUBTITLE"
-            
-            
-        }.disposed(by: rx.disposeBag)
-        
         return collectionView
     }()
     
     lazy var reviewTableView = {
         let tableView = UITableView(frame: .zero)
         tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell.cellId)
-        self.viewModel.reviewSubject.bind(to: tableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType:ReviewTableViewCell.self)) {
-            (row, element, cell) in
-        }.disposed(by: rx.disposeBag)
-        
-        
         return tableView
     }()
     
@@ -119,13 +112,16 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         
     }()
     
-    lazy var contentsDetailView = {
-        
+    
+    lazy var scrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.addSubview(self.infoStackView)
+//        view.addSubview(self.contentsView)
+        return view
     }()
     
-    
-    
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = .black
     }
     
@@ -149,7 +145,6 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         bell.tintColor = .white
         
         
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.rightBarButtonItems = [share, bell]
         
         
@@ -160,22 +155,100 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         navigationItem.leftBarButtonItems = [UIBarButtonItem(customView: backButton)]
     }
     
+    func wirePersonCollection () {
+        self.viewModel.personSubject.bind(to: self.personCollectionView.rx.items(cellIdentifier: PersonCollectionViewCell.cellId, cellType: PersonCollectionViewCell.self )) {
+            (row, element, cell) in
+            
+            cell.title.text = "TEXT"
+            cell.subTitle.text = "SUBTITLE"
+            Log.debug("PERSONCOLLECTION")
+            
+        }.disposed(by: rx.disposeBag)
+    }
+    
+    func wireReviewTable () {
+        self.viewModel.reviewSubject.bind(to: self.reviewTableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType:ReviewTableViewCell.self)) {
+            (row, element, cell) in
+            Log.debug("REVIEWTALBE")
+        }.disposed(by: rx.disposeBag)
+    }
+    
     func wireViewModel() {
+        self.wirePersonCollection()
+        self.wireReviewTable()
+        
+        self.viewModel.segmentIndex
+            .subscribe{
+                if let idx = $0.element {
+                    Log.debug(">>>>>>", idx)
+                if idx == 0 {
+                    Log.debug("SEGMENT", 0)
+                    self.viewModel.fetchPerson()
+                    self.viewModel.fetchReview()
+                } else if idx == 1 {
+                    Log.debug("SEGMENT", 1)
+                    self.viewModel.fetchContentsDetail()
+                }
+            }
+        }.disposed(by: rx.disposeBag)
+        
         self.segment.selectedSegmentIndex = 0
+        self.viewModel.segmentIndex.onNext(0)
     }
     
     func setConstraints() {
         self.infoStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view)
-            make.top.equalTo(view.layoutMarginsGuide)
+            make.top.leading.trailing.equalTo(self.scrollView)
         }
+        
         self.posterImage.snp.makeConstraints { make in
-            make.height.equalTo(self.view.frame.width / 3)
+            make.width.equalTo(200)
+            make.height.equalTo(250)
         }
+        
+        self.titleLabel.snp.makeConstraints { make in
+            make.width.equalTo(view).offset(-15)
+        }
+        
+        self.subtitleLabel.snp.makeConstraints { make in
+            make.width.equalTo(view).offset(-15)
+        }
+        
+        self.descriptionLabel.snp.makeConstraints { make in
+            make.width.equalTo(view).offset(-15)
+        }
+        
+        self.segment.snp.makeConstraints { make in
+            make.width.equalTo(self.scrollView)
+        }
+        
+        self.watchBtn.snp.makeConstraints { make in
+            make.width.equalTo( self.infoStackView ).multipliedBy( 0.9 )
+            make.height.equalTo(50)
+            make.centerX.equalTo(self.scrollView)
+        }
+        
+        self.watchBtn.titleLabel!.snp.makeConstraints{ make in
+            make.width.equalTo(self.watchBtn)
+            make.height.equalTo(50)
+        }
+//        
+//        self.contentsView.snp.makeConstraints { make in
+//            make.top.equalTo(self.infoStackView.snp.bottom).offset(15)
+//            make.leading.trailing.equalTo(self.scrollView)
+//        }
+        
+        self.scrollView.snp.makeConstraints { make in
+            make.top.equalTo(view.layoutMarginsGuide)
+            make.leading.trailing.bottom.equalTo(view)
+        }
+        
+        
+     
     }
     
     func prepareUI() {
-        view.addSubview(self.infoStackView)
+        view.addSubview(self.scrollView)
         
         self.setConstraints()
     }

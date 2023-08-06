@@ -30,11 +30,13 @@ class DetailViewModel: ViewModelType {
     }
     
     func fetchPerson () {
+        Log.warning("fetchPerson")
         persons.append(contentsOf: [Person(), Person(), Person(), Person(), Person(), Person(), Person()])
         personSubject.onNext(persons)
     }
     
     func fetchReview () {
+        Log.warning("fetchReview")
         reviews.append(contentsOf: [
             Comment(), Comment(), Comment(), Comment(), Comment(),
             Comment(), Comment(), Comment(), Comment(), Comment(),
@@ -43,6 +45,7 @@ class DetailViewModel: ViewModelType {
     }
     
     func fetchContentsDetail () {
+        Log.warning("fetchContentsDetail")
         contentsDetails.append(contentsOf: [ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail()])
         contentDetailSubject.onNext(contentsDetails)
     }
