@@ -9,11 +9,13 @@ import UIKit
 import SnapKit
 
 class PersonCollectionViewCell: UICollectionViewCell {
-    static let cellId = "Person"
+    static let cellId = "PersonId"
     
     lazy var imageView = {
         let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
-        img.layer.cornerRadius = 100.0
+        img.layer.cornerRadius = 100
+        img.clipsToBounds = true
+        img.contentMode = .scaleAspectFit
         return img
     }()
     
@@ -36,7 +38,7 @@ class PersonCollectionViewCell: UICollectionViewCell {
     lazy var verticalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.title, self.subTitle])
         stackView.axis = .vertical
-        
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -53,12 +55,17 @@ class PersonCollectionViewCell: UICollectionViewCell {
     }
     
     override init(frame: CGRect) {
+        Log.debug("INIT COLLECTION")
         super.init(frame: frame)
         drawUI()
     }
     
     func drawUI() {
         self.addSubview(self.horizontalStackView)
+        self.imageView.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+        }
         
         self.horizontalStackView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(self)

@@ -7,6 +7,8 @@
 
 import UIKit
 import RxCocoa
+import RxSwift
+
 
 class DetailViewController: BaseViewController, ViewModelBindable {
     var viewModel: DetailViewModel!
@@ -71,8 +73,15 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         return seg
     }()
     
-    lazy var infoStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.posterImage, self.titleLabel, self.subtitleLabel, self.watchBtn, self.descriptionLabel, self.segment])
+    lazy var infoStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            self.posterImage,
+            self.titleLabel,
+            self.subtitleLabel,
+            self.watchBtn,
+            self.descriptionLabel,
+            self.segment,
+        ])
         stackView.axis = .vertical
         stackView.spacing = 15
         stackView.alignment = .center
@@ -82,28 +91,86 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     
     
-    lazy var personCollectionView = {
-        
+    lazy var personCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let size = (view.frame.width - 20)
-        flowLayout.itemSize.width = size
+        flowLayout.itemSize.width = size * 0.9
+        flowLayout.itemSize.height = 80
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isPagingEnabled = true
         collectionView.register(PersonCollectionViewCell.self, forCellWithReuseIdentifier: PersonCollectionViewCell.cellId)
+        
         return collectionView
     }()
     
-    lazy var reviewTableView = {
+    lazy var reviewTableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell.cellId)
         return tableView
     }()
     
+    
+    
     lazy var contentsView = {
-        let stack = UIStackView(arrangedSubviews: [self.personCollectionView, self.reviewTableView])
-        stack.axis = .vertical
+        let red = UIView(frame: .zero)
+        red.backgroundColor = .red
+        let orange = UIView(frame: .zero)
+        orange.backgroundColor = .orange
+        let yellow = UIView(frame: .zero)
+        yellow.backgroundColor = .yellow
+        let green = UIView(frame: .zero)
+        green.backgroundColor = .green
+        let blue = UIView(frame: .zero)
+        blue.backgroundColor = .blue
+        let navy = UIView(frame: .zero)
+        navy.backgroundColor = .systemTeal
+        let purple = UIView(frame: .zero)
+        purple.backgroundColor = .purple
         
+        red.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        red.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        orange.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        yellow.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        green.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        blue.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        navy.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        purple.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(200)
+        }
+        
+        
+        
+//        let stack = UIStackView(arrangedSubviews: [self.personCollectionView, self.reviewTableView])
+        self.personCollectionView.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width)
+        }
+        let stack = UIStackView(arrangedSubviews: [self.personCollectionView, red, blue, yellow, green, blue, navy, purple])
+        stack.axis = .vertical
         return stack
     }()
     
@@ -114,10 +181,10 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     
     lazy var scrollView = {
-        let view = UIScrollView(frame: .zero)
-        view.addSubview(self.infoStackView)
-//        view.addSubview(self.contentsView)
-        return view
+        let scroll = UIScrollView(frame: .zero)
+        scroll.addSubview(self.infoStackView)
+        scroll.addSubview(self.personCollectionView)
+        return scroll
     }()
     
     override func viewDidLoad() {
@@ -156,17 +223,19 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     }
     
     func wirePersonCollection () {
-        self.viewModel.personSubject.bind(to: self.personCollectionView.rx.items(cellIdentifier: PersonCollectionViewCell.cellId, cellType: PersonCollectionViewCell.self )) {
-            (row, element, cell) in
-            
-            cell.title.text = "TEXT"
-            cell.subTitle.text = "SUBTITLE"
-            Log.debug("PERSONCOLLECTION")
-            
-        }.disposed(by: rx.disposeBag)
+        Log.debug("WIRE_PERSON")
+
+        self.viewModel.personSubject.map{
+            return [PersonSection(type: "Notice", items: $0)]
+        }
+        .bind(to: self.personCollectionView.rx.items(dataSource: viewModel.personDataSource))
+        .disposed(by: rx.disposeBag)
+        
+
     }
     
     func wireReviewTable () {
+        Log.debug("WIRE_REVIEW")
         self.viewModel.reviewSubject.bind(to: self.reviewTableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType:ReviewTableViewCell.self)) {
             (row, element, cell) in
             Log.debug("REVIEWTALBE")
@@ -175,7 +244,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     func wireViewModel() {
         self.wirePersonCollection()
-        self.wireReviewTable()
+//       self.wireReviewTable()
         
         self.viewModel.segmentIndex
             .subscribe{
@@ -191,60 +260,58 @@ class DetailViewController: BaseViewController, ViewModelBindable {
                 }
             }
         }.disposed(by: rx.disposeBag)
-        
+
         self.segment.selectedSegmentIndex = 0
         self.viewModel.segmentIndex.onNext(0)
     }
-    
+  
     func setConstraints() {
-        self.infoStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(self.scrollView)
-        }
-        
         self.posterImage.snp.makeConstraints { make in
             make.width.equalTo(200)
             make.height.equalTo(250)
         }
-        
+
         self.titleLabel.snp.makeConstraints { make in
             make.width.equalTo(view).offset(-15)
         }
-        
+
         self.subtitleLabel.snp.makeConstraints { make in
             make.width.equalTo(view).offset(-15)
         }
-        
+
         self.descriptionLabel.snp.makeConstraints { make in
             make.width.equalTo(view).offset(-15)
         }
-        
+
         self.segment.snp.makeConstraints { make in
             make.width.equalTo(self.scrollView)
         }
-        
+
         self.watchBtn.snp.makeConstraints { make in
             make.width.equalTo( self.infoStackView ).multipliedBy( 0.9 )
             make.height.equalTo(50)
             make.centerX.equalTo(self.scrollView)
         }
-        
+
         self.watchBtn.titleLabel!.snp.makeConstraints{ make in
             make.width.equalTo(self.watchBtn)
             make.height.equalTo(50)
         }
-//        
-//        self.contentsView.snp.makeConstraints { make in
-//            make.top.equalTo(self.infoStackView.snp.bottom).offset(15)
-//            make.leading.trailing.equalTo(self.scrollView)
-//        }
-        
-        self.scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.layoutMarginsGuide)
-            make.leading.trailing.bottom.equalTo(view)
+
+        self.infoStackView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(self.scrollView)
+        }
+
+        self.personCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(self.infoStackView.snp.bottom).offset(20)
+            make.leading.trailing.bottom.equalTo(self.scrollView)
+            make.height.equalTo(250)
         }
         
-        
-     
+        self.scrollView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view)
+        }
+
     }
     
     func prepareUI() {
