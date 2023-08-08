@@ -94,14 +94,18 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     lazy var personCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let size = (view.frame.width - 20)
-        flowLayout.itemSize.width = size * 0.9
+        flowLayout.itemSize.width = size
         flowLayout.itemSize.height = 80
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.minimumInteritemSpacing = 10
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.isPagingEnabled = true
         collectionView.register(PersonCollectionViewCell.self, forCellWithReuseIdentifier: PersonCollectionViewCell.cellId)
+        collectionView.register(PersonCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonCollectionViewHeader.cellId)
+            
         
         return collectionView
     }()
@@ -226,7 +230,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         Log.debug("WIRE_PERSON")
 
         self.viewModel.personSubject.map{
-            return [PersonSection(type: "Notice", items: $0)]
+            return [PersonSection(type: "감독/출연", items: $0)]
         }
         .bind(to: self.personCollectionView.rx.items(dataSource: viewModel.personDataSource))
         .disposed(by: rx.disposeBag)
@@ -305,7 +309,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         self.personCollectionView.snp.makeConstraints { make in
             make.top.equalTo(self.infoStackView.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalTo(self.scrollView)
-            make.height.equalTo(250)
+            make.height.equalTo(200)
         }
         
         self.scrollView.snp.makeConstraints { make in

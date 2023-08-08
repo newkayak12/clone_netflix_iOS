@@ -63,8 +63,8 @@ class PersonCollectionViewCell: UICollectionViewCell {
     func drawUI() {
         self.addSubview(self.horizontalStackView)
         self.imageView.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.height.equalTo(100)
+            make.width.equalTo(80)
+            make.height.equalTo(80)
         }
         
         self.horizontalStackView.snp.makeConstraints { make in

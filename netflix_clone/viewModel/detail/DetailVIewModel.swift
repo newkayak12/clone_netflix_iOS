@@ -26,22 +26,27 @@ class DetailViewModel: ViewModelType {
     var contentDetailSubject: BehaviorSubject<[ContentDetail]> = BehaviorSubject(value: [])
     
     public var personDataSource: RxCollectionViewSectionedReloadDataSource<PersonSection> = {
-        let datasource = RxCollectionViewSectionedReloadDataSource<PersonSection> (configureCell:{ _, collectionView, indexPath, item in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.cellId, for: indexPath) as! PersonCollectionViewCell
-            cell.title.text = "TITLE"
-            cell.subTitle.text = "SUBTITLE"
-            return cell
-        }, configureSupplementaryView: { _, collectionView, kind, indexPath  -> UICollectionReusableView in
-            switch kind {
-                case UICollectionView.elementKindSectionHeader:
-                    let view: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HEADER", for: indexPath)
-                    return view;
-                default: fatalError()
-            }
+        let dataSource = RxCollectionViewSectionedReloadDataSource<PersonSection> (
             
-        })
-        
-        return datasource
+            configureCell: { _, collectionView, indexPath, item in
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCollectionViewCell.cellId, for: indexPath) as! PersonCollectionViewCell
+                cell.title.text = "TITLE"
+                cell.subTitle.text = "SUBTITLE"
+                return cell
+            },
+            configureSupplementaryView: { datasource, collectionView, kind, indexPath  in
+                Log.error("?")
+                guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonCollectionViewHeader.cellId, for: indexPath) as? PersonCollectionViewHeader else {
+                    return UICollectionReusableView()
+                }
+                let section = datasource.sectionModels[indexPath.row].type
+                header.setTitle(title: section)
+                
+                return header
+            }
+        )
+        Log.debug("??????????????????????????", ">>>>>>>>>>>>>>>>>>>.")
+        return dataSource
     }()
     
     var contentsNo: Int?

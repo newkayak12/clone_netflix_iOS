@@ -92,6 +92,7 @@
 		7EF35FCB2A7A8A550092F7BE /* DetailVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FCA2A7A8A550092F7BE /* DetailVIewModel.swift */; };
 		7EF35FD02A7F99CA0092F7BE /* PersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FCF2A7F99CA0092F7BE /* PersonCollectionViewCell.swift */; };
 		7EF35FD22A7F9D490092F7BE /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */; };
+		7EF35FD62A827B320092F7BE /* PersonCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +196,7 @@
 		7EF35FCA2A7A8A550092F7BE /* DetailVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVIewModel.swift; sourceTree = "<group>"; };
 		7EF35FCF2A7F99CA0092F7BE /* PersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -739,6 +741,7 @@
 			children = (
 				7EF35FCF2A7F99CA0092F7BE /* PersonCollectionViewCell.swift */,
 				7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */,
+				7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				7E1D97BB2A5AE65400E91650 /* NoticeViewController.swift in Sources */,
 				7EBBBC162A582BB200C4999C /* SearchViewController.swift in Sources */,
 				7E1D97B52A5ACD4B00E91650 /* CategoryCell.swift in Sources */,
+				7EF35FD62A827B320092F7BE /* PersonCollectionViewHeader.swift in Sources */,
 				7EF35FC92A7A8A2F0092F7BE /* DetailViewController.swift in Sources */,
 				7EBBBC1F2A582CF000C4999C /* StartViewModel.swift in Sources */,
 				7EF35FCB2A7A8A550092F7BE /* DetailVIewModel.swift in Sources */,
