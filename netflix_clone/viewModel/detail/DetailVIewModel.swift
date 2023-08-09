@@ -67,6 +67,16 @@ class DetailViewModel: ViewModelType {
         reviews.append(contentsOf: [
             Comment(), Comment(), Comment(), Comment(), Comment(),
             Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
+            Comment(), Comment(), Comment(), Comment(), Comment(),
         ])
         reviewSubject.onNext(reviews)
     }

@@ -12,7 +12,8 @@ class ReviewTableViewCell: UITableViewCell {
     
     lazy var profileView = {
         let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
-        img.layer.cornerRadius = 100
+        img.layer.cornerRadius = 50
+        img.clipsToBounds = true
         
         return img
     }()
@@ -93,6 +94,8 @@ class ReviewTableViewCell: UITableViewCell {
     
     lazy var nickStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.nicknameView, self.starView])
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .leading
         stackView.axis = .horizontal
         return stackView
     }()
@@ -100,13 +103,17 @@ class ReviewTableViewCell: UITableViewCell {
     
     lazy var verticalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.nickStackView, self.comment])
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
+        stackView.spacing = 10
         return stackView
     }()
     
     lazy var horizontalStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.profileView, self.verticalStackView])
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .leading
         stackView.axis = .horizontal
+        stackView.spacing = 20
         
         return stackView
     }()
@@ -123,7 +130,32 @@ class ReviewTableViewCell: UITableViewCell {
     
     func drawUI () {
         self.addSubview(self.horizontalStackView)
+        self.profileView.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+        }
         
+        self.comment.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+        self.first.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
+        
+        self.second.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
+        
+        self.third.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
+        
+        self.fourth.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
+        
+        self.fifth.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
         self.horizontalStackView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(self)
         }

@@ -93,6 +93,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     lazy var personCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
+//        flowLayout.headerReferenceSize = CGSize(width: 100, height: 100)
         let size = (view.frame.width - 20)
         flowLayout.itemSize.width = size
         flowLayout.itemSize.height = 80
@@ -103,80 +104,41 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.isPagingEnabled = true
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(PersonCollectionViewCell.self, forCellWithReuseIdentifier: PersonCollectionViewCell.cellId)
         collectionView.register(PersonCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonCollectionViewHeader.cellId)
-            
-        
         return collectionView
     }()
     
+    lazy var personStackView = {
+        let label = UILabel(frame: .zero)
+        label.text = "감독/출연진"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        let stack = UIStackView(arrangedSubviews: [label, self.personCollectionView])
+        stack.axis = .vertical
+        stack.spacing = 20
+        return stack
+    }()
+    
     lazy var reviewTableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
+        let tableView = ReviewTableView(frame: .zero)
         tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell.cellId)
+        tableView.isScrollEnabled = false
+        tableView.rowHeight = 150
         return tableView
     }()
     
-    
-    
-    lazy var contentsView = {
-        let red = UIView(frame: .zero)
-        red.backgroundColor = .red
-        let orange = UIView(frame: .zero)
-        orange.backgroundColor = .orange
-        let yellow = UIView(frame: .zero)
-        yellow.backgroundColor = .yellow
-        let green = UIView(frame: .zero)
-        green.backgroundColor = .green
-        let blue = UIView(frame: .zero)
-        blue.backgroundColor = .blue
-        let navy = UIView(frame: .zero)
-        navy.backgroundColor = .systemTeal
-        let purple = UIView(frame: .zero)
-        purple.backgroundColor = .purple
-        
-        red.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        red.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        orange.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        yellow.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        green.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        blue.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        navy.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        purple.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-            make.height.equalTo(200)
-        }
-        
-        
-        
-//        let stack = UIStackView(arrangedSubviews: [self.personCollectionView, self.reviewTableView])
-        self.personCollectionView.snp.makeConstraints { make in
-            make.width.equalTo(view.frame.width)
-        }
-        let stack = UIStackView(arrangedSubviews: [self.personCollectionView, red, blue, yellow, green, blue, navy, purple])
+    lazy var reviewStackView = {
+        let label = UILabel(frame: .zero)
+        label.text = "리뷰"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        let stack = UIStackView(arrangedSubviews: [label, self.reviewTableView])
         stack.axis = .vertical
+        stack.spacing = 20
         return stack
     }()
+    
     
     
     lazy var contentsDetailTable = {
@@ -184,10 +146,17 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     }()
     
     
+    lazy var scrollStack = {
+        let stack  = UIStackView(arrangedSubviews: [self.infoStackView,self.personStackView,self.reviewStackView])
+        stack.axis = .vertical
+        stack.spacing = 30
+        return stack
+    }()
+    
+    
     lazy var scrollView = {
         let scroll = UIScrollView(frame: .zero)
-        scroll.addSubview(self.infoStackView)
-        scroll.addSubview(self.personCollectionView)
+        scroll.addSubview(self.scrollStack)
         return scroll
     }()
     
@@ -240,6 +209,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     func wireReviewTable () {
         Log.debug("WIRE_REVIEW")
+        
         self.viewModel.reviewSubject.bind(to: self.reviewTableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType:ReviewTableViewCell.self)) {
             (row, element, cell) in
             Log.debug("REVIEWTALBE")
@@ -247,8 +217,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     }
     
     func wireViewModel() {
-        self.wirePersonCollection()
-//       self.wireReviewTable()
+       self.wirePersonCollection()
+       self.wireReviewTable()
         
         self.viewModel.segmentIndex
             .subscribe{
@@ -263,7 +233,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
                     self.viewModel.fetchContentsDetail()
                 }
             }
-        }.disposed(by: rx.disposeBag)
+        }
+            .disposed(by: rx.disposeBag)
 
         self.segment.selectedSegmentIndex = 0
         self.viewModel.segmentIndex.onNext(0)
@@ -302,18 +273,28 @@ class DetailViewController: BaseViewController, ViewModelBindable {
             make.height.equalTo(50)
         }
 
-        self.infoStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(self.scrollView)
+//        self.infoStackView.snp.makeConstraints { make in
+//            make.top.leading.trailing.equalTo(self.scrollView)
+//        }
+//
+        self.personStackView.snp.makeConstraints { make in
+//            make.top.equalTo(self.infoStackView.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(self.scrollStack)
+            make.height.greaterThanOrEqualTo(300)
         }
-
-        self.personCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.infoStackView.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalTo(self.scrollView)
-            make.height.equalTo(200)
-        }
+//        
+//        
+//        self.reviewStackView.snp.makeConstraints { make in
+//            make.top.equalTo(self.personStackView.snp.bottom).offset(20)
+//            make.leading.trailing.equalTo(self.scrollView)
+//            make.height.greaterThanOrEqualTo(200)
+//        }
         
+        self.scrollStack.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(self.scrollView)
+        }
         self.scrollView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalTo(view)
+            make.top.bottom.leading.trailing.equalTo(view)
         }
 
     }

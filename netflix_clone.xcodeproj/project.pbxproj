@@ -93,6 +93,7 @@
 		7EF35FD02A7F99CA0092F7BE /* PersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FCF2A7F99CA0092F7BE /* PersonCollectionViewCell.swift */; };
 		7EF35FD22A7F9D490092F7BE /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */; };
 		7EF35FD62A827B320092F7BE /* PersonCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */; };
+		7EF35FD82A83BD6F0092F7BE /* ReviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FD72A83BD6F0092F7BE /* ReviewTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +198,7 @@
 		7EF35FCF2A7F99CA0092F7BE /* PersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewHeader.swift; sourceTree = "<group>"; };
+		7EF35FD72A83BD6F0092F7BE /* ReviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -742,6 +744,7 @@
 				7EF35FCF2A7F99CA0092F7BE /* PersonCollectionViewCell.swift */,
 				7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */,
 				7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */,
+				7EF35FD72A83BD6F0092F7BE /* ReviewTableView.swift */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				7EBBBC472A590A5100C4999C /* Analyze.swift in Sources */,
 				7EC697DF2A6179C2006F3F22 /* Step2ViewModel.swift in Sources */,
 				7EBBBC212A582CF500C4999C /* MyViewModel.swift in Sources */,
+				7EF35FD82A83BD6F0092F7BE /* ReviewTableView.swift in Sources */,
 				7EBBBC3B2A5909EA00C4999C /* Watched.swift in Sources */,
 				7EBBBC2A2A58399E00C4999C /* MobileDeviceInfo.swift in Sources */,
 				7EC697E32A617A81006F3F22 /* Step2ViewController.swift in Sources */,
