@@ -142,12 +142,25 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     
     lazy var contentsDetailTable = {
-        
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(ContentsTableViewCell.self, forCellReuseIdentifier: ContentsTableViewCell.cellId)
+        tableView.isScrollEnabled = false
+        tableView.rowHeight = 150
+        return tableView
+    }()
+    
+    lazy var contentsStackView = {
+        let label = UILabel(frame: .zero)
+        label.text = "회차 정보"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        let stack = UIStackView(arrangedSubviews: [label, self.contentsDetailTable])
+                                                   
+        return stack
     }()
     
     
     lazy var scrollStack = {
-        let stack  = UIStackView(arrangedSubviews: [self.infoStackView,self.personStackView,self.reviewStackView])
+        let stack  = UIStackView(arrangedSubviews: [self.infoStackView,self.personStackView,self.reviewStackView, self.contentsStackView])
         stack.axis = .vertical
         stack.spacing = 30
         return stack
@@ -159,6 +172,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         scroll.addSubview(self.scrollStack)
         return scroll
     }()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,19 +231,33 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         }.disposed(by: rx.disposeBag)
     }
     
+    func wireContentsDetailTable () {
+        self.viewModel.contentDetailSubject
+            .map{ return [ContentsDetailSection(type: "\($0.count)개", items: $0)]}
+            .bind(to: self.contentsDetailTable.rx.items(dataSource: viewModel.contnentsDetailDataSource))
+            .disposed(by: rx.disposeBag)
+    }
+    
     func wireViewModel() {
        self.wirePersonCollection()
        self.wireReviewTable()
+       self.wireContentsDetailTable()
         
         self.viewModel.segmentIndex
             .subscribe{
+                self.personStackView.isHidden = true
+                self.reviewStackView.isHidden = true
+                self.contentsStackView.isHidden = true
                 if let idx = $0.element {
                     Log.debug(">>>>>>", idx)
                 if idx == 0 {
+                    self.personStackView.isHidden = false
+                    self.reviewStackView.isHidden = false
                     Log.debug("SEGMENT", 0)
                     self.viewModel.fetchPerson()
                     self.viewModel.fetchReview()
                 } else if idx == 1 {
+                    self.contentsStackView.isHidden = false
                     Log.debug("SEGMENT", 1)
                     self.viewModel.fetchContentsDetail()
                 }

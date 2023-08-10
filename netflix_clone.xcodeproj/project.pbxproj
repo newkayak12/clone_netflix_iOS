@@ -38,6 +38,7 @@
 		7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6BE2A502C8200FB806C /* ViewModelBindable.swift */; };
 		7E5BD6C32A502E8800FB806C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C22A502E8800FB806C /* HomeViewController.swift */; };
 		7E5BD6C62A502EF100FB806C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C52A502EF100FB806C /* HomeViewModel.swift */; };
+		7E9807752A850F1700095880 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807742A850F1700095880 /* ContentsTableViewCell.swift */; };
 		7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC082A56E8D600C4999C /* Preview.swift */; };
 		7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC0E2A56F63600C4999C /* BannerCell.swift */; };
 		7EBBBC122A5829EE00C4999C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC112A5829EE00C4999C /* MainViewController.swift */; };
@@ -140,6 +141,7 @@
 		7E5BD6BE2A502C8200FB806C /* ViewModelBindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindable.swift; sourceTree = "<group>"; };
 		7E5BD6C22A502E8800FB806C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7E5BD6C52A502EF100FB806C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7E9807742A850F1700095880 /* ContentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewCell.swift; sourceTree = "<group>"; };
 		7EBBBC082A56E8D600C4999C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7EBBBC0E2A56F63600C4999C /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		7EBBBC112A5829EE00C4999C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -745,6 +747,7 @@
 				7EF35FD12A7F9D490092F7BE /* ReviewTableViewCell.swift */,
 				7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */,
 				7EF35FD72A83BD6F0092F7BE /* ReviewTableView.swift */,
+				7E9807742A850F1700095880 /* ContentsTableViewCell.swift */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -965,6 +968,7 @@
 				7EBBBC3B2A5909EA00C4999C /* Watched.swift in Sources */,
 				7EBBBC2A2A58399E00C4999C /* MobileDeviceInfo.swift in Sources */,
 				7EC697E32A617A81006F3F22 /* Step2ViewController.swift in Sources */,
+				7E9807752A850F1700095880 /* ContentsTableViewCell.swift in Sources */,
 				7EBBBC312A583D9800C4999C /* Ticket.swift in Sources */,
 				7EF35FD02A7F99CA0092F7BE /* PersonCollectionViewCell.swift in Sources */,
 				7EC697E82A617B31006F3F22 /* IdInput.swift in Sources */,

@@ -45,10 +45,21 @@ class DetailViewModel: ViewModelType {
                 return header
             }
         )
-        Log.debug("??????????????????????????", ">>>>>>>>>>>>>>>>>>>.")
         return dataSource
     }()
     
+    public var contnentsDetailDataSource: RxTableViewSectionedReloadDataSource<ContentsDetailSection> = {
+        let dataSource = RxTableViewSectionedReloadDataSource<ContentsDetailSection> { dataSource, table, IndexPath, item in
+            let cell =  table.dequeueReusableCell(withIdentifier: ContentsTableViewCell.cellId) as! ContentsTableViewCell
+            cell.textLabel?.text = item.subTitle
+            return cell
+        } titleForHeaderInSection: { dataSource, number in
+            return "0개"
+        }
+
+        Log.error(">>>>>>>>")
+        return dataSource
+    }()
     var contentsNo: Int?
     
     init(title: String, service: Service) {
@@ -83,18 +94,36 @@ class DetailViewModel: ViewModelType {
     
     func fetchContentsDetail () {
         Log.warning("fetchContentsDetail")
-        contentsDetails.append(contentsOf: [ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail()])
+        contentsDetails.append(contentsOf: [
+                                                    ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(),
+                                                    ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(),
+                                                    ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(), ContentDetail(),
+                                           ])
         contentDetailSubject.onNext(contentsDetails)
     }
     
     
 }
+
+
 struct PersonSection {
     var type: String
     var items: [Person]
 }
 extension PersonSection: SectionModelType {
     init(original: PersonSection, items: [Person]) {
+        self = original
+        self.items = items
+    }
+}
+
+
+struct ContentsDetailSection {
+    var type: String
+    var items: [ContentDetail]
+}
+extension ContentsDetailSection: SectionModelType {
+    init(original: ContentsDetailSection, items: [ContentDetail]) {
         self = original
         self.items = items
     }

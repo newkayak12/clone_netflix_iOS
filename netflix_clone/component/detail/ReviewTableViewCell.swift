@@ -137,6 +137,7 @@ class ReviewTableViewCell: UITableViewCell {
         self.comment.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
+        
         self.first.snp.makeConstraints { make in
             make.width.height.equalTo(20)
         }
