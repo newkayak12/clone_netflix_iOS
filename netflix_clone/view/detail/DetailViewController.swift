@@ -15,7 +15,6 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     lazy var posterImage = {
         let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
-        
         img.contentMode = .scaleAspectFit
         return img
     }()
@@ -142,10 +141,10 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     
     lazy var contentsDetailTable = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = ContentsTableView(frame: .zero)
         tableView.register(ContentsTableViewCell.self, forCellReuseIdentifier: ContentsTableViewCell.cellId)
         tableView.isScrollEnabled = false
-        tableView.rowHeight = 150
+        tableView.rowHeight = 100
         return tableView
     }()
     
@@ -154,7 +153,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         label.text = "회차 정보"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         let stack = UIStackView(arrangedSubviews: [label, self.contentsDetailTable])
-                                                   
+        stack.axis = .vertical
         return stack
     }()
     
@@ -233,8 +232,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     func wireContentsDetailTable () {
         self.viewModel.contentDetailSubject
-            .map{ return [ContentsDetailSection(type: "\($0.count)개", items: $0)]}
-            .bind(to: self.contentsDetailTable.rx.items(dataSource: viewModel.contnentsDetailDataSource))
+            .map{ [ContentsDetailSection(type: "\($0.count)개", items: $0)] }
+            .bind(to: self.contentsDetailTable.rx.items(dataSource: self.viewModel.contnentsDetailDataSource))
             .disposed(by: rx.disposeBag)
     }
     
@@ -302,26 +301,15 @@ class DetailViewController: BaseViewController, ViewModelBindable {
             make.height.equalTo(50)
         }
 
-//        self.infoStackView.snp.makeConstraints { make in
-//            make.top.leading.trailing.equalTo(self.scrollView)
-//        }
-//
         self.personStackView.snp.makeConstraints { make in
-//            make.top.equalTo(self.infoStackView.snp.bottom).offset(20)
             make.leading.trailing.equalTo(self.scrollStack)
             make.height.greaterThanOrEqualTo(300)
         }
-//        
-//        
-//        self.reviewStackView.snp.makeConstraints { make in
-//            make.top.equalTo(self.personStackView.snp.bottom).offset(20)
-//            make.leading.trailing.equalTo(self.scrollView)
-//            make.height.greaterThanOrEqualTo(200)
-//        }
         
         self.scrollStack.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalTo(self.scrollView)
         }
+        
         self.scrollView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalTo(view)
         }

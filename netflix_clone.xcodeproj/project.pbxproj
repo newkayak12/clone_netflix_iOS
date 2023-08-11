@@ -39,6 +39,7 @@
 		7E5BD6C32A502E8800FB806C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C22A502E8800FB806C /* HomeViewController.swift */; };
 		7E5BD6C62A502EF100FB806C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C52A502EF100FB806C /* HomeViewModel.swift */; };
 		7E9807752A850F1700095880 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807742A850F1700095880 /* ContentsTableViewCell.swift */; };
+		7E9807772A864D4700095880 /* ContentsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807762A864D4700095880 /* ContentsTableView.swift */; };
 		7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC082A56E8D600C4999C /* Preview.swift */; };
 		7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC0E2A56F63600C4999C /* BannerCell.swift */; };
 		7EBBBC122A5829EE00C4999C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC112A5829EE00C4999C /* MainViewController.swift */; };
@@ -142,6 +143,7 @@
 		7E5BD6C22A502E8800FB806C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7E5BD6C52A502EF100FB806C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7E9807742A850F1700095880 /* ContentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewCell.swift; sourceTree = "<group>"; };
+		7E9807762A864D4700095880 /* ContentsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableView.swift; sourceTree = "<group>"; };
 		7EBBBC082A56E8D600C4999C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7EBBBC0E2A56F63600C4999C /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		7EBBBC112A5829EE00C4999C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 				7EF35FD52A827B320092F7BE /* PersonCollectionViewHeader.swift */,
 				7EF35FD72A83BD6F0092F7BE /* ReviewTableView.swift */,
 				7E9807742A850F1700095880 /* ContentsTableViewCell.swift */,
+				7E9807762A864D4700095880 /* ContentsTableView.swift */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -926,6 +929,7 @@
 				7EF35FC22A7543550092F7BE /* RatingTableViewCell.swift in Sources */,
 				7E05342C2A66C86000C28837 /* BaseNavigationController.swift in Sources */,
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,
+				7E9807772A864D4700095880 /* ContentsTableView.swift in Sources */,
 				7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */,
 				7E1D97B32A5A87F400E91650 /* RankCell.swift in Sources */,
 				7E0534342A6965F100C28837 /* SearchResultViewController.swift in Sources */,

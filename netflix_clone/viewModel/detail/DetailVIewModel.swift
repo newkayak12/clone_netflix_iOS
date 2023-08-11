@@ -35,7 +35,6 @@ class DetailViewModel: ViewModelType {
                 return cell
             },
             configureSupplementaryView: { datasource, collectionView, kind, indexPath  in
-                Log.error("?")
                 guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonCollectionViewHeader.cellId, for: indexPath) as? PersonCollectionViewHeader else {
                     return UICollectionReusableView()
                 }
@@ -51,7 +50,8 @@ class DetailViewModel: ViewModelType {
     public var contnentsDetailDataSource: RxTableViewSectionedReloadDataSource<ContentsDetailSection> = {
         let dataSource = RxTableViewSectionedReloadDataSource<ContentsDetailSection> { dataSource, table, IndexPath, item in
             let cell =  table.dequeueReusableCell(withIdentifier: ContentsTableViewCell.cellId) as! ContentsTableViewCell
-            cell.textLabel?.text = item.subTitle
+            
+            Log.info("???????")
             return cell
         } titleForHeaderInSection: { dataSource, number in
             return "0개"
