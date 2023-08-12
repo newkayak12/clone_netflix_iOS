@@ -107,6 +107,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(PersonCollectionViewCell.self, forCellWithReuseIdentifier: PersonCollectionViewCell.cellId)
         collectionView.register(PersonCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonCollectionViewHeader.cellId)
+        
+        collectionView.isUserInteractionEnabled = true
         return collectionView
     }()
     
@@ -125,6 +127,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell.cellId)
         tableView.isScrollEnabled = false
         tableView.rowHeight = 150
+        tableView.isUserInteractionEnabled = false
         return tableView
     }()
     
@@ -219,6 +222,14 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         .disposed(by: rx.disposeBag)
         
 
+        
+        self.personCollectionView.rx
+            .itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: {
+                Log.warning("COLLECTION SELECTED", $1)
+                $0.personCollectionView.deselectItem(at: $1, animated: true)
+            }).disposed(by: rx.disposeBag)
     }
     
     func wireReviewTable () {
@@ -234,6 +245,14 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         self.viewModel.contentDetailSubject
             .map{ [ContentsDetailSection(type: "\($0.count)개", items: $0)] }
             .bind(to: self.contentsDetailTable.rx.items(dataSource: self.viewModel.contnentsDetailDataSource))
+            .disposed(by: rx.disposeBag)
+        
+        
+        self.contentsDetailTable.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: {
+                $0.contentsDetailTable.deselectRow(at: $1, animated: true)
+            })
             .disposed(by: rx.disposeBag)
     }
     

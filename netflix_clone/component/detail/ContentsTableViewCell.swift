@@ -31,6 +31,7 @@ class ContentsTableViewCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.text = "회차 이름"
         label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         
         return label
     }()
@@ -47,7 +48,7 @@ class ContentsTableViewCell: UITableViewCell {
         let stackView = UIStackView(arrangedSubviews: [self.titleLabel, self.durationLabel])
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
