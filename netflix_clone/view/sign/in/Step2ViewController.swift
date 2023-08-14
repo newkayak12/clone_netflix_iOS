@@ -90,6 +90,7 @@ class Step2ViewController: BaseViewController, ViewModelBindable {
     func fnBackBtn() {
         navigationController?.popViewController(animated: true)
     }
+    
     @objc
     func fnNextBtn() {
         let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])(?=.*[0-9])[A-Za-z\\d$@$!%*?&]{8}"

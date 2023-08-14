@@ -95,7 +95,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
 //        flowLayout.headerReferenceSize = CGSize(width: 100, height: 100)
         let size = (view.frame.width - 20)
         flowLayout.itemSize.width = size
-        flowLayout.itemSize.height = 80
+        flowLayout.itemSize.height = 60
         flowLayout.scrollDirection = .horizontal
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         flowLayout.minimumLineSpacing = 10
@@ -202,6 +202,7 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         bell.tintColor = .white
         
         
+        
         self.navigationItem.rightBarButtonItems = [share, bell]
         
         
@@ -229,6 +230,11 @@ class DetailViewController: BaseViewController, ViewModelBindable {
             .subscribe(onNext: {
                 Log.warning("COLLECTION SELECTED", $1)
                 $0.personCollectionView.deselectItem(at: $1, animated: true)
+                
+                var viewController = PersonViewController()
+                viewController.bind(viewModel: PersonViewModel(title: "인물이름", service: self.viewModel.service))
+                viewController.viewModel.fetchPersonContents()
+                self.navigationController?.pushViewController(viewController, animated: true)
             }).disposed(by: rx.disposeBag)
     }
     

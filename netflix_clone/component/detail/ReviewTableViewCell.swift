@@ -12,7 +12,7 @@ class ReviewTableViewCell: UITableViewCell {
     
     lazy var profileView = {
         let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
-        img.layer.cornerRadius = 50
+        img.layer.cornerRadius = 20
         img.clipsToBounds = true
         
         return img

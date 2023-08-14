@@ -40,6 +40,9 @@
 		7E5BD6C62A502EF100FB806C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BD6C52A502EF100FB806C /* HomeViewModel.swift */; };
 		7E9807752A850F1700095880 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807742A850F1700095880 /* ContentsTableViewCell.swift */; };
 		7E9807772A864D4700095880 /* ContentsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807762A864D4700095880 /* ContentsTableView.swift */; };
+		7E98077B2A8A50CD00095880 /* PersonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98077A2A8A50CD00095880 /* PersonViewModel.swift */; };
+		7E98077D2A8A515200095880 /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98077C2A8A515200095880 /* PersonViewController.swift */; };
+		7E9807802A8A544600095880 /* PersonContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98077F2A8A544600095880 /* PersonContentsCollectionViewCell.swift */; };
 		7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC082A56E8D600C4999C /* Preview.swift */; };
 		7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC0E2A56F63600C4999C /* BannerCell.swift */; };
 		7EBBBC122A5829EE00C4999C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC112A5829EE00C4999C /* MainViewController.swift */; };
@@ -144,6 +147,9 @@
 		7E5BD6C52A502EF100FB806C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7E9807742A850F1700095880 /* ContentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewCell.swift; sourceTree = "<group>"; };
 		7E9807762A864D4700095880 /* ContentsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableView.swift; sourceTree = "<group>"; };
+		7E98077A2A8A50CD00095880 /* PersonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewModel.swift; sourceTree = "<group>"; };
+		7E98077C2A8A515200095880 /* PersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person\U001bViewController.swift"; sourceTree = "<group>"; };
+		7E98077F2A8A544600095880 /* PersonContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonContentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EBBBC082A56E8D600C4999C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7EBBBC0E2A56F63600C4999C /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		7EBBBC112A5829EE00C4999C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +343,7 @@
 		7E5BD6912A4B1A9A00FB806C /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7E9807792A8A50C500095880 /* person */,
 				7EF35FC72A7A8A1A0092F7BE /* detail */,
 				7EC697D92A617898006F3F22 /* sign */,
 				7E1D97B72A5AE61B00E91650 /* notice */,
@@ -351,6 +358,7 @@
 		7E5BD6922A4B1AA000FB806C /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7E9807782A8A4F8A00095880 /* person */,
 				7EF35FC62A7A8A140092F7BE /* detail */,
 				7EC697D62A617720006F3F22 /* sign */,
 				7E1D97B62A5AE60F00E91650 /* notice */,
@@ -444,9 +452,34 @@
 			path = home;
 			sourceTree = "<group>";
 		};
+		7E9807782A8A4F8A00095880 /* person */ = {
+			isa = PBXGroup;
+			children = (
+				7E98077C2A8A515200095880 /* PersonViewController.swift */,
+			);
+			path = person;
+			sourceTree = "<group>";
+		};
+		7E9807792A8A50C500095880 /* person */ = {
+			isa = PBXGroup;
+			children = (
+				7E98077A2A8A50CD00095880 /* PersonViewModel.swift */,
+			);
+			path = person;
+			sourceTree = "<group>";
+		};
+		7E98077E2A8A542700095880 /* person */ = {
+			isa = PBXGroup;
+			children = (
+				7E98077F2A8A544600095880 /* PersonContentsCollectionViewCell.swift */,
+			);
+			path = person;
+			sourceTree = "<group>";
+		};
 		7EBBBC0C2A56F61C00C4999C /* component */ = {
 			isa = PBXGroup;
 			children = (
+				7E98077E2A8A542700095880 /* person */,
 				7EF35FCC2A7F99AF0092F7BE /* detail */,
 				7EF35FC32A7934B60092F7BE /* my */,
 				7EF35FC02A7543480092F7BE /* star */,
@@ -911,6 +944,7 @@
 				7E4A81E82A712BB60062477E /* SearchPersonCollectionViewCell.swift in Sources */,
 				7EBBBC492A5910AE00C4999C /* ContentPerson.swift in Sources */,
 				7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */,
+				7E98077B2A8A50CD00095880 /* PersonViewModel.swift in Sources */,
 				7EC697E12A617A19006F3F22 /* Step1ViewController.swift in Sources */,
 				7E5BD69A2A4B1CBA00FB806C /* Service.swift in Sources */,
 				7E1D97B12A5A7EE700E91650 /* AnalyzeFlow.swift in Sources */,
@@ -928,6 +962,7 @@
 				7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */,
 				7EF35FC22A7543550092F7BE /* RatingTableViewCell.swift in Sources */,
 				7E05342C2A66C86000C28837 /* BaseNavigationController.swift in Sources */,
+				7E9807802A8A544600095880 /* PersonContentsCollectionViewCell.swift in Sources */,
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,
 				7E9807772A864D4700095880 /* ContentsTableView.swift in Sources */,
 				7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */,
@@ -965,6 +1000,7 @@
 				7EBBBC4E2A59159B00C4999C /* Banner.swift in Sources */,
 				7E5BD6C32A502E8800FB806C /* HomeViewController.swift in Sources */,
 				7EBBBC412A590A2900C4999C /* ContentsInfo.swift in Sources */,
+				7E98077D2A8A515200095880 /* PersonViewController.swift in Sources */,
 				7EBBBC472A590A5100C4999C /* Analyze.swift in Sources */,
 				7EC697DF2A6179C2006F3F22 /* Step2ViewModel.swift in Sources */,
 				7EBBBC212A582CF500C4999C /* MyViewModel.swift in Sources */,
