@@ -12,7 +12,7 @@ import Alamofire
 
 class Service {
     private let af: Session
-    private var baseUrl: String = ""
+    private var baseUrl: String = "http://localhost:8000"
     
     public static let shared = {
         return Service()

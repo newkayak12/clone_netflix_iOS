@@ -95,14 +95,20 @@ class Step2ViewController: BaseViewController, ViewModelBindable {
     func fnNextBtn() {
         let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])(?=.*[0-9])[A-Za-z\\d$@$!%*?&]{8}"
         passwordInput.invalid(text: "")
+        
         if (viewModel.password.range(of: passwordRegex, options: .regularExpression) == nil){
+            
             passwordInput.invalid(text: "비밀번호가 형식에 맞지 않습니다.")
+            
         } else {
             
+            var viewController = SelectProfileViewController()
+            viewController.bind(viewModel: SelectProfileViewModel(title: "", service: self.viewModel.service))
+            navigationController?.pushViewController(viewController, animated: true)
             
-            navigationController?.dismiss(animated: true) {
-                Log.warning("COMPLETE", "SIGN_IN")
-            }
+//            navigationController?.dismiss(animated: true) {
+//                Log.warning("COMPLETE", "SIGN_IN")
+//            }
         }
     }
     

@@ -9,11 +9,18 @@ import Foundation
 
 final class Profile: Codable {
     var profileNo: Int
-    var account: Account
+    var account: Account?
     var regDate: Date
     var isPush: Bool
     var lastSignInDate: Date
-    var image: File
+    var image: File?
+    
+    init() {
+        self.profileNo = 0;
+        self.regDate = Date()
+        self.isPush = false
+        self.lastSignInDate = Date()
+    }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
