@@ -33,7 +33,9 @@ class Step1ViewController: BaseViewController, ViewModelBindable {
         backButton.addTarget(self, action: #selector(fnBackBtn), for: .touchUpInside)
         backButton.tintColor = .white
         backButton.setImage(UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(pointSize: CGFloat(18), weight: .bold)), for: .normal)
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(customView: backButton)]
+        if self.viewModel.isBack {
+            navigationItem.leftBarButtonItems = [UIBarButtonItem(customView: backButton)]
+        }
         
         let nextButton = UIButton(frame: .zero)
         nextButton.setTitle("다음", for: .normal)
@@ -66,7 +68,7 @@ class Step1ViewController: BaseViewController, ViewModelBindable {
     
     @objc
     func fnBackBtn() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     @objc
     func fnNextBtn() {

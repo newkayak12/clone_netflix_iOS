@@ -56,6 +56,7 @@ class MyViewController: BaseViewController, ViewModelBindable {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +66,6 @@ class MyViewController: BaseViewController, ViewModelBindable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
     
     
     
@@ -198,22 +198,19 @@ class MyViewController: BaseViewController, ViewModelBindable {
         let noticeViewModel = NoticeViewModel(title: "알림", service: self.viewModel.service)
         var noticeView = NoticeViewController()
         noticeView.bind(viewModel: noticeViewModel)
-        let navtigation = UINavigationController(rootViewController: noticeView)
-        navigationController?.present(navtigation, animated: true)
-        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(noticeView, animated: true)
+        //        navigationController?.modalPresentationStyle = .fullScreen
     }
-    
     @objc
     func fnRouteProfile () {
-        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
-            Log.warning("TOKEN", token)
-        } else {
-            var signInStep1ViewController = Step1ViewController()
-            let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
-            signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
-            navigationController?.present(UINavigationController(rootViewController: signInStep1ViewController), animated: true)
-            navigationController?.modalPresentationStyle = .fullScreen
-        }
+        //        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
+        //        } else {
+        var signInStep1ViewController = Step1ViewController()
+        let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
+        signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
+        navigationController?.pushViewController(signInStep1ViewController, animated: true)
+        //            navigationController?.push = .fullScreen
+        //        }
     }
     
     func fnRouteDetail( indexPath: IndexPath ) {

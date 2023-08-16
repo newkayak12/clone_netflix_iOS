@@ -9,6 +9,7 @@ import Foundation
 class Step1ViewModel: ViewModelType  {
     var title: String
     var service: Service
+    var isBack: Bool = true
     var id: String = ""
     
     init( title: String, service: Service ) {

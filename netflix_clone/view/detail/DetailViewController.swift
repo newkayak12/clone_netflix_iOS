@@ -370,10 +370,10 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         let noticeViewModel = NoticeViewModel(title: "알림", service: self.viewModel.service)
         var noticeView = NoticeViewController()
         noticeView.bind(viewModel: noticeViewModel)
-        let navtigation = UINavigationController(rootViewController: noticeView)
-        navigationController?.present(navtigation, animated: true)
-        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(noticeView, animated: true)
+        //        navigationController?.modalPresentationStyle = .fullScreen
     }
+  
    
     @objc
     func fnBackBtn() {

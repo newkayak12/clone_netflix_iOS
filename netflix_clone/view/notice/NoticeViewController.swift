@@ -134,7 +134,7 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
     
     @objc
     func fnRouteClose() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
 }

@@ -35,7 +35,6 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SearchCommonCell.self, forCellWithReuseIdentifier: "\(SearchCommonCell.cellId)_popular")
         self.viewModel.popular.bind(to: collectionView.rx.items(cellIdentifier: "\(SearchCommonCell.cellId)_popular", cellType: SearchCommonCell.self)) { (row, element, cell) in
-            Log.warning("POPULAR", "EMIT")
         }.disposed(by: rx.disposeBag)
         collectionView.snp.makeConstraints { make in
             make.height.equalTo(150)
@@ -174,6 +173,7 @@ class SearchViewController: BaseViewController, ViewModelBindable {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -190,6 +190,7 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         
         self.loadSearchText()
     }
+ 
     
     func loadSearchText () {
         UserDefaults.standard.setValue(["test1", "test2", "test3", "test4", "test5"], forKey: Constants.SEARCH_KEYWORK.rawValue)
@@ -268,22 +269,21 @@ class SearchViewController: BaseViewController, ViewModelBindable {
         let noticeViewModel = NoticeViewModel(title: "알림", service: self.viewModel.service)
         var noticeView = NoticeViewController()
         noticeView.bind(viewModel: noticeViewModel)
-        let navtigation = UINavigationController(rootViewController: noticeView)
-        navigationController?.present(navtigation, animated: true)
-        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(noticeView, animated: true)
+        //        navigationController?.modalPresentationStyle = .fullScreen
     }
     @objc
     func fnRouteProfile () {
-        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
-            Log.warning("TOKEN", token)
-        } else {
-            var signInStep1ViewController = Step1ViewController()
-            let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
-            signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
-            navigationController?.present(UINavigationController(rootViewController: signInStep1ViewController), animated: true)
-            navigationController?.modalPresentationStyle = .fullScreen
-        }
+        //        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
+        //        } else {
+        var signInStep1ViewController = Step1ViewController()
+        let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
+        signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
+        navigationController?.pushViewController(signInStep1ViewController, animated: true)
+        //            navigationController?.push = .fullScreen
+        //        }
     }
+    
     func searchTextTableTouchXmark(index: Int){
         var keyList = viewModel.searchText
         keyList.remove(at: index)

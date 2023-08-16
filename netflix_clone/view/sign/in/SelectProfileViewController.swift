@@ -34,9 +34,9 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
         self.viewModel.fetchProfile(accountNo: 0)
         
         self.viewModel.profileSubject.map {
-            return $0.map {
-                
-                Log.debug("MAP", $0)
+            return $0.enumerated().map {
+                Log.info("MAP", $0)
+                Log.info("MAP", $1)
                 
                 let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
                 img.clipsToBounds = true
@@ -45,17 +45,19 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
                     make.width.equalTo(100)
                     make.height.equalTo(100)
                 }
-                
+//
                 let label = UILabel(frame: .zero)
                 label.font = UIFont.boldSystemFont(ofSize: 20)
                 label.text = "TEXT"
                 label.textAlignment = .center
                 label.textColor = .white
-                
+
                 let stack = UIStackView(arrangedSubviews: [img, label])
                 stack.axis = .vertical
                 stack.spacing = 10
-                
+                let gesture = ProfileGesture(target: self, action: #selector(self.selectProfile(sender:)))
+                gesture.index = $0
+                stack.addGestureRecognizer(gesture)
                 return stack
             }
         }.subscribe { result  in
@@ -69,6 +71,14 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
         view.addSubview(self.resultStackView)
         
         self.setConstraints()
+    }
+    
+    @objc func selectProfile(sender: ProfileGesture) {
+        if let index = sender.index {
+            
+        }
+        
+        
     }
     
     
