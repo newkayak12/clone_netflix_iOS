@@ -13,6 +13,7 @@ class SelectProfileViewModel: ViewModelType {
     var service: Service
     
     var profileSubject = BehaviorSubject<[Profile]>(value: [])
+    var profile: [Profile] = []
     
     init( title: String, service: Service ) {
         self.service = service
@@ -20,7 +21,8 @@ class SelectProfileViewModel: ViewModelType {
     }
     
     func fetchProfile( accountNo: Int ) {
-        profileSubject.onNext([Profile(), Profile()])
+        profile.append(contentsOf: [Profile(), Profile()])
+        profileSubject.onNext(self.profile)
         
     }
 }

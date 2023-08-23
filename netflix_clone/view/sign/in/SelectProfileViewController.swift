@@ -75,10 +75,23 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
     
     @objc func selectProfile(sender: ProfileGesture) {
         if let index = sender.index {
+            let profile = self.viewModel.profile[index]
             
+            let encoder = JSONEncoder()
+            if let encodedValue = try? encoder.encode(profile) {
+                
+                Log.error("EV", encodedValue)
+                
+                
+                UserDefaults.standard.setValue("KEY", forKey: Constants.TOKEN.rawValue)
+                UserDefaults.standard.set(encodedValue, forKey: Constants.PROFILE.rawValue)
+                
+//                self.navigationController?.popToRootViewController(animated: true)
+                self.view.window?.rootViewController = MainViewController()
+                
+                
+            }
         }
-        
-        
     }
     
     

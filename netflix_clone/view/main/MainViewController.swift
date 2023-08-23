@@ -23,6 +23,8 @@ class MainViewController: UITabBarController {
     var signView = Step1ViewController()
     
     
+   
+    
     func setLaunchScreen () {
         view.addSubview(launchScreen)
         
@@ -41,7 +43,7 @@ class MainViewController: UITabBarController {
                 self.launchScreen.removeFromSuperview()
                 
                 
-                UserDefaults.standard.setValue("KEY", forKey: Constants.TOKEN.rawValue)
+//                UserDefaults.standard.setValue("KEY", forKey: Constants.TOKEN.rawValue)
                 
                 
                 if UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) == nil {
@@ -99,9 +101,21 @@ class MainViewController: UITabBarController {
         tabBar.barStyle = .black
         
     }
+    
+    
     override func viewDidLoad() {
-        self.setLaunchScreen()
+        super.viewDidLoad()
+        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) {
+            self.initializeView()
+            self.tabBar.isHidden = false
+        } else {
+            self.setLaunchScreen()
+        }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     
     func whenNotSigned(viewController: UINavigationController) -> UINavigationController {
         if UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) == nil {
