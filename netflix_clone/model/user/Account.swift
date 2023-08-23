@@ -26,7 +26,10 @@ final class Account: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userNo = try container.decode(Int.self, forKey: .userNo)
         self.userId = try container.decode(String.self, forKey: .userId)
-        self.userPwd = try container.decode(String.self, forKey: .userPwd)
+        
+        let userPwdDecode = try? container.decode(String.self, forKey: .userPwd)
+        self.userPwd =  userPwdDecode ?? "";
+        
         self.regDate = try container.decode(Date.self, forKey: .regDate)
         self.isAdult = try container.decode(Bool.self, forKey: .isAdult)
         self.adultCheckDate = try container.decode(Date.self, forKey: .adultCheckDate)

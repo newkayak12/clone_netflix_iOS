@@ -105,7 +105,7 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) {
+        if let _ = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) {
             self.initializeView()
             self.tabBar.isHidden = false
         } else {

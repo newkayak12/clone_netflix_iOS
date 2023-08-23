@@ -11,7 +11,7 @@ import Alamofire
 
 
 class Service {
-    private let af: Session
+    private var af: Session
     private var baseUrl: String = "http://localhost:8000"
     
     public static let shared = {
@@ -19,7 +19,9 @@ class Service {
     }()
     
     private init () {
-        af = AF
+        let configuration = URLSessionConfiguration.af.default
+        let apiLogger = APIEventLogger()
+        af =  Session(configuration: configuration, eventMonitors: [apiLogger])
     }
     
     public func setBaseUrl( baseUrl: String ) {
@@ -34,14 +36,18 @@ class Service {
         return HTTPHeaders(result)
     }
     
-    public func get <R: Decodable>( path: Api, params: [String: Any]?, type: R.Type ) -> Observable<R> {
+    public func get <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response =  af.request( baseUrl + path.rawValue, method: .get, parameters: params, headers: self.prepareHeader())
-                             .responseDecodable(of: R.self) { response in
+            let response =  af.request( self.baseUrl+path, method: .get, parameters: params, headers: self.prepareHeader())
+                              .responseDecodable(of: R.self) { response in
+                                 Log.debug("GET_RESPONSE", response)
+
                                  switch response.result {
                                      case .success(let response):
+                                         Log.debug("GET_SUCCESS", response)
                                          ob.onNext(response)
                                      case .failure(let error):
+                                         Log.debug("GET_FAILURE", response)
                                          ob.onError(error)
                                  }
                              }
@@ -52,9 +58,9 @@ class Service {
         }
     }
     
-    public func patch <R: Decodable>( path: Api, params: [String: Any]? ) -> Observable<R> {
+    public func patch <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response = af.request( baseUrl + path.rawValue, method: .patch, parameters: params, headers: self.prepareHeader())
+            let response = af.request( self.baseUrl+path, method: .patch, parameters: params, headers: self.prepareHeader())
                 .responseDecodable(of: R.self) { response in
                     switch response.result {
                         case .success(let response):
@@ -69,9 +75,9 @@ class Service {
         }
     }
     
-    public func post <R: Decodable>( path: Api, params: [String: Any]? ) -> Observable<R> {
+    public func post <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response = af.request( baseUrl + path.rawValue, method: .post, parameters: params, headers: self.prepareHeader())
+            let response = af.request( self.baseUrl+path, method: .post, parameters: params, headers: self.prepareHeader())
                 .responseDecodable(of: R.self) { response in
                     switch response.result {
                         case .success(let response):
@@ -86,12 +92,13 @@ class Service {
         }
     }
     
-    public func delete <R: Decodable>( path: Api, params: [String: Any]? ) -> Observable<R> {
+    public func delete <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
-            let response = af.request( baseUrl + path.rawValue, method: .delete, parameters: params, headers: self.prepareHeader())
+            let response = af.request( self.baseUrl+path, method: .delete, parameters: params, headers: self.prepareHeader())
                 .responseDecodable(of: R.self) { response in
                     switch response.result {
                         case .success(let response):
+                            
                             ob.onNext(response)
                         case .failure(let error):
                             ob.onError(error)
@@ -105,7 +112,3 @@ class Service {
     
 }
 
-
-enum Api: String {
-    case USER_SIGN_IN = ""
-}

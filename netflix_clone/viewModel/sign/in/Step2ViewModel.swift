@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+
 class Step2ViewModel: ViewModelType {
     var title: String
     var service: Service
@@ -16,5 +18,9 @@ class Step2ViewModel: ViewModelType {
     init( title: String, service: Service ) {
         self.title = title
         self.service = service
+    }
+    
+    func signIn () -> Observable<Account> {
+        return service.get(path: UserApi.signIn, params: ["userId": self.id, "userPwd": password], type: Account.self )
     }
 }
