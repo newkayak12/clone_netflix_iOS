@@ -102,17 +102,19 @@ class Step2ViewController: BaseViewController, ViewModelBindable {
             self.viewModel.signIn().subscribe(onNext: {
                 
                 let account = $0
-                Log.error("account", account)
+                let _ = MemorizeUser.shared.memorize(account: account)
                 
+                var viewController = SelectProfileViewController()
+                let viewModel = SelectProfileViewModel(title: "", service: self.viewModel.service)
+                
+                
+                if let account = MemorizeUser.shared.remind(), let userNo = account.userNo {
+                    viewModel.fetchProfile(accountNo: userNo )
+                }
+                
+                viewController.bind(viewModel: viewModel)
+                self.navigationController?.pushViewController(viewController, animated: true)
             }).disposed(by: rx.disposeBag)
-            
-//            var viewController = SelectProfileViewController()
-//            viewController.bind(viewModel: SelectProfileViewModel(title: "", service: self.viewModel.service))
-//            navigationController?.pushViewController(viewController, animated: true)
-            
-//            navigationController?.dismiss(animated: true) {
-//                Log.warning("COMPLETE", "SIGN_IN")
-//            }
         }
     }
     

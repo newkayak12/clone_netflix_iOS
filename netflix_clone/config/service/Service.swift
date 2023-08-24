@@ -8,19 +8,27 @@
 import Foundation
 import RxSwift
 import Alamofire
+import Kingfisher
 
 
 class Service {
     private var af: Session
     private var baseUrl: String = "http://localhost:8000"
+    let decoder = JSONDecoder()
+
     
     public static let shared = {
+        
         return Service()
     }()
     
     private init () {
         let configuration = URLSessionConfiguration.af.default
         let apiLogger = APIEventLogger()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//        self.decoder.dateDecodingStrategy = .iso8601
+        self.decoder.dateDecodingStrategy = .formatted(formatter)
         af =  Session(configuration: configuration, eventMonitors: [apiLogger])
     }
     
@@ -31,7 +39,7 @@ class Service {
     private func prepareHeader () -> HTTPHeaders {
         var result: [HTTPHeader] = Array()
         if let authorization = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) {
-                result.append(HTTPHeader(name: "Authorization", value: authorization))
+            result.append(HTTPHeader(name: Constants.TOKEN.rawValue, value: authorization))
         }
         return HTTPHeaders(result)
     }
@@ -39,18 +47,20 @@ class Service {
     public func get <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
             let response =  af.request( self.baseUrl+path, method: .get, parameters: params, headers: self.prepareHeader())
-                              .responseDecodable(of: R.self) { response in
-                                 Log.debug("GET_RESPONSE", response)
-
-                                 switch response.result {
-                                     case .success(let response):
-                                         Log.debug("GET_SUCCESS", response)
-                                         ob.onNext(response)
-                                     case .failure(let error):
-                                         Log.debug("GET_FAILURE", response)
-                                         ob.onError(error)
-                                 }
-                             }
+            
+            response.responseDecodable(of: R.self, decoder: decoder) { response in
+                 switch response.result {
+                    case .success(let res):
+                        if let token = response.response?.headers[Constants.TOKEN.rawValue] {
+                            UserDefaults.standard.set(token, forKey: Constants.TOKEN.rawValue)
+                        }
+                        Log.debug("GET_SUCCESS", res)
+                        ob.onNext(res)
+                    case .failure(let error):
+                        Log.debug("GET_FAILURE", response)
+                        ob.onError(error)
+                }
+            }
                             
             return Disposables.create {
                 response.cancel()
@@ -58,10 +68,10 @@ class Service {
         }
     }
     
-    public func patch <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func patch <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
             let response = af.request( self.baseUrl+path, method: .patch, parameters: params, headers: self.prepareHeader())
-                .responseDecodable(of: R.self) { response in
+                .responseDecodable(of: R.self, decoder: decoder) { response in
                     switch response.result {
                         case .success(let response):
                             ob.onNext(response)
@@ -75,10 +85,10 @@ class Service {
         }
     }
     
-    public func post <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func post <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
             let response = af.request( self.baseUrl+path, method: .post, parameters: params, headers: self.prepareHeader())
-                .responseDecodable(of: R.self) { response in
+                .responseDecodable(of: R.self, decoder: decoder) { response in
                     switch response.result {
                         case .success(let response):
                             ob.onNext(response)
@@ -92,10 +102,10 @@ class Service {
         }
     }
     
-    public func delete <R: Decodable>( path: String, params: [String: Any]? ) -> Observable<R> {
+    public func delete <R: Decodable>( path: String, params: [String: Any]?, type: R.Type ) -> Observable<R> {
         return Observable.create { [unowned self] ob in
             let response = af.request( self.baseUrl+path, method: .delete, parameters: params, headers: self.prepareHeader())
-                .responseDecodable(of: R.self) { response in
+                .responseDecodable(of: R.self, decoder: decoder) { response in
                     switch response.result {
                         case .success(let response):
                             

@@ -8,21 +8,25 @@
 import Foundation
 final class Account: Codable {
     
-    var userNo: Int
-    var userId: String
-    var userPwd: String
-    var regDate: Date
-    var isAdult: Bool
-    var adultCheckDate: Date
-    var mobileNo: String
-    var email: String
-    var isSubscribed: Bool
-    var lastSignDate: Date
+    var userNo: Int?
+    var userId: String?
+    var userPwd: String?
+    var regDate: Date?
+    var isAdult: Bool?
+    var adultCheckDate: Date?
+    var mobileNo: String?
+    var email: String?
+    var isSubscribed: Bool?
+    var lastSignDate: Date?
 
-    var profiles: [Profile] = []
-    var ticketStatus: TicketRaise
+    var profiles: [Profile]? = []
+    var ticketStatus: TicketRaise?
     
     required init(from decoder: Decoder) throws {
+        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userNo = try container.decode(Int.self, forKey: .userNo)
         self.userId = try container.decode(String.self, forKey: .userId)
@@ -30,15 +34,18 @@ final class Account: Codable {
         let userPwdDecode = try? container.decode(String.self, forKey: .userPwd)
         self.userPwd =  userPwdDecode ?? "";
         
+//        self.regDate = dateFormatter.date(from: try container.decode(String.self, forKey: .regDate))
         self.regDate = try container.decode(Date.self, forKey: .regDate)
         self.isAdult = try container.decode(Bool.self, forKey: .isAdult)
-        self.adultCheckDate = try container.decode(Date.self, forKey: .adultCheckDate)
+        
+        self.adultCheckDate = try? container.decode(Date.self, forKey: .adultCheckDate)
         self.mobileNo = try container.decode(String.self, forKey: .mobileNo)
         self.email = try container.decode(String.self, forKey: .email)
         self.isSubscribed = try container.decode(Bool.self, forKey: .isSubscribed)
-        self.lastSignDate = try container.decode(Date.self, forKey: .lastSignDate)
+        self.lastSignDate = try? container.decode(Date.self, forKey: .lastSignDate)
+        
         self.profiles = try container.decode([Profile].self, forKey: .profiles)
-        self.ticketStatus = try container.decode(TicketRaise.self, forKey:  .ticketStatus)
+        self.ticketStatus = try? container.decode(TicketRaise.self, forKey:  .ticketStatus)
     }
     
 }

@@ -7,14 +7,14 @@
 
 import Foundation
 struct File: Codable {
-    private var fileNo: Int
-    private var tableNo: Int
-    private var fileType: FileType
-    private var storedFileName: String
-    private var originalFileName: String
-    private var orders: Int
-    private var contentType: String
-    private var fileSize: Int
+    var fileNo: Int
+    var tableNo: Int
+    var fileType: FileType
+    var storedFileName: String
+    var originalFileName: String
+    var orders: Int
+    var contentType: String
+    var fileSize: Int
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

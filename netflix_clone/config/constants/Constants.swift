@@ -7,7 +7,8 @@
 
 import Foundation
 enum Constants: String {
-    case TOKEN = "Authorization"
+    case TOKEN = "NETFLIX_CLONE"
     case SEARCH_KEYWORK = "SearchKeyword"
     case PROFILE = "Profile"
+    case USER = "User"
 }

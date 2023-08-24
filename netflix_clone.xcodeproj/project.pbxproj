@@ -48,6 +48,8 @@
 		7E9807872A8B269A00095880 /* SelectProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807862A8B269A00095880 /* SelectProfileViewModel.swift */; };
 		7E98078A2A8CD63300095880 /* ProfileGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807892A8CD63300095880 /* ProfileGesture.swift */; };
 		7E98078C2A96447000095880 /* APIEventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98078B2A96447000095880 /* APIEventLogger.swift */; };
+		7E98078E2A97804E00095880 /* Memorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98078D2A97804E00095880 /* Memorize.swift */; };
+		7E9807912A97920A00095880 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E9807902A97920A00095880 /* Kingfisher */; };
 		7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC082A56E8D600C4999C /* Preview.swift */; };
 		7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC0E2A56F63600C4999C /* BannerCell.swift */; };
 		7EBBBC122A5829EE00C4999C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC112A5829EE00C4999C /* MainViewController.swift */; };
@@ -160,6 +162,7 @@
 		7E9807862A8B269A00095880 /* SelectProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileViewModel.swift; sourceTree = "<group>"; };
 		7E9807892A8CD63300095880 /* ProfileGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGesture.swift; sourceTree = "<group>"; };
 		7E98078B2A96447000095880 /* APIEventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEventLogger.swift; sourceTree = "<group>"; };
+		7E98078D2A97804E00095880 /* Memorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memorize.swift; sourceTree = "<group>"; };
 		7EBBBC082A56E8D600C4999C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7EBBBC0E2A56F63600C4999C /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		7EBBBC112A5829EE00C4999C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 				7E5BD69D2A501FB300FB806C /* Alamofire in Frameworks */,
 				7E5BD6A52A501FDD00FB806C /* RxCocoa in Frameworks */,
 				7E5BD6A02A501FCA00FB806C /* SnapKit in Frameworks */,
+				7E9807912A97920A00095880 /* Kingfisher in Frameworks */,
 				7E3C27862A5ECDBD002E08A6 /* RxDataSources in Frameworks */,
 				7EC818D92A5951C200A28D43 /* NSObject-Rx in Frameworks */,
 				7E1D97AD2A59B6E400E91650 /* Lottie in Frameworks */,
@@ -492,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				7E9807812A8B21EB00095880 /* List.swift */,
+				7E98078D2A97804E00095880 /* Memorize.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -843,6 +848,7 @@
 				7EC818D82A5951C200A28D43 /* NSObject-Rx */,
 				7E1D97AC2A59B6E400E91650 /* Lottie */,
 				7E3C27852A5ECDBD002E08A6 /* RxDataSources */,
+				7E9807902A97920A00095880 /* Kingfisher */,
 			);
 			productName = netflix_clone;
 			productReference = 7EC97DA52A2557E0008AC342 /* netflix_clone.app */;
@@ -923,6 +929,7 @@
 				7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
 				7E1D97AB2A59B6E400E91650 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				7E3C27842A5ECDBD002E08A6 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				7E98078F2A97920A00095880 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 7EC97DA62A2557E0008AC342 /* Products */;
 			projectDirPath = "";
@@ -984,6 +991,7 @@
 				7E5BD6BB2A502AD800FB806C /* OsLog.swift in Sources */,
 				7EBBBC3F2A590A1B00C4999C /* Favorite.swift in Sources */,
 				7E4A81E62A7004EC0062477E /* SearchPosterCollectionViewCell.swift in Sources */,
+				7E98078E2A97804E00095880 /* Memorize.swift in Sources */,
 				7EBBBC4B2A5910FE00C4999C /* FavoriteWatched.swift in Sources */,
 				7E5BD6BF2A502C8200FB806C /* ViewModelBindable.swift in Sources */,
 				7EBBBC542A5919DF00C4999C /* Faq.swift in Sources */,
@@ -1437,6 +1445,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		7E98078F2A97920A00095880 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		7EC818D72A5951C200A28D43 /* XCRemoteSwiftPackageReference "NSObject-Rx" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/NSObject-Rx";
@@ -1477,6 +1493,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E5BD6A12A501FDD00FB806C /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		7E9807902A97920A00095880 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E98078F2A97920A00095880 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		7EC818D82A5951C200A28D43 /* NSObject-Rx */ = {
 			isa = XCSwiftPackageProductDependency;

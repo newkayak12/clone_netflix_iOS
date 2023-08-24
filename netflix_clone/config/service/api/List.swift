@@ -7,6 +7,12 @@
 
 import Foundation
 
+
+struct ImageApi {
+    static func imgUrl (url: String) -> URL {
+        return URL(string: "http://localhost:8080" + url)!
+    }
+}
 struct UserApi {
     static let PREFIX = "/api/v1/user"
     
@@ -20,13 +26,13 @@ struct UserApi {
 struct ProfileApi {
     static let PREFIX = "/api/v1/profile"
     
-    let profiles = "\(ProfileApi.PREFIX)/"
-    func profile ( profileNo: Int ) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)"}
-    let  saveProfile = "\(ProfileApi.PREFIX)/save"
-    func changeProfileName ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)/profileName" }//changeProfileName
-    func changePushState ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)/isPush" } //changePushState
-    func changeProfileImage ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)/profileImage" } //changeProfileImage
-    func removeProfile ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)" } //removeProfile
+    static let profiles = "\(ProfileApi.PREFIX)/"
+    static func profile ( profileNo: Int ) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)"}
+    static let  saveProfile = "\(ProfileApi.PREFIX)/save"
+    static func changeProfileName ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)/profileName" }//changeProfileName
+    static func changePushState ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)/isPush" } //changePushState
+    static func changeProfileImage ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)/profileImage" } //changeProfileImage
+    static func removeProfile ( profileNo: Int) -> String { return "\(ProfileApi.PREFIX)/\(profileNo)" } //removeProfile
 }
 
 

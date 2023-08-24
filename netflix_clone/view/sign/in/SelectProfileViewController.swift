@@ -27,6 +27,8 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
     func setConstraints () {
         self.resultStackView.snp.makeConstraints { make in
             make.center.equalTo(view)
+            make.width.lessThanOrEqualToSuperview()
+            make.height.lessThanOrEqualToSuperview()
         }
     }
     
@@ -35,10 +37,14 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
         
         self.viewModel.profileSubject.map {
             return $0.enumerated().map {
-                Log.info("MAP", $0)
-                Log.info("MAP", $1)
                 
                 let img = UIImageView(image: UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: .current), scale: .large)))
+              
+                if let file = $1.image {
+                    let url = file.storedFileName
+                    img.kf.setImage(with: ImageApi.imgUrl(url: url))
+                }
+                
                 img.clipsToBounds = true
                 img.layer.cornerRadius = 50
                 img.snp.makeConstraints { make in
@@ -48,7 +54,7 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
 //
                 let label = UILabel(frame: .zero)
                 label.font = UIFont.boldSystemFont(ofSize: 20)
-                label.text = "TEXT"
+                label.text = $1.profileName
                 label.textAlignment = .center
                 label.textColor = .white
 
@@ -60,36 +66,26 @@ class SelectProfileViewController: BaseViewController, ViewModelBindable  {
                 stack.addGestureRecognizer(gesture)
                 return stack
             }
-        }.subscribe { result  in
-            
+        }
+        .subscribe { result  in
+            Log.debug("RESULT", result)
             self.resultStackView = UIStackView(arrangedSubviews: result)
             self.resultStackView.axis = .horizontal
             self.resultStackView.spacing = 10
+            self.view.addSubview(self.resultStackView)
+            
+            self.setConstraints()
         
         }.disposed(by: rx.disposeBag)
         
-        view.addSubview(self.resultStackView)
-        
-        self.setConstraints()
     }
     
     @objc func selectProfile(sender: ProfileGesture) {
         if let index = sender.index {
             let profile = self.viewModel.profile[index]
             
-            let encoder = JSONEncoder()
-            if let encodedValue = try? encoder.encode(profile) {
-                
-                Log.error("EV", encodedValue)
-                
-                
-                UserDefaults.standard.setValue("KEY", forKey: Constants.TOKEN.rawValue)
-                UserDefaults.standard.set(encodedValue, forKey: Constants.PROFILE.rawValue)
-                
-//                self.navigationController?.popToRootViewController(animated: true)
+            if MemorizeProfile.shared.memorize(profile: profile) {
                 self.view.window?.rootViewController = MainViewController()
-                
-                
             }
         }
     }
