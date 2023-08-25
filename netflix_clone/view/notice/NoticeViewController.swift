@@ -74,9 +74,12 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
         noticeTableView.rx.willDisplayCell
             .subscribe{ (cell: UITableViewCell, indexPath: IndexPath) in
                 if( indexPath.section == 1){
-                    self.loading.onNext(false)
-                    self.viewModel.fetchNotice()
-                    self.noticeTableView.reloadData()
+                    Log.debug("PAGE::::::::", "\(self.viewModel.pageRequest.totalPages) : \(self.viewModel.pageRequest.page)")
+                    if self.viewModel.pageRequest.totalPages  >= self.viewModel.pageRequest.page - 1 {
+                        self.loading.onNext(false)
+                        self.viewModel.fetchNotice()
+                        self.noticeTableView.reloadData()
+                    }
                 }
             }.disposed(by: rx.disposeBag)
         

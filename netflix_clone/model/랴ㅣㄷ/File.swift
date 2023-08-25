@@ -9,10 +9,10 @@ import Foundation
 struct File: Codable {
     var fileNo: Int
     var tableNo: Int
-    var fileType: FileType
+    var fileType: FileType?
     var storedFileName: String
     var originalFileName: String
-    var orders: Int
+    var orders: Int?
     var contentType: String
     var fileSize: Int
     
@@ -20,10 +20,13 @@ struct File: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.fileNo = try container.decode(Int.self, forKey: .fileNo)
         self.tableNo = try container.decode(Int.self, forKey: .tableNo)
-        self.fileType = try container.decode(FileType.self, forKey: .fileType)
+        
+        let value = try container.decode(String.self, forKey: .fileType)
+        self.fileType = FileType(rawValue: value)
+        
         self.storedFileName = try container.decode(String.self, forKey: .storedFileName)
         self.originalFileName = try container.decode(String.self, forKey: .originalFileName)
-        self.orders = try container.decode(Int.self, forKey: .orders)
+        self.orders = try? container.decode(Int.self, forKey: .orders)
         self.contentType = try container.decode(String.self, forKey: .contentType)
         self.fileSize = try container.decode(Int.self, forKey: .fileSize)
     }

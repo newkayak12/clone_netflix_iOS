@@ -9,11 +9,13 @@ import Foundation
 struct PageRequest: Codable {
     var page: Int
     var limit: Int
+    var totalPages: Int
     var tableNo: Int?
     
     init ( page: Int = 1 ) {
         self.page = page
         self.limit = 10
+        self.totalPages = 2
         tableNo = nil
     }
     
@@ -21,6 +23,7 @@ struct PageRequest: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.page = try container.decode(Int.self, forKey: .page)
         self.limit = try container.decode(Int.self, forKey: .limit)
+        self.totalPages = try container.decode(Int.self, forKey: .totalPages)
         self.tableNo = try container.decode(Int.self, forKey: .tableNo)
     }
 }

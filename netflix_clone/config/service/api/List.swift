@@ -47,3 +47,12 @@ struct TicketApi {
     static let raises =  "\(TicketApi.PREFIX)/raises" //raises
     static func toggleSubscribeStatus( userNo: Int ) -> String  {  return "\(TicketApi.PREFIX)/toggle/subscribe/\(userNo)"} //toggleSubscribeStatus
 }
+
+struct BoardApi {
+    static let PREFIX = "/api/v1/notice"
+    static let notices = "\(BoardApi.PREFIX)/"
+    static func notice ( noticeNo: Int) -> String { return "\(BoardApi.PREFIX)/\(noticeNo)"}
+    static let save = "\(BoardApi.PREFIX)/"
+    static func remove ( noticeNo: Int) -> String { return "\(BoardApi.PREFIX)/\(noticeNo)"}
+    
+}

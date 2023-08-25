@@ -50,6 +50,8 @@
 		7E98078C2A96447000095880 /* APIEventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98078B2A96447000095880 /* APIEventLogger.swift */; };
 		7E98078E2A97804E00095880 /* Memorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98078D2A97804E00095880 /* Memorize.swift */; };
 		7E9807912A97920A00095880 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E9807902A97920A00095880 /* Kingfisher */; };
+		7E9807942A98E4F200095880 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807932A98E4F200095880 /* ProfileViewController.swift */; };
+		7E9807972A98E51700095880 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9807962A98E51700095880 /* ProfileViewModel.swift */; };
 		7EBBBC092A56E8D600C4999C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC082A56E8D600C4999C /* Preview.swift */; };
 		7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC0E2A56F63600C4999C /* BannerCell.swift */; };
 		7EBBBC122A5829EE00C4999C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBBBC112A5829EE00C4999C /* MainViewController.swift */; };
@@ -163,6 +165,8 @@
 		7E9807892A8CD63300095880 /* ProfileGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGesture.swift; sourceTree = "<group>"; };
 		7E98078B2A96447000095880 /* APIEventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEventLogger.swift; sourceTree = "<group>"; };
 		7E98078D2A97804E00095880 /* Memorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memorize.swift; sourceTree = "<group>"; };
+		7E9807932A98E4F200095880 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7E9807962A98E51700095880 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7EBBBC082A56E8D600C4999C /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		7EBBBC0E2A56F63600C4999C /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		7EBBBC112A5829EE00C4999C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -509,6 +513,22 @@
 			path = selectProfile;
 			sourceTree = "<group>";
 		};
+		7E9807922A98E4E700095880 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				7E9807932A98E4F200095880 /* ProfileViewController.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		7E9807952A98E50700095880 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				7E9807962A98E51700095880 /* ProfileViewModel.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
 		7EBBBC0C2A56F61C00C4999C /* component */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +687,7 @@
 		7EC697D62A617720006F3F22 /* sign */ = {
 			isa = PBXGroup;
 			children = (
+				7E9807922A98E4E700095880 /* profile */,
 				7EC697D72A617724006F3F22 /* in */,
 			);
 			path = sign;
@@ -685,6 +706,7 @@
 		7EC697D92A617898006F3F22 /* sign */ = {
 			isa = PBXGroup;
 			children = (
+				7E9807952A98E50700095880 /* profile */,
 				7EC697DA2A61789C006F3F22 /* in */,
 			);
 			path = sign;
@@ -982,6 +1004,7 @@
 				7E4A81E82A712BB60062477E /* SearchPersonCollectionViewCell.swift in Sources */,
 				7E9807872A8B269A00095880 /* SelectProfileViewModel.swift in Sources */,
 				7EBBBC492A5910AE00C4999C /* ContentPerson.swift in Sources */,
+				7E9807942A98E4F200095880 /* ProfileViewController.swift in Sources */,
 				7E5BD6972A4B1C7600FB806C /* BaseViewController.swift in Sources */,
 				7E98077B2A8A50CD00095880 /* PersonViewModel.swift in Sources */,
 				7E98078A2A8CD63300095880 /* ProfileGesture.swift in Sources */,
@@ -1002,6 +1025,7 @@
 				7EBBBC0F2A56F63600C4999C /* BannerCell.swift in Sources */,
 				7EC97DA92A2557E0008AC342 /* AppDelegate.swift in Sources */,
 				7EF35FC22A7543550092F7BE /* RatingTableViewCell.swift in Sources */,
+				7E9807972A98E51700095880 /* ProfileViewModel.swift in Sources */,
 				7E05342C2A66C86000C28837 /* BaseNavigationController.swift in Sources */,
 				7E9807802A8A544600095880 /* PersonContentsCollectionViewCell.swift in Sources */,
 				7EBBBC332A583F7800C4999C /* TicketPayment.swift in Sources */,

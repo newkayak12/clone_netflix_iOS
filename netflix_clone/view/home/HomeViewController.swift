@@ -400,20 +400,20 @@ class HomeViewController: BaseViewController, ViewModelBindable {
     }
     @objc
     func fnRouteProfile () {
-        //        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
-        //        } else {
-        var signInStep1ViewController = Step1ViewController()
-        let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
-        signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
-        navigationController?.pushViewController(signInStep1ViewController, animated: true)
-        //            navigationController?.push = .fullScreen
-        //        }
+        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
+            
+            
+        } else {
+            var signInStep1ViewController = Step1ViewController()
+            let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
+            signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
+            navigationController?.pushViewController(signInStep1ViewController, animated: true)
+        }
     }
     func fnTouchMovie ( contentsInfoNo: Int ){
         
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black

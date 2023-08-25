@@ -274,14 +274,14 @@ class SearchViewController: BaseViewController, ViewModelBindable {
     }
     @objc
     func fnRouteProfile () {
-        //        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
-        //        } else {
-        var signInStep1ViewController = Step1ViewController()
-        let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
-        signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
-        navigationController?.pushViewController(signInStep1ViewController, animated: true)
+        if let token = UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue)  {
+        } else {
+            var signInStep1ViewController = Step1ViewController()
+            let signInStep1ViewModel = Step1ViewModel(title: "", service: viewModel.service)
+            signInStep1ViewController.bind(viewModel: signInStep1ViewModel)
+            navigationController?.pushViewController(signInStep1ViewController, animated: true)
         //            navigationController?.push = .fullScreen
-        //        }
+        }
     }
     
     func searchTextTableTouchXmark(index: Int){
