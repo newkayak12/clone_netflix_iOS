@@ -60,11 +60,12 @@ class NoticeViewModel: ViewModelType {
                         self.pageRequest.totalPages = result.totalPages
                         self.noticeArray.append(contentsOf: result.content)
                         self.notice.onNext( self.noticeArray )
+                        self.pageRequest.page += 1
                     }
                 }   .disposed(by: disposeBag)
             
             
-            self.pageRequest.page += 1
+            
     }
     
 }

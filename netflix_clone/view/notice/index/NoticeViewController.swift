@@ -72,13 +72,15 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
             .bind(to: noticeTableView.rx.items(dataSource: viewModel.dataSource)).disposed(by:rx.disposeBag)
         
         noticeTableView.rx.willDisplayCell
+            .debounce(.microseconds(1000), scheduler: MainScheduler().self)
             .subscribe{ (cell: UITableViewCell, indexPath: IndexPath) in
                 if( indexPath.section == 1){
                     Log.debug("PAGE::::::::", "\(self.viewModel.pageRequest.totalPages) : \(self.viewModel.pageRequest.page)")
-                    if self.viewModel.pageRequest.totalPages  >= self.viewModel.pageRequest.page - 1 {
+                    if self.viewModel.pageRequest.totalPages  >= self.viewModel.pageRequest.page {
+                        Log.debug("LOAD", "\(self.viewModel.pageRequest.totalPages) : \(self.viewModel.pageRequest.page)")
                         self.loading.onNext(false)
                         self.viewModel.fetchNotice()
-                        self.noticeTableView.reloadData()
+//                        self.noticeTableView.reloadData()
                     }
                 }
             }.disposed(by: rx.disposeBag)
@@ -92,13 +94,24 @@ class NoticeViewController: BaseViewController, ViewModelBindable {
                   .map{ $0.1 }
                   .withUnretained(self)
                   .subscribe{ this, data in
-                      print(data.0)
-                      print(data.1)
+                      
+                      let selectedData = this.viewModel.noticeArray[data.1.item]
+                
+                      
+                      var noticeDetailViewController = NoticeDetailViewController()
+                      let noticeDetailViewModel = NoticeDetailViewModel(title: selectedData.title, service: this.viewModel.service)
+                      noticeDetailViewModel.notice = selectedData
+                      noticeDetailViewController.bind(viewModel: noticeDetailViewModel)
+                      
+                      this.navigationController?.pushViewController(noticeDetailViewController, animated: true)
+                   
                   }.disposed(by: rx.disposeBag)
     }
     
     func wireViewModel() {
         self.wireNotice()
+        
+        Log.debug("PAGE::::::::", "\(self.viewModel.pageRequest.totalPages) : \(self.viewModel.pageRequest.page)")
         
         viewModel.fetchNotice()
         self.noticeTableView.reloadData()
