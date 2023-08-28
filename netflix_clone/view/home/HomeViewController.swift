@@ -43,10 +43,15 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         layout.itemSize.width = view.frame.width
         layout.itemSize.height = 500
         layout.scrollDirection = .horizontal
+        
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = true
+        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     private lazy var analysticCollection = {
@@ -67,6 +72,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = false
+        
         collectionView.contentInsetAdjustmentBehavior = .never
      
         
@@ -87,6 +93,8 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     private lazy var watchedCollection = {
@@ -99,7 +107,9 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
-        collectionView.isPagingEnabled = true
+        collectionView.isPagingEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     private lazy var newEpisodeCollection = {
@@ -113,7 +123,7 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
-        collectionView.isPagingEnabled = true
+        collectionView.isPagingEnabled = false
         return collectionView
     }()
     private lazy var categoryCollection = {
@@ -126,6 +136,8 @@ class HomeViewController: BaseViewController, ViewModelBindable {
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = true
         collectionView.isPagingEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     

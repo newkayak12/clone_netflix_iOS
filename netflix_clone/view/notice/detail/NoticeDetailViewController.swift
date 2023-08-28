@@ -7,6 +7,7 @@
 
 import RxCocoa
 import UIKit
+import Kingfisher
 
 class NoticeDetailViewController: BaseViewController, ViewModelBindable  {
     var viewModel: NoticeDetailViewModel!
@@ -38,14 +39,45 @@ class NoticeDetailViewController: BaseViewController, ViewModelBindable  {
     }
     
     func prepareUI() {
+        guard let notice = self.viewModel.notice else  { return }
+        let date = notice.regDate
+        let content = notice.content
         
-        if let date = self.viewModel.notice?.regDate {
-            let dateLabel = UILabel(frame: .zero)
-            dateLabel.textAlignment = .left
-            dateLabel.font = UIFont.systemFont(ofSize: 10)
-            let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
-            dateLabel.text = dateFormat.string(from: date)
+        let dateLabel = UILabel(frame: .zero)
+        dateLabel.textAlignment = .right
+        dateLabel.font = UIFont.systemFont(ofSize: 15)
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
+        dateLabel.text = dateFormat.string(from: date)
+        dateLabel.textColor = .gray
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize.width = 100
+        layout.itemSize.height = 100
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.register(NoticeDetailImageCollectionViewCell.self, forCellWithReuseIdentifier: NoticeDetailImageCollectionViewCell.cellId)
+        if viewModel.notice?.images.count == 0 {
+            collectionView.isHidden = true
+        }
+        
+        let textView = UITextView(frame: .zero)
+        textView.text = content
+        textView.isEditable = false
+        textView.font = UIFont.systemFont(ofSize: 20)
+        
+        let stackView = UIStackView(arrangedSubviews: [dateLabel, textView, collectionView])
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview()
+            make.top.bottom.equalTo(view.layoutMarginsGuide).offset(10)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.height.equalTo(120)
         }
     }
     
@@ -54,7 +86,20 @@ class NoticeDetailViewController: BaseViewController, ViewModelBindable  {
         navigationController?.popViewController(animated: true)
     }
     
-  
+}
+
+extension NoticeDetailViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.notice?.images.count ?? 0
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeDetailImageCollectionViewCell.cellId, for: indexPath) as? NoticeDetailImageCollectionViewCell else {return UICollectionViewCell()}
+        if let image = viewModel.notice?.images[indexPath.item] {
+            cell.imageView.kf.setImage(with: ImageApi.imgUrl(url: "/"+image.storedFileName))
+        }
+        
+        return cell
+    }
     
 }
