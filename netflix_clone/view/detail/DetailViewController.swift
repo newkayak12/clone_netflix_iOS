@@ -391,14 +391,14 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     @objc
     func fnStream(){
 //        guard let urlData = NSURL(string: "http://192.168.0.11:8000/api/v1/contents/2/27") else { return }
-//        guard let urlData = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { return }
         guard let urlData = NSURL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4") else { return }
         let playerController = PlayerViewController()
         let player = AVPlayer(url: urlData as URL)
         playerController.player = player
         
+
         self.present(playerController, animated: true) {
-            player.play()
+            playerController.player!.play()
         }
         
     }

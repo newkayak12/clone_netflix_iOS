@@ -14,10 +14,11 @@ class PlayerViewController: AVPlayerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldSupportAllOrientation = true
         
         if #available(iOS 16.0, *) {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.shouldSupportAllOrientation = true
+            
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
         } else {
@@ -28,9 +29,9 @@ class PlayerViewController: AVPlayerViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.shouldSupportAllOrientation = false
+        Log.warning("viewWillDisappear _ ROTATION!")
+        
+        
         if #available(iOS 16.0, *) {
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
@@ -38,6 +39,11 @@ class PlayerViewController: AVPlayerViewController {
             let value = UIInterfaceOrientation.portrait.rawValue
             UIDevice.current.setValue(value, forKey: "orientation")
         }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldSupportAllOrientation = false
+        super.viewWillDisappear(animated)
     }
-    
 }
+
+
