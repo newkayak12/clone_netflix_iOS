@@ -56,3 +56,8 @@ struct BoardApi {
     static func remove ( noticeNo: Int) -> String { return "\(BoardApi.PREFIX)/\(noticeNo)"}
     
 }
+
+struct MovieApi {
+    static let PREFIX = "/api/v1/contents"
+    static func stream (contentsNo: Int, detailNo: Int  ) -> String { return "\(BoardApi.PREFIX)/\(contentsNo)/\(detailNo)"}
+}

@@ -63,7 +63,7 @@ final class PasswordInput: UIView {
             .disposed(by: rx.disposeBag)
         
         field.snp.makeConstraints { make in
-            make.height.equalTo(20)
+            make.height.equalTo(80)
         }
         return field
     }()

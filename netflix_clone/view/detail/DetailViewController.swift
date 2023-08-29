@@ -8,6 +8,8 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import AVKit
+import AVFoundation
 
 
 class DetailViewController: BaseViewController, ViewModelBindable {
@@ -43,6 +45,8 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         btn.titleLabel?.clipsToBounds = true
         btn.titleLabel?.textAlignment = .center
         btn.titleLabel?.layer.cornerRadius = 10
+        
+        btn.addTarget(self, action: #selector(fnStream), for: .touchUpInside)
         
         return btn
     }()
@@ -182,7 +186,11 @@ class DetailViewController: BaseViewController, ViewModelBindable {
         view.backgroundColor = .black
     }
     
-    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     
     func setNavigation() {
         let appearance = UINavigationBarAppearance()
@@ -378,6 +386,21 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     @objc
     func fnBackBtn() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    func fnStream(){
+//        guard let urlData = NSURL(string: "http://192.168.0.11:8000/api/v1/contents/2/27") else { return }
+//        guard let urlData = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4") else { return }
+        guard let urlData = NSURL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4") else { return }
+        let playerController = PlayerViewController()
+        let player = AVPlayer(url: urlData as URL)
+        playerController.player = player
+        
+        self.present(playerController, animated: true) {
+            player.play()
+        }
+        
     }
     
     

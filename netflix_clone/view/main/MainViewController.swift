@@ -43,7 +43,7 @@ class MainViewController: UITabBarController {
                 self.launchScreen.removeFromSuperview()
                 
                 
-//                UserDefaults.standard.setValue("KEY", forKey: Constants.TOKEN.rawValue)
+                UserDefaults.standard.setValue("KEY", forKey: Constants.TOKEN.rawValue)
                 
                 
                 if UserDefaults.standard.string(forKey: Constants.TOKEN.rawValue) == nil {

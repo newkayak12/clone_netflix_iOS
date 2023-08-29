@@ -103,6 +103,7 @@
 		7EC97DC02A2557E1008AC342 /* netflix_cloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DBF2A2557E1008AC342 /* netflix_cloneTests.swift */; };
 		7EC97DCA2A2557E1008AC342 /* netflix_cloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DC92A2557E1008AC342 /* netflix_cloneUITests.swift */; };
 		7EC97DCC2A2557E1008AC342 /* netflix_cloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97DCB2A2557E1008AC342 /* netflix_cloneUITestsLaunchTests.swift */; };
+		7ED783A82A9E0D7F009A140B /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED783A72A9E0D7F009A140B /* PlayerViewController.swift */; };
 		7EF35FC22A7543550092F7BE /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FC12A7543550092F7BE /* RatingTableViewCell.swift */; };
 		7EF35FC52A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FC42A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift */; };
 		7EF35FC92A7A8A2F0092F7BE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF35FC82A7A8A2F0092F7BE /* DetailViewController.swift */; };
@@ -224,6 +225,7 @@
 		7EC97DC52A2557E1008AC342 /* netflix_cloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = netflix_cloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC97DC92A2557E1008AC342 /* netflix_cloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netflix_cloneUITests.swift; sourceTree = "<group>"; };
 		7EC97DCB2A2557E1008AC342 /* netflix_cloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netflix_cloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7ED783A72A9E0D7F009A140B /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		7EF35FC12A7543550092F7BE /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		7EF35FC42A7934D70092F7BE /* PostTitleSubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitleSubCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EF35FC82A7A8A2F0092F7BE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 		7E5BD6922A4B1AA000FB806C /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7ED783A62A9E0D77009A140B /* player */,
 				7E9807782A8A4F8A00095880 /* person */,
 				7EF35FC62A7A8A140092F7BE /* detail */,
 				7EC697D62A617720006F3F22 /* sign */,
@@ -842,6 +845,14 @@
 			path = netflix_cloneUITests;
 			sourceTree = "<group>";
 		};
+		7ED783A62A9E0D77009A140B /* player */ = {
+			isa = PBXGroup;
+			children = (
+				7ED783A72A9E0D7F009A140B /* PlayerViewController.swift */,
+			);
+			path = player;
+			sourceTree = "<group>";
+		};
 		7EF35FC02A7543480092F7BE /* star */ = {
 			isa = PBXGroup;
 			children = (
@@ -1097,6 +1108,7 @@
 				7EC697EA2A6259C5006F3F22 /* PasswordInput.swift in Sources */,
 				7E3C27802A5C3312002E08A6 /* PageResult.swift in Sources */,
 				7EBBBC3D2A5909FF00C4999C /* Person.swift in Sources */,
+				7ED783A82A9E0D7F009A140B /* PlayerViewController.swift in Sources */,
 				7E1D97B92A5AE62600E91650 /* NoticeViewModel.swift in Sources */,
 				7EBBBC562A591A6700C4999C /* Notice.swift in Sources */,
 				7EC697D52A6175FB006F3F22 /* Constants.swift in Sources */,

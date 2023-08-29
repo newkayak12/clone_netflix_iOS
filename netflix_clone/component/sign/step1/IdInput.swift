@@ -20,9 +20,9 @@ final class IdInput: UIView {
         label.text = "아이디를 입력해주세요"
         label.font = UIFont.boldSystemFont(ofSize: 26)
         label.textColor = .white
-       label.snp.makeConstraints { make in
-           make.height.equalTo(26)
-       }
+        label.snp.makeConstraints { make in
+            make.height.equalTo(26)
+        }
         return label;
     }()
    private lazy var xButton = {
@@ -43,7 +43,7 @@ final class IdInput: UIView {
        field.rightView = self.xButton
        field.font = UIFont.systemFont(ofSize: 20)
        field.snp.makeConstraints { make in
-           make.height.equalTo(20)
+           make.height.equalTo(50)
        }
         return field
     }()
