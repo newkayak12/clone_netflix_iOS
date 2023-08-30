@@ -15,7 +15,7 @@ class PlayerViewController: AVPlayerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.shouldSupportAllOrientation = true
+        appDelegate.shouldSupportAllOrientation = false
         
         if #available(iOS 16.0, *) {
             
