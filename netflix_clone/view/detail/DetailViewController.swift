@@ -390,7 +390,6 @@ class DetailViewController: BaseViewController, ViewModelBindable {
     
     @objc
     func fnStream(){
-        do{
             guard let urlData = NSURL(string: "http://192.168.0.11:8000/api/v1/contents/2/27") else { return }
     //        guard let urlData = NSURL(string: "http://192.168.0.11:8000/api/v1/contents/2/27/byte") else { return }
     //        guard let urlData = NSURL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4") else { return }
@@ -405,10 +404,6 @@ class DetailViewController: BaseViewController, ViewModelBindable {
                     playerController.player!.play()
                     
             }
-        } catch {
-                Log.error(error)
-            }
-        
     }
     
     
